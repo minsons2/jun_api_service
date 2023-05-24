@@ -10,7 +10,7 @@ import org.snaker.engine.entity.HistoryOrder;
 import org.snaker.engine.entity.WorkItem;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.jun.plugin.bizservice.mapper.BizCommonMapper;
+//import com.jun.plugin.module.ext.mapper.BizCommonMapper;
 import com.jun.plugin.system.entity.BaseFlowEntity;
 import com.jun.plugin.system.mapper.SysUserMapper;
 import com.jun.plugin.system.service.HttpSessionService;
@@ -30,8 +30,8 @@ public class BaseFlowController {
     @Autowired
 	private SysUserMapper sysuer;
 
-    @Autowired
-    private BizCommonMapper bizCommonMapper;
+//    @Autowired
+//    private BizCommonMapper bizCommonMapper;
 
     protected void setFlowStatusInfo(BaseFlowStatus baseFlowStatus) {
         String orderId = baseFlowStatus.getOrderId();

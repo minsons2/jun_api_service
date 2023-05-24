@@ -41,7 +41,7 @@
         </dependency>
         <dependency>
             <groupId>com.jun.plugin</groupId>
-		    <artifactId>jun_api_service_system</artifactId>
+		    <artifactId>jun_api_service_user_service</artifactId>
 			<version>1.0</version>
         </dependency>
         

@@ -5,9 +5,6 @@ import static org.snaker.engine.access.QueryFilter.DESC;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,11 +24,9 @@ import org.snaker.engine.entity.WorkItem;
 import org.snaker.engine.helper.AssertHelper;
 import org.snaker.engine.helper.StreamHelper;
 import org.snaker.engine.helper.StringHelper;
-import org.snaker.engine.model.NodeModel;
 import org.snaker.engine.model.ProcessModel;
 import org.snaker.engine.model.TaskModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,10 +35,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSON;
-import com.jun.plugin.bizservice.controller.PrimaryKeyService;
-import com.jun.plugin.bizservice.mapper.BizCommonMapper;
-import com.jun.plugin.bizservice.service.BizCommonService;
+import com.jun.plugin.module.ext.mapper.ExtLogMapper;
 import com.jun.plugin.module.flow.module.PageResponse;
 import com.jun.plugin.module.flow.module.Response;
 import com.jun.plugin.module.flow.process.SnakerEngineFacets;
@@ -57,13 +49,11 @@ import com.jun.plugin.system.service.HttpSessionService;
 //import com.laker.admin.module.sys.service.ISysUserService;
 import com.jun.plugin.system.service.UserService;
 
-import ch.qos.logback.classic.Logger;
 //import cn.dev33.satoken.annotation.SaCheckPermission;
 //import cn.dev33.satoken.stp.StpUtil;
 //import cn.dev33.satoken.annotation.SaCheckPermission;
 //import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
@@ -96,10 +86,9 @@ public class SnakerflowFacetsController {
 	private SysUserMapper sysuer;
 
 	@Autowired
-	private BizCommonMapper bizCommonMapper;
-
-	@Autowired
-	private BizCommonService bizCommonService;
+	private ExtLogMapper bizCommonMapper;
+//	@Autowired
+//	private BizCommonService bizCommonService;
 
 	/**
 	 * ---------------------------------------------流程定义--------------------------------------------
@@ -438,7 +427,8 @@ public class SnakerflowFacetsController {
 			log.info("流程结束！" + processNameEn, "orderId=" + orderId);
 			ThreadLocal<String> tdata = new ThreadLocal<>();
 //			tdata.set
-			String errMsg = bizCommonService.doAfterFlowFinish(processNameEn, orderId, businessId, taskName);
+			//@TODO wujun  改定时任务处理
+			String errMsg = "";//bizCommonService.doAfterFlowFinish(processNameEn, orderId, businessId, taskName);
 			if (errMsg.length() > 0) {
 				Response.error("2022", errMsg);
 			}
@@ -484,7 +474,8 @@ public class SnakerflowFacetsController {
 //    			String process = item.get("process");
 				String taskName = item.get("taskName");
 				if (orderName == null || orderName.length() < 1) {
-					orderName = user.getRealName() + taskName + PrimaryKeyService.getOrderIdPrefix(new Date());
+					//@TODO wujun
+					orderName = user.getRealName() + taskName /* + PrimaryKeyService.getOrderIdPrefix(new Date())  */;
 				}
 				Map args = new HashMap(8);
 				args.put("step1", sessionService.getCurrentUsername());

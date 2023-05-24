@@ -15,11 +15,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * 
  */
 @Configuration
-@EnableConfigurationProperties(FileUploadProperties.class)
+//@EnableConfigurationProperties(FileUploadProperties.class)
 public class WebMvcConfig implements WebMvcConfigurer {
 	
-  @Resource
-  private FileUploadProperties fileUploadProperties;
+//  @Resource
+//  private FileUploadProperties fileUploadProperties;
 	/**
 	 * 首页地址
 	 */
@@ -63,7 +63,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
 		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 		/** 文件下载映射配置,同下 */
-        registry.addResourceHandler(fileUploadProperties.getAccessUrl()).addResourceLocations("file:" + fileUploadProperties.getPath());
+//        registry.addResourceHandler(fileUploadProperties.getAccessUrl()).addResourceLocations("file:" + fileUploadProperties.getPath());
 	}
 
 	/**

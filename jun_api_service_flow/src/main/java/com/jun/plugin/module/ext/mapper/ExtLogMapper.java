@@ -2,7 +2,9 @@ package com.jun.plugin.module.ext.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jun.plugin.module.ext.entity.ExtLog;
@@ -43,5 +45,9 @@ public interface ExtLogMapper extends BaseMapper<ExtLog> {
 
     @Select("SELECT count(DISTINCT ip) from ext_log")
     int selectDistinctIp();
+    
+    @Update(" update ${tableName}  set  ${columnName}  = #{columnValue}  where id = #{id} ")
+	int updateRecordByColumnValue(@Param("tableName") String tableName, @Param("columnName") String columnName,
+			@Param("columnValue") String columnValue, @Param("id") String id);
 
 }
