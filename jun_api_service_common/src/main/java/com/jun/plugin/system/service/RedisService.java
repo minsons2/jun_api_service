@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 public class RedisService {
+	
     private final StringRedisTemplate redisTemplate;
 
     public RedisService(StringRedisTemplate redisTemplate) {
@@ -70,6 +71,12 @@ public class RedisService {
             this.redisTemplate.delete(keys);
         }
     }
+
+	public StringRedisTemplate getRedisTemplate() {
+		return redisTemplate;
+	}
+    
+    
 
 
 }
