@@ -10,8 +10,9 @@
 
     
     <groupId>com.jun.plugin</groupId>
+    <artifactId>jun_api_service_bizservice</artifactId>
 	<version>1.0</version>
-    <artifactId>jun_api_service_admin</artifactId>
+    <packaging>jar</packaging>
     
     <properties>
         <java.version>1.8</java.version>
@@ -35,24 +36,7 @@
     <dependencies>
         <dependency>
             <groupId>com.jun.plugin</groupId>
-		    <artifactId>jun_api_service_system</artifactId>
-			<version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-    		<artifactId>jun_api_service_bizservice</artifactId>
-    		<version>1.0</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-    		<artifactId>jun_api_service_common</artifactId>
-    		<version>1.0</version>
-        </dependency>
-    
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-		    <artifactId>jun_api_service_system</artifactId>
+		    <artifactId>jun_api_service_common</artifactId>
 			<version>1.0</version>
         </dependency>
         
@@ -71,20 +55,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-validation</artifactId>
-		    <version>2.5.14</version>
-		</dependency>
-        
-        <!-- https://mvnrepository.com/artifact/junit/junit -->
-		<dependency>
-		    <groupId>junit</groupId>
-		    <artifactId>junit</artifactId>
-		    <version>4.13.2</version>
-		    <scope>test</scope>
-		</dependency>
         
         <!--数据源-->
         <dependency>
@@ -299,10 +269,8 @@
             <artifactId>jedis</artifactId>
             <version>2.9.0</version>
         </dependency>
+        
     </dependencies>
-    
-     
-    
 
     <build>
         <finalName>manager</finalName>

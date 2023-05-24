@@ -10,8 +10,8 @@
 
     
     <groupId>com.jun.plugin</groupId>
+    <artifactId>jun_api_service_system</artifactId>
 	<version>1.0</version>
-    <artifactId>jun_api_service_admin</artifactId>
     
     <properties>
         <java.version>1.8</java.version>
@@ -35,24 +35,7 @@
     <dependencies>
         <dependency>
             <groupId>com.jun.plugin</groupId>
-		    <artifactId>jun_api_service_system</artifactId>
-			<version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-    		<artifactId>jun_api_service_bizservice</artifactId>
-    		<version>1.0</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-    		<artifactId>jun_api_service_common</artifactId>
-    		<version>1.0</version>
-        </dependency>
-    
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-		    <artifactId>jun_api_service_system</artifactId>
+		    <artifactId>jun_api_service_common</artifactId>
 			<version>1.0</version>
         </dependency>
         
@@ -299,9 +282,26 @@
             <artifactId>jedis</artifactId>
             <version>2.9.0</version>
         </dependency>
+        
     </dependencies>
     
-     
+    
+    
+    <dependencyManagement>
+        <dependencies>
+            <!-- SpringBoot的依赖配置-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                  	<!-- <version>2.6.9</version> -->
+               <!-- <version>2.3.12.RELEASE</version> -->
+               <!-- <version>2.4.13</version> -->
+               		<version>2.5.14</version>
+	                <type>pom</type>
+	                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     
 
     <build>
