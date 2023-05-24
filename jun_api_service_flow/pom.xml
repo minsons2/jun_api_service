@@ -10,7 +10,7 @@
 
     
     <groupId>com.jun.plugin</groupId>
-    <artifactId>jun_api_service_biz_module</artifactId>
+    <artifactId>jun_api_service_flow</artifactId>
 	<version>1.0</version>
     <packaging>jar</packaging>
     
@@ -39,6 +39,11 @@
 		    <artifactId>jun_api_service_common</artifactId>
 			<version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.jun.plugin</groupId>
+		    <artifactId>jun_api_service_system</artifactId>
+			<version>1.0</version>
+        </dependency>
         
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -54,6 +59,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.github.snakerflow-starter</groupId>
+            <artifactId>snakerflow-spring-boot-starter</artifactId>
+            <version>1.0.6</version>
         </dependency>
         
         <!--数据源-->
