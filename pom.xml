@@ -17,7 +17,7 @@
 
 	<modules>
 		<module>jun_api_service_common</module>
-		<module>jun_api_service_bizservice</module>
+		<module>jun_api_service_biz_module</module>
 		<module>jun_api_service_system</module>
 		<module>jun_api_service_admin</module>
 		<module>jun_api_service_groovy_api</module>

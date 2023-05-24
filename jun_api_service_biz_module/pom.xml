@@ -10,7 +10,7 @@
 
     
     <groupId>com.jun.plugin</groupId>
-    <artifactId>jun_api_service_bizservice</artifactId>
+    <artifactId>jun_api_service_biz_module</artifactId>
 	<version>1.0</version>
     <packaging>jar</packaging>
     
