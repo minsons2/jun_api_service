@@ -1,4 +1,4 @@
-package com.jun.plugin.system.common.comfig;
+package com.jun.plugin.system.common.config;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

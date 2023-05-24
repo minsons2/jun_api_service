@@ -1,4 +1,4 @@
-package com.jun.plugin.system.common.comfig;
+package com.jun.plugin.system.common.config;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

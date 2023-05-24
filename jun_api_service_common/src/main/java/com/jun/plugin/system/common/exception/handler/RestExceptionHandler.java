@@ -33,7 +33,14 @@ public class RestExceptionHandler {
     @ExceptionHandler(Exception.class)
     public DataResult handleException(Exception e) {
         log.error("Exception,exception:{}", e, e);
-        return DataResult.getResult(BaseResponseCode.SYSTEM_BUSY);
+        return DataResult.getResult(500,"系统繁忙，请稍候再试!异常信息："+e.getMessage());
+        //return DataResult.getResult(BaseResponseCode.SYSTEM_BUSY);
+    }
+    
+    @ExceptionHandler(org.springframework.dao.QueryTimeoutException.class)
+    public DataResult handleQueryTimeoutException(Exception e) {
+    	log.error("Exception,exception:{}", e, e);
+    	return DataResult.getResult(BaseResponseCode.SYSTEM_REDIS_BUSY);
     }
 
     /**

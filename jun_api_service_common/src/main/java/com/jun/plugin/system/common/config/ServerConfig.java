@@ -1,4 +1,4 @@
-package com.jun.plugin.system.common.comfig;
+package com.jun.plugin.system.common.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.context.WebServerInitializedEvent;

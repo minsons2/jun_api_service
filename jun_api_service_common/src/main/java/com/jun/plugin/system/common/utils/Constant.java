@@ -17,6 +17,12 @@ public class Constant {
     public static final String USERID_KEY = "userid-key";
     public static final String USERNAME_KEY = "username-key";
     public static final String ROLES_KEY = "roles-key";
+	    public static final String USERPHONE_KEY = "userphone-key";
+    public static final String USERREALNAME_KEY = "userrealname-key";
+    public static final String USERDEPTID_KEY = "userdeptid-key";
+    public static final String USERDEPTNO_KEY = "userdeptno-key";
+    public static final String USERDEPTNAME_KEY = "userdeptname-key";
+    public static final String USER_KEY = "user-key";
 
     /**
      * 未删除值

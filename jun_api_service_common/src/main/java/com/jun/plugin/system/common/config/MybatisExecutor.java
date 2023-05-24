@@ -1,4 +1,4 @@
-package com.jun.plugin.system.common.comfig;
+package com.jun.plugin.system.common.config;
 
 //import com.fen.dou.entity.BaseEntity;
 //import com.fen.dou.entity.User;
