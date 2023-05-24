@@ -22,9 +22,12 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
-	<modules> 
-		<module>jun_springboot_api</module>
-		<module>jun_springboot_groovy_api</module>
+	<modules>
+		<module>jun_api_service_common</module>
+		<module>jun_api_service_bizservice</module>
+		<module>jun_api_service_system</module>
+		<module>jun_api_service_admin</module>
+		<module>jun_api_service_groovy_api</module>
 	</modules>
 
 	<dependencies>
@@ -47,24 +50,12 @@
 		</dependency> -->
 	</dependencies>
 	
-		<!-- 依赖声明 -->
+	<!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
-            <!-- SpringBoot的依赖配置-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                  	<!-- <version>2.6.9</version> -->
-               		<!-- <version>2.3.12.RELEASE</version> -->
-               		<!-- <version>2.4.13</version> -->
-               		<version>2.5.14</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
  
-
 	<profiles>
 		<profile>
 			<id>jdk-1.8</id>
