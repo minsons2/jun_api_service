@@ -32,6 +32,12 @@
     </properties>
 
     <dependencies>
+    	<!-- --><dependency>
+			<groupId>io.github.wujun728</groupId>
+			<artifactId>jun-groovy-api-spring-boot-starter</artifactId>
+			<version>1.0.2-RELEASE</version>
+        </dependency>
+         
         <dependency>
             <groupId>com.jun.plugin</groupId>
     		<artifactId>jun_api_service_biz_service</artifactId>
@@ -72,12 +78,13 @@
 		    <artifactId>jun_api_service_sms</artifactId>
 			<version>1.0</version>
         </dependency>
+        <!-- -->
         <dependency>
             <groupId>com.jun.plugin</groupId>
 		    <artifactId>jun_api_service_flow</artifactId>
 			<version>1.0</version>
         </dependency>
-        
+         
         
         
         <dependency>
@@ -123,11 +130,11 @@
         </dependency>
         
         <!--数据库持久化 及 插件依赖-->
-        <dependency>
+        <!-- <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
             <version>${mybatis-plus-dynamic.version}</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>

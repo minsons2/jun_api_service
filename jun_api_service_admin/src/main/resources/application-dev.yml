@@ -3,24 +3,35 @@ spring:
   thymeleaf:
     cache: false
   datasource:
-    dynamic:
-      primary: master #设置默认的数据源或者数据源组,默认值即为master
-      datasource:
-        master:
-          username: root
-          password: 
-          driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://localhost:3306/test666?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8
-        oracle:
-          username: root
-          password: 
-          driver-class-name: oracle.jdbc.driver.OracleDriver
-          url: jdbc:oracle:thin:@localhost:1521/company_project
-        sqlServer:
-          username: sa
-          password: 123456
-          driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-          url: jdbc:sqlserver://localhost:1433;databaseName=company_project
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/test666?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8
+    username: root
+    password: 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialSize: 10
+    minIdle: 10
+    maxActive: 40
+    maxWait: 60000
+    test-on-borrow: true
+    test-while-idle: true
+#    dynamic:
+#      primary: master #设置默认的数据源或者数据源组,默认值即为master
+#      datasource:
+#        master:
+#          username: root
+#          password: 
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#          url: jdbc:mysql://localhost:3306/test666?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8
+#        oracle:
+#          username: root
+#          password: 
+#          driver-class-name: oracle.jdbc.driver.OracleDriver
+#          url: jdbc:oracle:thin:@localhost:1521/company_project
+#        sqlServer:
+#          username: sa
+#          password: 123456
+#          driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#          url: jdbc:sqlserver://localhost:1433;databaseName=company_project
   redis:
     host: localhost # Redis服务器地址
     database: 0 # Redis数据库索引（默认为0）

@@ -69,11 +69,11 @@
         </dependency>
         
         <!--数据库持久化 及 插件依赖-->
-        <dependency>
+        <!-- <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
             <version>${mybatis-plus-dynamic.version}</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>
