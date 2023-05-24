@@ -32,11 +32,6 @@
     </properties>
 
     <dependencies>
-        <!-- <dependency>
-            <groupId>com.jun.plugin</groupId>
-		    <artifactId>jun_api_service_system</artifactId>
-			<version>1.0</version>
-        </dependency> -->
         <dependency>
             <groupId>com.jun.plugin</groupId>
     		<artifactId>jun_api_service_biz_service</artifactId>

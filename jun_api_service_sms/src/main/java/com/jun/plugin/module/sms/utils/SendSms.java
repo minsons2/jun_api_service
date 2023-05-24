@@ -53,6 +53,7 @@ public class SendSms {
 			 * 这里采用的是从环境变量读取的方式，需要在环境变量中先设置这两个值。 你也可以直接在代码中写死密钥对，但是小心不要将代码复制、上传或者分享给他人，
 			 * 以免泄露密钥对危及你的财产安全。 CAM密匙查询: https://console.cloud.tencent.com/cam/capi
 			 */
+			//密匙已禁用，后续抽到配置文件prod里面，不提交
 			Credential cred = new Credential("AKIDb4KMAkBTZTAbmiQu98sOjpgHfokS2XzO",
 					"NfpspgP1YzJYghbP6hAXnx1yrgJkxvd5");
 
