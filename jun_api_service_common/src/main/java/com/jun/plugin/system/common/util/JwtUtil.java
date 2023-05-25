@@ -3,6 +3,7 @@ package com.jun.plugin.system.common.util;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,13 +15,10 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.jun.plugin.system.common.exception.BusinessException;
-import com.jun.plugin.system.common.util.common.Base64ConvertUtil;
 import com.jun.plugin.system.common.utils.Constant;
 
 /**
  * JAVA-JWT工具类
- * @author Wang926454
- * @date 2018/8/30 11:45
  */
 @Component
 public class JwtUtil {
@@ -57,7 +55,7 @@ public class JwtUtil {
      * @author Wang926454
      * @date 2018/8/31 9:05
      */
-    public static boolean verify(String token) {
+    public static boolean verify(String token) throws BusinessException{
         try {
             // 帐号加JWT私钥解密
             String secret = getClaim(token, Constant.ACCOUNT) + Base64ConvertUtil.decode(encryptJWTKey);
@@ -65,9 +63,15 @@ public class JwtUtil {
             JWTVerifier verifier = JWT.require(algorithm).build();
             verifier.verify(token);
             return true;
+        } catch (TokenExpiredException e) {
+            logger.error("JWTToken The Token has expired Token失效  TokenExpiredException异常:{}", e.getMessage());
+            throw new BusinessException("Token过期失效，请重新认证:" + e.getMessage());
         } catch (UnsupportedEncodingException e) {
             logger.error("JWTToken认证解密出现UnsupportedEncodingException异常:{}", e.getMessage());
             throw new BusinessException("JWTToken认证解密出现UnsupportedEncodingException异常:" + e.getMessage());
+        } catch (Exception e) {
+            logger.error("JWTToken认证解密异常:{}", e.getMessage());
+            throw new BusinessException("JWTToken认证异常，非法的TOKEN:" + e.getMessage());
         }
     }
 

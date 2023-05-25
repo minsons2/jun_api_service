@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jun.plugin.system.common.exception.BusinessException;
 import com.jun.plugin.system.common.exception.code.BaseResponseCode;
+import com.jun.plugin.system.common.util.JwtUtil;
 import com.jun.plugin.system.common.utils.PasswordUtils;
 import com.jun.plugin.system.entity.SysContentEntity;
 import com.jun.plugin.system.entity.SysDept;
@@ -107,8 +108,10 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impleme
         if(roles.contains("管理员")||roles.contains("超级管理员")) {
         	respVO.setIsAdmin("1");
         }
-        String token = httpSessionService.createTokenAndUser(sysUser,roles , permissionService.getPermissionsByUserId(sysUser.getId()));
-        respVO.setAccessToken(token);
+        String token = JwtUtil.sign(sysUser.getUsername());
+        String accesstoken = httpSessionService.createTokenAndUser(sysUser,roles , permissionService.getPermissionsByUserId(sysUser.getId()),token);
+        respVO.setAccessToken(accesstoken);
+        respVO.setAuthorization(token);
         return respVO;
     }
 

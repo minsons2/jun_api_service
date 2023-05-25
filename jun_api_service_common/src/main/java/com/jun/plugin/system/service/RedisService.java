@@ -59,6 +59,9 @@ public class RedisService {
         this.redisTemplate.opsForValue().set(key, value);
         this.redisTemplate.expire(key, seconds, TimeUnit.SECONDS);
     }
+    public void expire(String key,  long seconds) {
+        this.redisTemplate.expire(key, seconds, TimeUnit.SECONDS);
+    }
 
 
     public Set<String> keys(String pattern) {

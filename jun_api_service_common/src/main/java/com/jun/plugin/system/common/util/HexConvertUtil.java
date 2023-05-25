@@ -1,4 +1,4 @@
-package com.jun.plugin.system.common.util.common;
+package com.jun.plugin.system.common.util;
 
 /**
  * 进制转换工具

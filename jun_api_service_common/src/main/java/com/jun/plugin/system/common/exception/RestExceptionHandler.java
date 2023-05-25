@@ -1,7 +1,7 @@
-package com.jun.plugin.system.common.exception.handler;
+package com.jun.plugin.system.common.exception;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.authz.AuthorizationException;
+//import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -55,12 +55,11 @@ public class RestExceptionHandler {
     /**
      * 没有权限 返回403视图
      */
-    @ExceptionHandler(value = AuthorizationException.class)
-    public DataResult errorPermission(AuthorizationException e) {
-        log.error("Exception,exception:{}", e, e);
-        return new DataResult(BaseResponseCode.UNAUTHORIZED_ERROR);
-
-    }
+//    @ExceptionHandler(value = AuthorizationException.class)
+//    public DataResult errorPermission(AuthorizationException e) {
+//        log.error("Exception,exception:{}", e, e);
+//        return new DataResult(BaseResponseCode.UNAUTHORIZED_ERROR);
+//    }
 
     /**
      * 处理validation 框架异常

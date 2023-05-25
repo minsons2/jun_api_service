@@ -1,4 +1,4 @@
-package com.jun.plugin.system.common.util.common;
+package com.jun.plugin.system.common.util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;

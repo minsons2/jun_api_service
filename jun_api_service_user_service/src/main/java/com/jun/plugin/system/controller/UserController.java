@@ -69,6 +69,11 @@ public class UserController {
         }
         return DataResult.success(userService.login(vo));
     }
+    @PostMapping(value = "/user/token")
+    @ApiOperation(value = "用户登录JWT接口")
+    public DataResult token(@RequestBody @Valid SysUser vo, HttpServletRequest request) {
+        return DataResult.success(userService.login(vo));
+    }
 
     @PostMapping("/user/register")
     @ApiOperation(value = "用户注册接口")

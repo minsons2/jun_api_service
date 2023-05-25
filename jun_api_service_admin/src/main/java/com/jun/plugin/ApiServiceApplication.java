@@ -14,7 +14,7 @@ import java.net.InetAddress;
 @SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class)
 @MapperScan("com.jun.plugin.**.mapper")
 @Slf4j
-//@ServletComponentScan(basePackages = {"com.cosmoplat.config.filter"}) //这一句完成了配置，Springboot的”懒理念“真的厉害。
+@ServletComponentScan(basePackages = {"com.jun.plugin.**.filter"})
 public class ApiServiceApplication {
 
     public static void main(String[] args) throws Exception {

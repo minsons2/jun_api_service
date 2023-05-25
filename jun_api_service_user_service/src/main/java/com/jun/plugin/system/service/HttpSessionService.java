@@ -1,9 +1,12 @@
 package com.jun.plugin.system.service;
 
+import cn.hutool.jwt.JWT;
+import cn.hutool.jwt.JWTUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.jun.plugin.system.common.util.JwtUtil;
 import com.jun.plugin.system.common.utils.Constant;
 import com.jun.plugin.system.entity.SysUser;
 
@@ -53,9 +56,9 @@ public class HttpSessionService {
     @Value("${spring.redis.key.expire.permissionRefresh}")
     private Long redisPermissionRefreshExpire;
 
-    public String createTokenAndUser(SysUser user, List<String> roles, Set<String> permissions) {
+    public String createTokenAndUser(SysUser user, List<String> roles, Set<String> permissions,String jwtToken) {
         //方便根据id找到redis的key， 修改密码/退出登陆 方便使用
-        String token = getRandomToken() + "#" + user.getId();
+        String token = jwtToken + "#" + user.getId();
         JSONObject sessionInfo = new JSONObject();
         sessionInfo.put(Constant.USERID_KEY, user.getId());
         sessionInfo.put(Constant.USERNAME_KEY, user.getUsername());
@@ -70,6 +73,7 @@ public class HttpSessionService {
         String key = userTokenPrefix + token;
         //设置该用户已登录的token
         redisService.setAndExpire(key, sessionInfo.toJSONString(), exire);
+        redisService.setAndExpire(userTokenPrefix+jwtToken, sessionInfo.toJSONString(), exire);
 
         //登陆后删除权限刷新标志
         redisService.del(redisPermissionRefreshKey + user.getId());
@@ -251,31 +255,35 @@ public class HttpSessionService {
     }
 
 
+    private String getJWTToken(String username) {
+        return JwtUtil.sign(username);
+    }
     /**
      * 生成随机的token
      *
      * @return token
      */
+    @Deprecated
     private String getRandomToken() {
-        Random random = new Random();
-        StringBuilder randomStr = new StringBuilder();
+            Random random = new Random();
+            StringBuilder randomStr = new StringBuilder();
 
-        // 根据length生成相应长度的随机字符串
-        for (int i = 0; i < 32; i++) {
-            String charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num";
+            // 根据length生成相应长度的随机字符串
+            for (int i = 0; i < 32; i++) {
+                String charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num";
 
-            //输出字母还是数字
-            if ("char".equalsIgnoreCase(charOrNum)) {
-                //输出是大写字母还是小写字母
-                int temp = random.nextInt(2) % 2 == 0 ? 65 : 97;
-                randomStr.append((char) (random.nextInt(26) + temp));
-            } else {
-                randomStr.append(random.nextInt(10));
+                //输出字母还是数字
+                if ("char".equalsIgnoreCase(charOrNum)) {
+                    //输出是大写字母还是小写字母
+                    int temp = random.nextInt(2) % 2 == 0 ? 65 : 97;
+                    randomStr.append((char) (random.nextInt(26) + temp));
+                } else {
+                    randomStr.append(random.nextInt(10));
+                }
             }
-        }
 
-        return randomStr.toString();
-    }
+            return randomStr.toString();
+        }
 
 
     private List<String> getRolesByUserId(String userId) {

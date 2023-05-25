@@ -1,4 +1,4 @@
-package com.jun.plugin.system.common.util.common;
+package com.jun.plugin.system.common.util;
 
 /**
  * String工具

@@ -44,4 +44,7 @@ public class LoginRespVO {
     
     @ApiModelProperty(value = "是否管理员")
     private String isAdmin;
+
+    @ApiModelProperty(value = "JWTToken")
+    private String authorization;
 }

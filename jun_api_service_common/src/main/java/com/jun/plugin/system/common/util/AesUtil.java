@@ -3,9 +3,7 @@ package com.jun.plugin.system.common.util;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.Provider;
 import java.security.SecureRandom;
-import java.security.Security;
 
 //import com.jun.plugin.apiservice.exception.BusinessException;
 //import com.jun.plugin.apiservice.util.common.Base64ConvertUtil;
@@ -23,16 +21,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.jun.plugin.system.common.exception.BusinessException;
-import com.jun.plugin.system.common.util.common.Base64ConvertUtil;
-import com.jun.plugin.system.common.util.common.HexConvertUtil;
 
 /**
  * AES加密解密工具类
- * @author dolyw.com
- * @date 2018/8/31 16:39
  */
 @Component
-public class AesCipherUtil {
+public class AesUtil {
 
     /**
      * AES密码加密私钥(Base64加密)
@@ -42,20 +36,18 @@ public class AesCipherUtil {
 
     @Value("${encryptAESKey}")
     public void setEncryptAESKey(String encryptAESKey) {
-        AesCipherUtil.encryptAESKey = encryptAESKey;
+        AesUtil.encryptAESKey = encryptAESKey;
     }
 
     /**
      * logger
      */
-    private static final Logger logger = LoggerFactory.getLogger(AesCipherUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(AesUtil.class);
 
     /**
      * 加密
      * @param str
      * @return java.lang.String
-     * @author dolyw.com
-     * @date 2018/8/31 16:56
      */
     public static String enCrypto(String str) {
         try {
@@ -98,8 +90,6 @@ public class AesCipherUtil {
      * 解密
      * @param str
      * @return java.lang.String
-     * @author dolyw.com
-     * @date 2018/8/31 16:56
      */
     public static String deCrypto(String str) {
         try {
