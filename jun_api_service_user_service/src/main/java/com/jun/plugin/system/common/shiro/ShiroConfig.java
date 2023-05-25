@@ -116,7 +116,8 @@ public class ShiroConfig {
         filterRuleMap.put("/api/**", "anon");
         filterRuleMap.put("/lib/**", "anon");
         filterRuleMap.put("/component/**", "anon");
-        filterRuleMap.put("/**", "token,authc,jwt");// TODO 所有请求通过我们自己的JWT Filter
+        filterRuleMap.put("/**", "token,authc");// TODO 所有请求通过我们自己的JWT Filter
+        //filterRuleMap.put("/**", "token,authc,jwt");// TODO 所有请求通过我们自己的JWT Filter
         shiroFilterFactoryBean.setLoginUrl("/login.html");
         shiroFilterFactoryBean.setUnauthorizedUrl("/401"); // 可设置无需鉴权的路径
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterRuleMap);

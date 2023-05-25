@@ -10,10 +10,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 
 import java.net.InetAddress;
-
+@Slf4j
 @SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class)
 @MapperScan("com.jun.plugin.**.mapper")
-@Slf4j
 @ServletComponentScan(basePackages = {"com.jun.plugin.**.filter"})
 public class ApiServiceApplication {
 
