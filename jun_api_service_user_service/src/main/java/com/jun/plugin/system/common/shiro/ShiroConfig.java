@@ -2,6 +2,7 @@ package com.jun.plugin.system.common.shiro;
 
 //import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 
+import com.jun.plugin.system.common.filter.JwtFilter;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -74,48 +75,51 @@ public class ShiroConfig {
         LinkedHashMap<String, Filter> filtersMap = new LinkedHashMap<>();
         //用来校验token
         filtersMap.put("token", new CustomAccessControlFilter());
+        //filtersMap.put("jwt", new JwtFilter()); // TODO JWT认证，Wujun 添加自己的过滤器并且取名为jwt
         shiroFilterFactoryBean.setFilters(filtersMap);
-        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+
+        Map<String, String> filterRuleMap = new LinkedHashMap<>();
         // 配置不会被拦截的链接 顺序判断
-        filterChainDefinitionMap.put("/*.html", "anon");
-        filterChainDefinitionMap.put("/sys/user/token", "anon");
-        filterChainDefinitionMap.put("/sys/user/login", "anon");
-        filterChainDefinitionMap.put("/sys/getVerify", "anon");
-        filterChainDefinitionMap.put("/sys/checkVerify", "anon");
-        filterChainDefinitionMap.put("/sysDict/getType/*", "anon");
-        filterChainDefinitionMap.put("/sms/sendCode", "anon");
-        filterChainDefinitionMap.put("/index/**", "anon");
-        filterChainDefinitionMap.put("/admin/**", "anon");
-        filterChainDefinitionMap.put("/flow/**", "anon");
-        filterChainDefinitionMap.put("/ext/**", "anon");
-        filterChainDefinitionMap.put("/configInfo/**", "anon");
-        filterChainDefinitionMap.put("/pages/*.html", "anon");
-        filterChainDefinitionMap.put("/**/*.html", "anon");
-        filterChainDefinitionMap.put("/**/*.js", "anon");
-        filterChainDefinitionMap.put("/static/**", "anon");
-        filterChainDefinitionMap.put("/doc.html", "anon");
-        filterChainDefinitionMap.put("/swagger-resources/**", "anon");
-        filterChainDefinitionMap.put("/v2/api-docs", "anon");
-        filterChainDefinitionMap.put("/v2/api-docs-ext", "anon");
-        filterChainDefinitionMap.put("/webjars/**", "anon");
-        filterChainDefinitionMap.put("/druid/**", "anon");
-        filterChainDefinitionMap.put("/favicon.ico", "anon");
-        filterChainDefinitionMap.put("/captcha.jpg", "anon");
-        filterChainDefinitionMap.put("/csrf", "anon");
-        filterChainDefinitionMap.put("/public/**", "anon");
+        filterRuleMap.put("/*.html", "anon");
+        filterRuleMap.put("/sys/user/token", "anon");
+        filterRuleMap.put("/sys/user/login", "anon");
+        filterRuleMap.put("/sys/getVerify", "anon");
+        filterRuleMap.put("/sys/checkVerify", "anon");
+        filterRuleMap.put("/sysDict/getType/*", "anon");
+        filterRuleMap.put("/sms/sendCode", "anon");
+        filterRuleMap.put("/index/**", "anon");
+        filterRuleMap.put("/admin/**", "anon");
+        filterRuleMap.put("/flow/**", "anon");
+        filterRuleMap.put("/ext/**", "anon");
+        filterRuleMap.put("/configInfo/**", "anon");
+        filterRuleMap.put("/pages/*.html", "anon");
+        filterRuleMap.put("/**/*.html", "anon");
+        filterRuleMap.put("/**/*.js", "anon");
+        filterRuleMap.put("/static/**", "anon");
+        filterRuleMap.put("/doc.html", "anon");
+        filterRuleMap.put("/swagger-resources/**", "anon");
+        filterRuleMap.put("/v2/api-docs", "anon");
+        filterRuleMap.put("/v2/api-docs-ext", "anon");
+        filterRuleMap.put("/webjars/**", "anon");
+        filterRuleMap.put("/druid/**", "anon");
+        filterRuleMap.put("/favicon.ico", "anon");
+        filterRuleMap.put("/captcha.jpg", "anon");
+        filterRuleMap.put("/csrf", "anon");
+        filterRuleMap.put("/public/**", "anon");
         //文件上传可直接访问
-//        filterChainDefinitionMap.put(fileUploadProperties.getAccessUrl(), "anon");
-        filterChainDefinitionMap.put("/images/**", "anon");
-        filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/layui/**", "anon");
-        filterChainDefinitionMap.put("/css/**", "anon");
-        filterChainDefinitionMap.put("/layui-ext/**", "anon");
-        filterChainDefinitionMap.put("/api/**", "anon");
-        filterChainDefinitionMap.put("/lib/**", "anon");
-        filterChainDefinitionMap.put("/component/**", "anon");
-        filterChainDefinitionMap.put("/**", "token,authc");
+//        filterRuleMap.put(fileUploadProperties.getAccessUrl(), "anon");
+        filterRuleMap.put("/images/**", "anon");
+        filterRuleMap.put("/js/**", "anon");
+        filterRuleMap.put("/layui/**", "anon");
+        filterRuleMap.put("/css/**", "anon");
+        filterRuleMap.put("/layui-ext/**", "anon");
+        filterRuleMap.put("/api/**", "anon");
+        filterRuleMap.put("/lib/**", "anon");
+        filterRuleMap.put("/component/**", "anon");
+        filterRuleMap.put("/**", "token,authc,jwt");// TODO 所有请求通过我们自己的JWT Filter
         shiroFilterFactoryBean.setLoginUrl("/login.html");
-        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        shiroFilterFactoryBean.setUnauthorizedUrl("/401"); // 可设置无需鉴权的路径
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return shiroFilterFactoryBean;
     }
 
