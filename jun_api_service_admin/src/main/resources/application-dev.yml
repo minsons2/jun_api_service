@@ -4,16 +4,16 @@ spring:
     cache: false
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/test666?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8
+    url: jdbc:mysql://localhost:3306/db_qixing?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8
     username: root
     password: 
     driver-class-name: com.mysql.cj.jdbc.Driver
-    initialSize: 10
-    minIdle: 10
-    maxActive: 40
-    maxWait: 60000
-    test-on-borrow: true
-    test-while-idle: true
+#    initialSize: 10
+#    minIdle: 10
+#    maxActive: 40
+#    maxWait: 60000
+#    test-on-borrow: true
+#    test-while-idle: true
 #    dynamic:
 #      primary: master #设置默认的数据源或者数据源组,默认值即为master
 #      datasource:
