@@ -10,6 +10,8 @@ import com.jun.plugin.system.common.exception.BusinessException;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import javax.annotation.Resource;
+
 /**
  * JedisUtil(推荐存Byte数组，存Json字符串效率更慢)
  * @date 2018/9/4 15:45
@@ -21,14 +23,14 @@ public class JedisUtil {
      * 静态注入JedisPool连接池
      * 本来是正常注入JedisUtil，可以在Controller和Service层使用，但是重写Shiro的CustomCache无法注入JedisUtil
      * 现在改为静态注入JedisPool连接池，JedisUtil直接调用静态方法即可
-     * https://blog.csdn.net/W_Z_W_888/article/details/79979103
      */
+    @Autowired
     private static JedisPool jedisPool;
 
-    @Autowired
-    public void setJedisPool(JedisPool jedisPool) {
-        JedisUtil.jedisPool = jedisPool;
-    }
+//    @Autowired
+//    public void setJedisPool(JedisPool jedisPool) {
+//        JedisUtil.jedisPool = jedisPool;
+//    }
 
     /**
      * 获取Jedis实例

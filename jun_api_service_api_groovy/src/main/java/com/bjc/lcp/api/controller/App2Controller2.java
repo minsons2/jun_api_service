@@ -25,12 +25,12 @@ public class App2Controller2 {
 
 	@RequestMapping("/api/user/login")
 	public DataResult login(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		JSONObject json= JSON.parseObject(" {\r\n"
 				+ "		\"userinfo\":{\r\n"
 				+ "		\"id\":1,\r\n"
 				+ "		\"username\":\"admin\",\r\n"
-				+ "		\"nickname\":\"admin\",\r\n"
+				+ "		\"nickname\":\"admin1111\",\r\n"
 				+ "		\"mobile\":\"13888888888\",\r\n"
 				+ "		\"avatar\":\"\",\r\n"
 				+ "		\"score\":0,\r\n"
@@ -44,7 +44,7 @@ public class App2Controller2 {
 	
 	@RequestMapping("/api/index/getsysteminfo")
 	public DataResult getsysteminfo(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		JSONObject json= JSON.parseObject(" {\r\n"
 				+ "   \"images\": \"https://omo-oss-image.thefastimg.com/portal-saas/new2022093017543412358/cms/image/e46936f7-8a3d-4240-8b81-81541babc2d8.png\",  \r\n"
 				+ "    \"name\": \"齐兴会计师事务所\",  \r\n"
@@ -55,7 +55,7 @@ public class App2Controller2 {
 	
 	@RequestMapping("/api/index/getmenus")
 	public DataResult getmenus(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		
 		Map<String,Object> data = Maps.newHashMap();
 		List<String> list = Lists.newArrayList();
@@ -79,7 +79,7 @@ public class App2Controller2 {
 	
 	@RequestMapping("/api/index/getmenus2")
 	public DataResult getmenus2(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		JSONObject json= JSON.parseObject("  {\r\n"
 				+ "    \"menus\": {\r\n"
 				+ "        \"title\": \"功能模块666\",\r\n"
@@ -106,7 +106,7 @@ public class App2Controller2 {
 	Map<String,Object> userinfo = Maps.newHashMap();
 	@RequestMapping("api/user/getUserDetail")
 	public DataResult getUserDetail(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		if(CollectionUtils.isEmpty(userinfo)) {
 			userinfo.put("avatar", "");
 			userinfo.put("nickname", "admin");
@@ -122,7 +122,7 @@ public class App2Controller2 {
 	
 	@RequestMapping("/api/user/setuserinfo")
 	public DataResult setuserinfo(HttpServletRequest request) {
-		Map param = RequestMappingExecutor.getParameters(request);
+		Map param = RequestMappingExecutor.getFromParams(request);
 		System.out.println(JSON.toJSONString(param));
 //		data.put("nickname", "admin");
 //		data.put("username", "admin");
@@ -136,7 +136,7 @@ public class App2Controller2 {
 	}
 	@RequestMapping("/api/user/setusergender")
 	public DataResult setusergender(HttpServletRequest request) {
-		Map param = RequestMappingExecutor.getParameters(request);
+		Map param = RequestMappingExecutor.getFromParams(request);
 		System.out.println(JSON.toJSONString(param));
 		userinfo.putAll(param);
 		return DataResult.successWithDataMsg(userinfo,null);
@@ -145,7 +145,7 @@ public class App2Controller2 {
 	
 	@RequestMapping("/api/common/upload")
 	public DataResult upload(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		JSONObject json= JSON.parseObject(" {\r\n"
 				+ "   \"url\": \"https://omo-oss-image.thefastimg.com/portal-saas/new2022093017543412358/cms/image/e46936f7-8a3d-4240-8b81-81541babc2d8.png\",  \r\n"
 				+ "    \"name\": \"name\",  \r\n"
@@ -155,48 +155,48 @@ public class App2Controller2 {
 	}
 	@RequestMapping("/api/ykjp/product/unit/deleteUnit")
 	public DataResult deleteUnit(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		return DataResult.success();
 	}
 	@RequestMapping("/api/ykjp/product/unit/addUnit")
 	public DataResult addUnit(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		return DataResult.success();
 	}
 	@RequestMapping("/api/ykjp/product/type/deleteType")
 	public DataResult deleteType(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		return DataResult.success();
 	}
 	@RequestMapping("/api/ykjp/product/type/add")
 	public DataResult addType(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		return DataResult.success();
 	}
 	@RequestMapping("/api/ykjp/product/product/deleteProduct")
 	public DataResult deleteProduct(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		return DataResult.success();
 	}
 	@RequestMapping("/api/ykjp/information/basisinfo/supplier/deleteProduct")
 	public DataResult deletebasisinfoProduct(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		return DataResult.success();
 	}
 	@RequestMapping("/api/ykjp/information/basisinfo/supplier/add")
 	public DataResult addbasisinfoProduct(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		return DataResult.success();
 	}
 	@RequestMapping("/api/ykjp/information/basisinfo/warehouse/add")
 	public DataResult addwarehouse(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		return DataResult.success();
 	}
 	
 	@RequestMapping("/api/ykjp/product/unit/getUnitList")
 	public DataResult getUnitList(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		JSONObject json= JSON.parseObject(" {\r\n"
 				+ "		\"data\": [{\r\n"
 				+ "			\"id\": 1,\r\n"
@@ -219,7 +219,7 @@ public class App2Controller2 {
 	
 	@RequestMapping("/api/ykjp/product/type/getType")
 	public DataResult getType(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		JSONObject json= JSON.parseObject(" {\r\n"
 				+ "		\"data\": [{\r\n"
 				+ "			createtime:1594827893\r\n"
@@ -252,7 +252,7 @@ public class App2Controller2 {
 	
 	@RequestMapping("/api/ykjp/product/product/getProduct")
 	public DataResult getProduct(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		JSONObject json= JSON.parseObject(" {\r\n"
 				+ "        \"data\":[\r\n"
 				+ "            {\r\n"
@@ -281,7 +281,7 @@ public class App2Controller2 {
 	
 	@RequestMapping("/api/ykjp/information/basisinfo/supplier/index")
 	public DataResult getProductList(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		JSONObject json= JSON.parseObject(" {\r\n"
 				+ "        \"data\":[\r\n"
 				+ "            {\r\n"
@@ -318,7 +318,7 @@ public class App2Controller2 {
 	
 	@RequestMapping("/api/ykjp/information/basisinfo/supplier/getdetails")
 	public DataResult getProductDetail(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		JSONObject json= JSON.parseObject(" {\r\n"
 				+ "        \"data\":[\r\n"
 				+ "            {\r\n"
@@ -354,7 +354,7 @@ public class App2Controller2 {
 	
 	@RequestMapping("/api/ykjp/summary/Purchase/index")
 	public DataResult getPurchaseDetail(HttpServletRequest request) {
-		System.out.println(JSON.toJSONString(RequestMappingExecutor.getParameters(request)));
+		System.out.println(JSON.toJSONString(RequestMappingExecutor.getFromParams(request)));
 		JSONObject json= JSON.parseObject(" {\r\n"
 				+ "        \"data\": {\r\n"
 				+ "            \"purchase\": {\r\n"

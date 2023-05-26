@@ -46,8 +46,5 @@ mybatis-plus:
 project:
   database: mysql
 
-# 对外开放接口验签
-openapi:
-  apps:
-    - from: test
-      secret: 29e907700db7ad91318424a97c54ed576
+shiro:
+  enable: false

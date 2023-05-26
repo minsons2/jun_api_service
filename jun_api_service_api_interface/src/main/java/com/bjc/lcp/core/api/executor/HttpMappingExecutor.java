@@ -125,7 +125,7 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 	public Object doGroovyProcess(ApiConfig config, HttpServletRequest request, HttpServletResponse response) {
 		String beanName = GroovyInnerCache.getByPath(config.getPath());
         //GroovyInfo groovyInfo = GroovyInnerCache.getGroovyInfoByPath(config.getPath());
-        Map<String, Object> params = getParams(request, config);
+        Map<String, Object> params = getParameters(request, config);
         params.put("_request", request);
     	IExecutor bean = SpringUtil.getBean(beanName);
 		try {
@@ -143,7 +143,7 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 				response.setStatus(500);
 				return DataResult.fail("Datasource not exists!");
 			}
-			Map<String, Object> params = getParams(request, config);
+			Map<String, Object> params = getParameters(request, config);
 			List<ApiSql> sqlList = config.getSqlList();
 			if (CollectionUtils.isEmpty(params) && !CollectionUtils.isEmpty(sqlList) && JSON.toJSONString(sqlList).contains("#")) {
 				return DataResult.fail("Request parameter is not exists(请求入参不能为空)!");

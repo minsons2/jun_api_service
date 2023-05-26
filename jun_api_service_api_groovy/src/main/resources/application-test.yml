@@ -16,9 +16,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     #MySQL配置
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://10.100.201.155:3306/lcp-dev?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8
+    url: jdbc:mysql://localhost:3306/db_qixing?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8
     username: root
-    password: 123456
+    password:
     #oracle配置
     #    driverClassName: oracle.jdbc.OracleDriver
     #    url: jdbc:oracle:thin:@47.100.206.162:1521:xe
@@ -58,23 +58,22 @@ spring:
 #      pager-suffix: /page
 #      count-suffix: /count
       
+
+filepath: "D:\\files\\"
 file:
   #文件上传目录 绝对路径 末尾请加 /
   path: D:/files/ #windows
-  #path: /data/files/ #linux
+  #path: /home/data/files/ #linux
   #文件预览、下载的url, 末尾请勿加 /
-  url: http://localhost:8080/files
-  
-config:
-  api:
-    context: apitest
-    mode: 1
-    serviceName: lcp-engine
-    basePath: apiengine
-  cluster:
-    gateway:
-      name: apitest
-  
+  url: http://qixing.vip321.vip/files
+  qiniuAccessKey: ts0n9OF16ekFkDkZTTlpmyPI-tP3HKQDyw_GR4o2
+  qiniuBucketName: qixing-files
+  qiniuDomain: http://qiniu.vip321.vip
+  qiniuPrefix: upload
+  qiniuSecretKey: c-OjjwV3ZgzCQwxc6W_bsTFKuDg8qeyqohyJU0RL
+  type: 1
+
+
 # AES密码加密私钥(Base64加密)
 encryptAESKey: V2FuZzkyNjQ1NGRTQkFQSUpXVA==
 # JWT认证加密私钥(Base64加密)

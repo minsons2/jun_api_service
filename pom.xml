@@ -23,6 +23,7 @@
 		<module>jun_api_service_mq</module>
 		<module>jun_api_service_sms</module>
 		<module>jun_api_service_user_service</module>
+		<module>jun_api_service_user_shiro</module>
 		<module>jun_api_service_file</module>
 		<module>jun_api_service_flow</module>
 		<module>jun_api_service_admin</module>

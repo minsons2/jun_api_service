@@ -7,8 +7,10 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
@@ -16,10 +18,14 @@ import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import cn.hutool.core.lang.Console;
 import cn.hutool.extra.spring.SpringUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Slf4j
+@EnableScheduling
+@SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class) // 多数据源 (exclude = DruidDataSourceAutoConfigure.class)
 @MapperScan("com.jun.plugin.**.mapper")
-@SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class)
+@ComponentScan(basePackages = {"com.bjc.lcp","com.jun.plugin"})
+@ServletComponentScan(basePackages = {"com.jun.plugin.**.filter"})
 public class ApiGroovyApplication {
 
     public static void main(String[] args) throws UnknownHostException {
@@ -48,6 +54,7 @@ public class ApiGroovyApplication {
         return args -> {
             System.out.println("Let's inspect the beans provided by Spring Boot:");
             String[] beanNames = ctx.getBeanDefinitionNames();
+            System.err.println("beanNames size = "+ beanNames.length);
             for (String beanName : beanNames) {
                 //System.err.println(beanName);
 				/*
