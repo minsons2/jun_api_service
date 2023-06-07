@@ -11,6 +11,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.hutool.core.convert.Convert;
+import cn.hutool.core.map.MapUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -144,6 +146,12 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 				return DataResult.fail("Datasource not exists!");
 			}
 			Map<String, Object> params = getParameters(request, config);
+//			if(MapUtil.getStr(params,"pageNumber")!=null && MapUtil.getStr(params,"pageSize")!=null ){
+//				Integer size = Convert.convert(Integer.class, params.get("pageSize"));
+//				Integer page = Convert.convert(Integer.class, params.get("pageNumber"));
+//				params.put("pageSize", size);
+//				params.put("pageNumber", size*(page-1));
+//			}
 			List<ApiSql> sqlList = config.getSqlList();
 			if (CollectionUtils.isEmpty(params) && !CollectionUtils.isEmpty(sqlList) && JSON.toJSONString(sqlList).contains("#")) {
 				return DataResult.fail("Request parameter is not exists(请求入参不能为空)!");
@@ -201,6 +209,7 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 				SqlMeta sqlMeta = JdbcUtil.getEngine().parse(apiSql.getSqlText(), sqlParam);
 				_sqlMeta = sqlMeta;
 				Object data = JdbcUtil.executeSql(connection, sqlMeta.getSql(), sqlMeta.getJdbcParamValues());
+				log.info("SQL执行-，当前执行的SQL：{},当前执行的SQL参数：{}",_sqlMeta.getSql(),_sqlMeta.getJdbcParamValues());
 				dataList.add(data);
 			}
 			if (flag)
@@ -211,13 +220,13 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 				if (flag)
 					connection.rollback();
 				if(_sqlMeta !=null) {
-					log.error("SQL执行失败，当前执行的SQL：[#{}],当前执行的SQL参数[#{}]；",_sqlMeta.getSql(),_sqlMeta.getJdbcParamValues());
+					log.error("SQL执行失败，当前执行的SQL：{},当前执行的SQL参数：{}",_sqlMeta.getSql(),_sqlMeta.getJdbcParamValues());
 				}
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
 			if(_sqlMeta !=null) {
-				throw new RuntimeException(e +";\n\t SQL执行失败，当前执行的SQL：["+_sqlMeta.getSql()+"],当前执行的SQL参数["+_sqlMeta.getJdbcParamValues()+"];");
+				throw new RuntimeException(e +";\n\t SQL执行失败，当前执行的SQL：["+_sqlMeta.getSql()+"],当前执行的SQL参数:"+_sqlMeta.getJdbcParamValues()+"");
 			}else {
 				throw new RuntimeException(e);
 			}

@@ -1,4 +1,4 @@
-package com.bjc.lcp.api.service;
+package com.bjc.lcp.api.component;
 
 
 import java.sql.SQLException;

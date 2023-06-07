@@ -9,10 +9,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import com.gitthub.wujun728.engine.common.RequestWrapper;
-import com.jun.plugin.system.entity.SysUser;
-import com.jun.plugin.system.service.SysDictService;
-import com.jun.plugin.system.service.UserService;
-import com.jun.plugin.system.vo.resp.LoginRespVO;
+//import com.jun.plugin.system.entity.SysUser;
+//import com.jun.plugin.system.service.SysDictService;
+//import com.jun.plugin.system.service.UserService;
+//import com.jun.plugin.system.vo.resp.LoginRespVO;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,11 +34,11 @@ import cn.hutool.http.server.HttpServerRequest;
 @RestController
 public class App1Controller {
 
-	@Resource
-	SysDictService sysDictService;
-
-	@Resource
-	UserService userService;
+//	@Resource
+//	SysDictService sysDictService;
+//
+//	@Resource
+//	UserService userService;
 
 	@RequestMapping("/api/mobile/login/loginByPassword")
 	@ResponseBody
@@ -56,11 +56,11 @@ public class App1Controller {
 			String username = MapUtil.getStr(param, "username");
 			String password = MapUtil.getStr(param, "password");
 			String validCode = MapUtil.getStr(param, "validCode");
-			SysUser vo = new SysUser();
-			vo.setUsername(username);
-			vo.setPassword(password);
-			LoginRespVO loginRespVO = userService.login(vo);
-			return DataResult.success(loginRespVO);
+//			SysUser vo = new SysUser();
+//			vo.setUsername(username);
+//			vo.setPassword(password);
+//			LoginRespVO loginRespVO = userService.login(vo);
+//			return DataResult.success(loginRespVO);
 		}
 		if("3".equals(loginType)) {//本机号码一键登录
 			String phoneNo = MapUtil.getStr(param, "phoneNo");

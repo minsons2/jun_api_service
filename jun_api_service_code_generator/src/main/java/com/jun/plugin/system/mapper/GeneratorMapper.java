@@ -3,6 +3,8 @@ package com.jun.plugin.system.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jun.plugin.system.code.BeanColumn;
+import com.jun.plugin.system.code.TsysTables;
 import com.jun.plugin.system.entity.SysGenerator;
 
 import org.apache.ibatis.annotations.Param;
@@ -24,4 +26,20 @@ public interface GeneratorMapper extends BaseMapper<SysGenerator> {
     Map<String, String> queryTable(String tableName);
 
     List<Map<String, String>> queryColumns(String tableName);
+
+
+    /**
+     * 查询当前所有表
+     * @param tableName 条件搜索
+     * @return
+     */
+    List<TsysTables> queryList(String tableName);
+
+    /**
+     * 查询表详情
+     * @param tableName
+     * @return
+     */
+    List<BeanColumn> queryColumns2(String tableName);
+    List<Map<String, String>> queryColumns3(String tableName);
 }

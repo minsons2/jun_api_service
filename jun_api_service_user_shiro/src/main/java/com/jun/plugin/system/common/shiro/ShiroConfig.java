@@ -99,6 +99,7 @@ public class ShiroConfig {
             filterRuleMap.put("/pages/*.html", "anon");
             filterRuleMap.put("/**/*.html", "anon");
             filterRuleMap.put("/**/*.js", "anon");
+            filterRuleMap.put("/**/*.css", "anon");
             filterRuleMap.put("/static/**", "anon");
             filterRuleMap.put("/doc.html", "anon");
             filterRuleMap.put("/swagger-resources/**", "anon");

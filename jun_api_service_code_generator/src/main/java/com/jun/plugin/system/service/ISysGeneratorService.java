@@ -2,7 +2,12 @@ package com.jun.plugin.system.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jun.plugin.system.code.BeanColumn;
+import com.jun.plugin.system.code.TsysTables;
 import com.jun.plugin.system.entity.SysGenerator;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 代码生成
@@ -29,4 +34,28 @@ public interface ISysGeneratorService {
      * @return byte[]
      */
     byte[] generatorCode(String[] tables);
+
+
+    Map<String, String> queryTable(String tableName);
+
+    List<Map<String, String>> queryColumns(String tableName);
+
+    /**
+     * 查询具体某表信息
+     *
+     * @param tableName
+     * @return
+     */
+    public List<TsysTables> queryList(String tableName);
+
+    /**
+     * 查询表详情
+     *
+     * @param tableName
+     * @return
+     */
+    public List<BeanColumn> queryColumns2(String tableName);
+
+
+
 }

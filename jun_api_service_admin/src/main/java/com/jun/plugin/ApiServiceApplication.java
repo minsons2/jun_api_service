@@ -26,6 +26,7 @@ public class ApiServiceApplication {
         log.info("\n----------------------------------------------------------\n\t" +
                         "Application '{}' is running! Access URLs:\n\t" +
                         "Api Test Json: \thttp://{}:{}/public/json\n\t" +
+                        "Api Code Generator: \thttp://{}:{}/generator/list.html\n\t" +
                         "----------------------------------------------------------",
                 env.getProperty("spring.application.name"),
                 InetAddress.getLocalHost().getHostAddress(),

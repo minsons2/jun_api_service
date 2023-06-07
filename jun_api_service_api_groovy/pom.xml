@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
+    <!--<parent>
        	<groupId>com.jun.plugin</groupId>
 		<artifactId>jun_springboot_api_service</artifactId>
 		<version>1.0</version>
-    </parent>
+    </parent>-->
     
     <groupId>com.jun.plugin</groupId>
     <artifactId>jun_api_service_api_groovy</artifactId>
@@ -38,29 +38,16 @@
     </properties>
 
     <dependencies>
-    
-	    <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
-            </dependency>
-
         <dependency>
-		    <groupId>com.jun.plugin</groupId>
-		    <artifactId>jun_api_service_api_interface</artifactId>
-		    <version>1.0</version>
-        </dependency>
-
-        <dependency>
-			<groupId>io.github.wujun728</groupId>
-			<artifactId>jun-groovy-api-spring-boot-starter</artifactId>
-			<version>1.0.2-RELEASE</version>
+            <groupId>io.github.wujun728</groupId>
+            <artifactId>jun-groovy-api-spring-boot-starter</artifactId>
+            <version>1.0.2-RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.jun.plugin</groupId>
-            <artifactId>jun_api_service_common</artifactId>
+            <artifactId>jun_api_service_api_interface</artifactId>
             <version>1.0</version>
         </dependency>
-
 
         <dependency>
             <groupId>com.jun.plugin</groupId>
@@ -69,61 +56,65 @@
         </dependency>
         <dependency>
             <groupId>com.jun.plugin</groupId>
+            <artifactId>jun_api_service_common</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jun.plugin</groupId>
             <artifactId>jun_api_service_code_generator</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.jun.plugin</groupId>
-            <artifactId>jun_api_service_job</artifactId>
-            <version>1.0</version>
+		    <artifactId>jun_api_service_job</artifactId>
+			<version>1.0</version>
         </dependency>
         <dependency>
             <groupId>com.jun.plugin</groupId>
-            <artifactId>jun_api_service_mq</artifactId>
-            <version>1.0</version>
+		    <artifactId>jun_api_service_mq</artifactId>
+			<version>1.0</version>
         </dependency>
         <dependency>
             <groupId>com.jun.plugin</groupId>
-            <artifactId>jun_api_service_user_service</artifactId>
-            <version>1.0</version>
-            <!--<scope>compile</scope>-->
+		    <artifactId>jun_api_service_file</artifactId>
+			<version>1.0</version>
+        </dependency>-->
+
+        <!-- <dependency>
+            <groupId>com.jun.plugin</groupId>
+		    <artifactId>jun_api_service_user_service</artifactId>
+			<version>1.0</version>
         </dependency>
         <dependency>
             <groupId>com.jun.plugin</groupId>
-            <artifactId>jun_api_service_file</artifactId>
-            <version>1.0</version>
+		    <artifactId>jun_api_service_flow</artifactId>
+			<version>1.0</version>
         </dependency>
         <dependency>
             <groupId>com.jun.plugin</groupId>
             <artifactId>jun_api_service_sms</artifactId>
             <version>1.0</version>
         </dependency>
-
-
-
-        
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
+            <groupId>com.jun.plugin</groupId>
+            <artifactId>jun_api_service_user_shiro</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
-        <dependency>
-            <groupId>commons-dbutils</groupId>
-            <artifactId>commons-dbutils</artifactId>
-            <version>1.7</version>
-        </dependency>
+         -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -140,8 +131,17 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        
-        
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
+        <dependency>
+            <groupId>commons-dbutils</groupId>
+            <artifactId>commons-dbutils</artifactId>
+            <version>1.7</version>
+        </dependency>
          <!--数据源-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -159,8 +159,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        
-        <!--数据库持久化 及 插件依赖-->
         <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -177,7 +175,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>${ojdbc6.version}</version>
@@ -187,41 +185,7 @@
             <artifactId>sqljdbc4</artifactId>
             <version>${sqlserver.version}</version>
             <scope>runtime</scope>
-        </dependency>
-        		
-<!-- 		<dependency>
-		    <groupId>com.baomidou</groupId>
-		    <artifactId>mybatis-plus</artifactId>
-		    <version>3.5.2</version>
-		</dependency> -->
-
-        <!-- <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency> -->
-        <!-- <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.1.10</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-            <version>3.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.2.0</version>
-        </dependency> -->
-        <!-- mybatis plus end -->
-
+        </dependency>-->
 
 		<dependency>
             <groupId>commons-lang</groupId>
@@ -245,55 +209,33 @@
             <artifactId>cglib-nodep</artifactId>
             <version>2.1_3</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java8 -->
-        <dependency>
+        <!--<dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java8</artifactId>
             <version>4.2.0</version>
-        </dependency>
-
+        </dependency>-->
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
-        <dependency>
+       <!-- <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>4.2.0</version>
             <scope>test</scope>
-        </dependency>
-        
-        <dependency>
+        </dependency>-->
+        <!--<dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
         </dependency>
-        
-         <!-- https://mvnrepository.com/artifact/org.eclipse/osgi -->
         <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>osgi</artifactId>
             <version>3.10.0-v20140606-1445</version>
             <scope>provided</scope>
-        </dependency>
-        <!-- <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>1.8.9</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-jsr223</artifactId>
-            <version>2.5.4</version>
-        </dependency> -->
-      <!--  <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.7</version>
         </dependency>-->
        	<dependency>
 		    <groupId>org.codehaus.groovy</groupId>
 		    <artifactId>groovy</artifactId>
-		    </dependency>
-
+        </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -304,7 +246,6 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${springfox.version}</version>
         </dependency>
-
         <dependency>
         	<groupId>cn.hutool</groupId>
         	<artifactId>hutool-all</artifactId>
@@ -316,11 +257,6 @@
 		    <artifactId>activerecord</artifactId>
 		    <version>5.0.4</version>
 		</dependency>
-        <!-- <dependency>
-            <groupId>io.github.freakchick</groupId>
-            <artifactId>orange</artifactId>
-            <version>1.0</version>
-        </dependency> -->
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
@@ -331,30 +267,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
-        <!--  
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
-            1<exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                </exclusion>
-               <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-webflux</artifactId>
-                </exclusion>
-            </exclusions>1
-        </dependency>
-		-->
-		<!-- nacos配置 -->
-		<!-- 
-		<dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-         -->
-
         <dependency>
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-autoconfigure</artifactId>
@@ -369,10 +281,12 @@
         	<artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 
-        <!-- <dependency>
-        	<groupId>io.projectreactor.netty</groupId>
-        	<artifactId>reactor-netty</artifactId>
-        </dependency> -->
+        <!-- Sqlite驱动包 -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+        </dependency>
+
     </dependencies>
     
     

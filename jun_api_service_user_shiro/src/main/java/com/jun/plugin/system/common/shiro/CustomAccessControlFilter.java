@@ -12,7 +12,10 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -21,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -42,6 +47,10 @@ public class CustomAccessControlFilter extends AccessControlFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+        StringBuffer url = request.getRequestURL();
+        if(url.toString().endsWith(".js") || url.toString().endsWith(".css")){
+            return true;
+        }
         try {
             Subject subject = getSubject(servletRequest, servletResponse);
             System.out.println(subject.isAuthenticated() + "");
@@ -53,6 +62,10 @@ public class CustomAccessControlFilter extends AccessControlFilter {
             //如果header中不存在token，则从参数中获取token
             if (StringUtils.isEmpty(token)) {
                 token = request.getParameter(Constant.ACCESS_TOKEN);
+                if (StringUtils.isEmpty(token)) {
+                    Map<String, Object> urlPara = getParam(request);
+                    token = urlPara.get(Constant.ACCESS_TOKEN)==null?null:urlPara.get(Constant.ACCESS_TOKEN).toString();
+                }
             }
             if (StringUtils.isEmpty(token)) {
                 throw new BusinessException(BaseResponseCode.TOKEN_ERROR);
@@ -96,6 +109,21 @@ public class CustomAccessControlFilter extends AccessControlFilter {
             return false;
         }
         return true;
+    }
+
+    private static Map<String, Object> getParam(HttpServletRequest request) {
+        StringBuffer url = request.getRequestURL();
+        if (request.getQueryString() != null) {
+            url.append("?");
+            url.append(request.getQueryString());
+        }
+        Map<String, Object> result = new HashMap<>();
+        MultiValueMap<String, String> urlMvp = UriComponentsBuilder.fromHttpUrl(url.toString()).build().getQueryParams();
+        urlMvp.forEach((key, value) -> {
+            String firstValue = CollectionUtils.isEmpty(value) ? null : value.get(0);
+            result.put(key, firstValue);
+        });
+        return result;
     }
 
     private void customResponse(int code, String msg, ServletResponse response) {

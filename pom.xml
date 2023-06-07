@@ -3,12 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>com.jun.plugin</groupId>
 	<artifactId>jun_springboot_api_service</artifactId>
 	<version>1.0</version>
 	<packaging>pom</packaging>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -50,7 +50,7 @@
 			<version>5.1.40</version>
 		</dependency> -->
 	</dependencies>
-	
+
 	<!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
@@ -67,7 +67,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
- 
+
 	<profiles>
 		<profile>
 			<id>jdk-1.8</id>

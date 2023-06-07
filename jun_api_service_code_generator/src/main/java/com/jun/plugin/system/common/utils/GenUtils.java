@@ -1,6 +1,8 @@
 package com.jun.plugin.system.common.utils;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.jun.plugin.system.code.TableInfo;
 import com.jun.plugin.system.common.exception.BusinessException;
 import com.jun.plugin.system.entity.ColumnEntity;
 import com.jun.plugin.system.entity.TableEntity;
@@ -10,13 +12,12 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.WordUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.*;
 import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -30,25 +31,52 @@ import java.util.zip.ZipOutputStream;
  */
 public class GenUtils {
 
-    public static List<String> getTemplates() {
-        List<String> templates = new ArrayList<>();
-        templates.add("vm/Entity.java.vm");
-        templates.add("vm/Dao.java.vm");
-        templates.add("vm/Dao.xml.vm");
-        templates.add("vm/Service.java.vm");
-        templates.add("vm/ServiceImpl.java.vm");
-        templates.add("vm/Controller.java.vm");
-        templates.add("vm/menu.sql.vm");
-        templates.add("vm/list.html.vm");
+    static Configuration config = getConfig();
 
+    public static List<String> getTemplates() {
+        if(false){
+            return getTemplates2();
+        }else{
+            List<String> templates = new ArrayList<>();
+            templates.add("vm/Entity.java.vm");
+            templates.add("vm/Dao.java.vm");
+            templates.add("vm/Dao.xml.vm");
+            templates.add("vm/Service.java.vm");
+            templates.add("vm/ServiceImpl.java.vm");
+            templates.add("vm/Controller.java.vm");
+            templates.add("vm/menu.sql.vm");
+            templates.add("vm/list.html.vm");
+            return templates;
+        }
+    }
+
+    public static List<String> getTemplates2() {
+        List<String> templates = new ArrayList<String>();
+
+        //java代码模板
+        templates.add("vm2/model/Entity.java.vm");
+        //templates.add("auto_code/model/EntityExample.java.vm");
+        templates.add("vm2/mapperxml/EntityMapper.xml.vm");
+        templates.add("vm2/service/EntityService.java.vm");
+        templates.add("vm2/service/impl/EntityServiceImpl.java.vm");
+        templates.add("vm2/mapper/EntityMapper.java.vm");
+        templates.add("vm2/controller/EntityController.java.vm");
+        //前端模板
+        templates.add("vm2/html/list.html.vm");
+        templates.add("vm2/html/add.html.vm");
+        templates.add("vm2/html/edit.html.vm");
+        //sql模板
+        templates.add("vm2/sql/menu.sql.vm");
+        //templates.add("auto_code/说明.txt.vm");
         return templates;
     }
 
     /**
      * 生成代码
      */
-    public static void generatorCode(Map<String, String> table,
-                                     List<Map<String, String>> columns, ZipOutputStream zip) {
+    public static Map<String, String>  generatorCode(Map<String, String> table, List<Map<String, String>> columns, ZipOutputStream zip,Boolean isView) {
+        Map<String, String> velocityMap = new HashMap<String, String>();
+
         //配置信息
         Configuration config = getConfig();
         boolean hasBigDecimal = false;
@@ -125,6 +153,8 @@ public class GenUtils {
         map.put("updateId", IdWorker.getId());
         map.put("deleteId", IdWorker.getId());
         map.put("selectId", IdWorker.getId());
+        
+        
         VelocityContext context = new VelocityContext(map);
 
         //获取模板列表
@@ -136,15 +166,67 @@ public class GenUtils {
             tpl.merge(context, sw);
 
             try {
-                //添加到zip
-                zip.putNextEntry(new ZipEntry(Objects.requireNonNull(getFileName(template, tableEntity.getClassName(), config.getString("package")))));
-                IOUtils.write(sw.toString(), zip, "UTF-8");
-                IOUtils.closeQuietly(sw);
-                zip.closeEntry();
+                if(!isView){
+                    //添加到zip
+                    zip.putNextEntry(new ZipEntry(Objects.requireNonNull(getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("package")))));
+                    IOUtils.write(sw.toString(), zip, "UTF-8");
+                    IOUtils.closeQuietly(sw);
+                    zip.closeEntry();
+                }
             } catch (IOException e) {
                 throw new BusinessException("渲染模板失败，表名：" + tableEntity.getTableName());
             }
+            velocityMap.put(template.substring(template.lastIndexOf("/") + 1, template.lastIndexOf(".vm")), sw.toString());
         }
+        return velocityMap;
+
+    }
+
+
+    /**
+     * 预览方法
+     *
+     * @param tableInfo 数据库表
+     * @return
+     * @author fuce
+     * @Date 2021年1月18日 上午2:10:55
+     */
+    public static Map<String, String> viewAuto(TableInfo tableInfo, String tableName ,String tableComment) {
+        Map<String, String> velocityMap = new HashMap<String, String>();
+
+        //设置velocity资源加载器
+        Properties prop = new Properties();
+        prop.put("file.resource.loader.class" , "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        Velocity.init(prop);
+        Map<String, Object> map = new HashMap<>();
+        //数据库表数据
+        map.put("tableInfo" , tableInfo);
+        //字段集合
+        map.put("beanColumns" , tableInfo.getBeanColumns());
+        //配置文件
+        map.put("SnowflakeIdWorker" , "SnowflakeIdWorker.class");
+        //class类路径
+        map.put("parentPack" , config.getString("package"));
+        //作者
+        map.put("author" , config.getString("author"));
+        //时间
+        map.put("datetime" , new DateTime());
+        //sql需要的权限父级pid
+        map.put("pid" , "0");
+
+        VelocityContext velocityContext = new VelocityContext(map);
+        //获取模板列表
+        List<String> templates = getTemplates();
+        for (String template : templates) {
+            Template tpl = Velocity.getTemplate(template, "UTF-8");
+            StringWriter sw = new StringWriter();
+            tpl.merge(velocityContext, sw);
+            System.out.println("输出模板");
+            System.out.println(sw);
+            System.out.println("输出模板 end");
+            velocityMap.put(template.substring(template.lastIndexOf("/") + 1, template.lastIndexOf(".vm")), sw.toString());
+        }
+        return velocityMap;
     }
 
 
@@ -191,7 +273,7 @@ public class GenUtils {
     /**
      * 获取文件名
      */
-    public static String getFileName(String template, String className, String packageName) {
+    public static String getFileName(String template, String className, String packageName, String targetPath) {
         String packagePath = "main" + File.separator + "java" + File.separator;
         if (StringUtils.isNotBlank(packageName)) {
             packagePath += packageName.replace(".", File.separator) + File.separator;
@@ -225,10 +307,238 @@ public class GenUtils {
             return className.toLowerCase() + "_menu.sql";
         }
 
-        if (template.contains("list.html.vm")) {
+        if (template.contains("generator.html.vm")) {
             return "main" + File.separator + "resources" + File.separator + "templates2" + File.separator + className.toLowerCase() + File.separator + "list" + ".html";
         }
+        return getCoverFileName(template,className,packageName,config.getString("parentPath"));
 
-        return null;
+//        return null;
     }
+    // ****************************************************************************************************************
+    // ****************************************************************************************************************
+    // ****************************************************************************************************************
+
+    /**
+     * @param template
+     * @return
+     * @author fuce
+     * @Date 2021年1月17日 下午6:40:57
+     */
+    public static String getCoverFileName(String template, String className, String packageName, String targetPath) {
+
+        String separator = File.separator;
+        String packagePath = targetPath + separator + "src" + separator + "main" + separator + "java" + separator;
+        String resourcesPath = targetPath + separator + "src" + separator + "main" + separator + "resources" + separator;
+        ;
+        if (com.jun.plugin.system.code.StringUtils.isNotBlank(packageName)) {
+            packagePath += packageName.replace("." , separator) + separator;
+        }
+
+        //model.java
+        if (template.contains("Entity.java.vm")) {
+            return packagePath + "model" + separator + "original" + separator + className + ".java";
+        }
+//        if(template.contains("EntityExample.java.vm")) {//modelExample.java
+//        	return packagePath+"model" +separator+ "auto" + separator + className + "Example.java";
+//        }
+
+        //daomapper.java
+        if (template.contains("EntityMapper.java.vm")) {
+            return packagePath + "Mapper" + separator  + "original" + separator+ className + "Mapper.java";
+        }
+
+        //daomapper.xml
+        if (template.contains("EntityMapper.xml.vm")) {
+            return resourcesPath + "mybatis" + separator  + "auto" + separator+ className + "Mapper.xml";
+        }
+
+        if (template.contains("EntityService.java.vm")) {
+            return packagePath + "Service" + separator + "original" + separator+ "" + className + "Service.java";
+        }
+
+        if (template.contains("EntityServiceImpl.java.vm")) {
+            return packagePath + "Service" + separator + "impl" + separator + className + "ServiceImpl.java";
+        }
+
+        if (template.contains("EntityController.java.vm")) {
+            return packagePath + "Controller" + separator  + "original" + separator+ className + "Controller.java";
+        }
+
+        if (template.contains("generator.html.vm")) {
+            return resourcesPath + "templates" + separator + "admin" + separator + firstLowerCase(className) + separator + "generator.html";
+        }
+
+        if (template.contains("add.html.vm")) {
+            return resourcesPath + "templates" + separator + "admin" + separator + firstLowerCase(className) + separator + "add.html";
+        }
+
+        if (template.contains("edit.html.vm")) {
+            return resourcesPath + "templates" + separator + "admin" + separator + firstLowerCase(className) + separator + "edit.html";
+        }
+
+        if (template.contains("menu.sql.vm")) {
+            return resourcesPath + "sql" + separator + "menu.sql";
+        }
+        return "";
+    }
+
+    /**
+     * 列名转换成Java属性名
+     *
+     * @param columnName
+     * @return
+     */
+//    public String columnToJava(String columnName) {
+//        return WordUtils.capitalizeFully(columnName, new char[]{'_'}).replace("_" , "");
+//    }
+
+    /**
+     * 表名转换成Java类名
+     *
+     * @param tableName
+     * @return
+     */
+    public String tableToJava(String tableName) {
+        String tablePrefix = Objects.requireNonNull(GenUtils.getConfig().getString("tablePrefix"));
+        if (com.jun.plugin.system.code.StringUtils.isNotBlank(tablePrefix)) {
+            tableName = tableName.replaceFirst(tablePrefix, "");
+        }
+        return columnToJava(tableName);
+    }
+
+    public static String firstLowerCase(String name) {
+        name = name.substring(0, 1).toLowerCase() + name.substring(1);
+        return name;
+
+    }
+
+
+    /**
+     * 创建单表
+     *
+     * @author fuce
+     * @Date 2019年8月24日 下午11:44:54
+     */
+    public static void autoCodeOneModel(TableInfo tableInfo, String tableName ,String tableComment) {
+        //设置velocity资源加载器
+        Properties prop = new Properties();
+        prop.put("file.resource.loader.class" , "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        Velocity.init(prop);
+        Map<String, Object> map = new HashMap<>();
+        //数据库表数据
+        map.put("tableInfo" , tableInfo);
+        //字段集合
+        map.put("beanColumns" , tableInfo.getBeanColumns());
+        //配置文件
+        map.put("SnowflakeIdWorker" , "SnowflakeIdWorker.class");
+        //class类路径
+        map.put("parentPack" , config.getString("package"));
+        //作者
+        map.put("author" , config.getString("author"));
+        //时间
+        map.put("datetime" , new DateTime());
+        //sql需要的权限父级pid
+        map.put("pid" , "0");
+
+        VelocityContext context = new VelocityContext(map);
+
+        //获取模板列表
+        List<String> templates = getTemplates();
+        /*
+         * if(vhtml!=true) { templates.remove("auto_code/html/generator.html.vm");
+         * templates.remove("auto_code/html/add.html.vm");
+         * templates.remove("auto_code/html/edit.html.vm"); } if (vController!=true) {
+         * templates.remove("auto_code/controller/EntityController.java.vm"); } if
+         * (vService!=true) {
+         * templates.remove("auto_code/service/EntityService.java.vm"); } if
+         * (vMapperORdao!=true) { templates.remove("auto_code/model/Entity.java.vm");
+         * templates.remove("auto_code/model/EntityExample.java.vm");
+         * templates.remove("auto_code/mapperxml/EntityMapper.xml.vm");
+         * templates.remove("auto_code/mapper/EntityMapper.java.vm"); }
+         */
+        for (String template : templates) {
+            try {
+                String targetPath = config.getString("parentPath");
+                String filepath = getCoverFileName(template, tableInfo.getJavaTableName(), config.getString("package"), targetPath);
+                //            读取模板
+                Template tpl = Velocity.getTemplate(template, "UTF-8");
+                File file = new File(filepath);
+                if (!file.getParentFile().exists()) {
+                    file.getParentFile().mkdirs();
+                }
+
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                try (FileOutputStream outStream = new FileOutputStream(file);
+                     OutputStreamWriter writer = new OutputStreamWriter(outStream, "UTF-8");
+                     BufferedWriter sw = new BufferedWriter(writer)) {
+                    tpl.merge(context, sw);//进行模板渲染
+                    sw.flush();
+                    System.out.println("成功生成Java文件:" + filepath);
+                }
+            } catch (IOException e) {
+                try {
+                    throw new Exception("渲染模板失败，表名：" + "c" + "\n" + e.getMessage());
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+
+    /**
+     * 自动生成压缩文件方法
+     *
+     * @param tableInfo
+     * @param zip
+     * @author fuce
+     * @Date 2021年1月17日 下午7:37:50
+     */
+    public static void autoCodeOneModel(TableInfo tableInfo, String tableName ,String tableComment, ZipOutputStream zip) {
+        //设置velocity资源加载器
+        Properties prop = new Properties();
+        prop.put("file.resource.loader.class" , "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        Velocity.init(prop);
+        Map<String, Object> map = new HashMap<>();
+        //数据库表数据
+        map.put("tableInfo" , tableInfo);
+        //字段集合
+        map.put("beanColumns" , tableInfo.getBeanColumns());
+        //配置文件
+        map.put("SnowflakeIdWorker" , "SnowflakeIdWorker.class");
+        //class类路径
+        map.put("parentPack" , config.getString("package"));
+        //作者
+        map.put("author" ,  config.getString("author"));
+        //时间
+        map.put("datetime" , new DateTime());
+        //sql需要的权限父级pid
+        map.put("pid" , "0");
+        VelocityContext velocityContext = new VelocityContext(map);
+        //获取模板列表
+        List<String> templates = getTemplates();
+        for (String template : templates) {
+            try {
+                String filepath = getCoverFileName(template, tableInfo.getJavaTableName(), config.getString("package"), "");
+                Template tpl = Velocity.getTemplate(template, "UTF-8");
+                StringWriter sw = new StringWriter();
+                tpl.merge(velocityContext, sw);
+                zip.putNextEntry(new ZipEntry(filepath));
+                IOUtils.write(sw.toString(), zip, "UTF-8");
+                IOUtils.closeQuietly(sw);
+                zip.closeEntry();
+            } catch (IOException e) {
+                try {
+                    throw new Exception("渲染模板失败，表名：" + "c" + "\n" + e.getMessage());
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+    }
+
+
 }

@@ -1,4 +1,4 @@
-package com.bjc.lcp.api.service;
+package com.bjc.lcp.api.component;
 
 import java.util.Map;
 
@@ -6,6 +6,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bjc.lcp.core.api.executor.AbstractExecutor;
 import com.bjc.lcp.core.api.executor.IExecutor;
+import com.bjc.lcp.engine.common.Context;
+//import com.github.freakchick.orange.context.Context;
+import com.gitthub.wujun728.engine.common.DataResult;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.druid.DruidPlugin;
 
 /**
  * 组件ID：BAS000000000100
@@ -15,12 +20,20 @@ import com.bjc.lcp.core.api.executor.IExecutor;
  * 参 数2：sql参数 
  * 参 数3：执行SQL语句处理记录数存放标签
  * 
- * 说明：需要把该代码放进DB，api_config，测试JSONOBject对象直接返回-保存在庫裡面
+ * 说明：需要把该代码放进DB，api_groovy，测试Jfinal-CURD-保存在庫裡面
  */
-public class TestJSONObjectService extends AbstractExecutor implements  IExecutor<JSONObject, Map<String,Object>>  {
+public class TestDataResultJSONService extends AbstractExecutor implements IExecutor<DataResult, Map<String,Object>> {
+
+	public void initDb(String appNo, String url, String username, String password) {
+		DruidPlugin dp = new DruidPlugin(url, username, password);
+		ActiveRecordPlugin arp = new ActiveRecordPlugin(appNo, dp);
+		// 与 jfinal web 环境唯一的不同是要手动调用一次相关插件的start()方法
+		dp.start();
+		arp.start();
+	}
 
 	@Override
-	public JSONObject execute(Map<String, Object> params) throws Exception{
+	public DataResult execute(Map<String, Object> params) throws Exception{
 		
 		String servletPath = (String) params.get("path");
 		System.out.println(JSON.toJSONString(params));
@@ -37,12 +50,14 @@ public class TestJSONObjectService extends AbstractExecutor implements  IExecuto
 				+ "		\"createtime\":1593422850,\r\n"
 				+ "		\"expiretime\":1596014850,\r\n"
 				+ "		\"expires_in\":2592000}} ");
-		return json;
+		return DataResult.success(json);
 	}
 
 	@Override
-	public JSONObject rollback(Map<String, Object> parms) {
-		return null;
+	public DataResult rollback(Map<String, Object> parms) {
+		return DataResult.success("");
 	}
+	
+	
 
 }
