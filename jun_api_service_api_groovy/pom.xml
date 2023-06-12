@@ -48,60 +48,11 @@
             <artifactId>jun_api_service_api_interface</artifactId>
             <version>1.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-            <artifactId>jun_api_service_biz_service</artifactId>
-            <version>1.0</version>
-        </dependency>
         <dependency>
             <groupId>com.jun.plugin</groupId>
             <artifactId>jun_api_service_common</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-            <artifactId>jun_api_service_code_generator</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <!--<dependency>
-            <groupId>com.jun.plugin</groupId>
-		    <artifactId>jun_api_service_job</artifactId>
-			<version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-		    <artifactId>jun_api_service_mq</artifactId>
-			<version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-		    <artifactId>jun_api_service_file</artifactId>
-			<version>1.0</version>
-        </dependency>-->
-
-        <!-- <dependency>
-            <groupId>com.jun.plugin</groupId>
-		    <artifactId>jun_api_service_user_service</artifactId>
-			<version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-		    <artifactId>jun_api_service_flow</artifactId>
-			<version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-            <artifactId>jun_api_service_sms</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-            <artifactId>jun_api_service_user_shiro</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
-         -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -260,7 +211,7 @@
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
-            <version>3.8.3</version>
+            <version>4.4.0</version>
         </dependency>
         
         <dependency>
@@ -285,6 +236,10 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
     </dependencies>
