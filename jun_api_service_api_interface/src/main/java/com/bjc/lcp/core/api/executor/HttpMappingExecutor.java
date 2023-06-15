@@ -1,36 +1,12 @@
 package com.bjc.lcp.core.api.executor;
 
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.map.MapUtil;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.druid.pool.DruidPooledConnection;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.gitthub.wujun728.engine.common.ApiConfig;
-import com.gitthub.wujun728.engine.common.ApiDataSource;
-import com.gitthub.wujun728.engine.common.ApiProperties;
-import com.gitthub.wujun728.engine.common.ApiService;
-import com.gitthub.wujun728.engine.common.ApiSql;
-import com.gitthub.wujun728.engine.common.DataResult;
+import com.gitthub.wujun728.engine.common.*;
 import com.gitthub.wujun728.engine.groovy.cache.IApiConfigCache;
-import com.gitthub.wujun728.engine.groovy.core.cache.GroovyInfo;
 import com.gitthub.wujun728.engine.groovy.core.cache.GroovyInnerCache;
 import com.gitthub.wujun728.engine.groovy.mapping.RequestMappingExecutor;
 import com.gitthub.wujun728.engine.plugin.CachePlugin;
@@ -39,11 +15,22 @@ import com.gitthub.wujun728.engine.plugin.TransformPlugin;
 import com.gitthub.wujun728.engine.util.JdbcUtil;
 import com.gitthub.wujun728.engine.util.PoolManager;
 import com.gitthub.wujun728.mybatis.sql.SqlMeta;
-
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 将存储的API注册为request mapping,并且提供对入参及存储的执行脚本进行解析。 输出解析后的最终脚本提供给脚本执行器`@Link
@@ -128,14 +115,31 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 		String beanName = GroovyInnerCache.getByPath(config.getPath());
         //GroovyInfo groovyInfo = GroovyInnerCache.getGroovyInfoByPath(config.getPath());
         Map<String, Object> params = getParameters(request, config);
-        params.put("_request", request);
-    	IExecutor bean = SpringUtil.getBean(beanName);
+		Object beanObj = SpringUtil.getBean(beanName);
 		try {
-			return bean.execute(params);
+			if(beanObj instanceof  IExecutor){
+				IExecutor bean = (IExecutor) beanObj;
+				return bean.execute(params);
+			}else if(beanObj instanceof  AbstractExecutor){
+				AbstractExecutor bean = (AbstractExecutor) beanObj;
+				bean.init(request,response);
+				return bean.execute(params);
+			}
+		} catch (BusinessException e) {
+			return DataResult.fail(e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
+			if(beanObj instanceof  IExecutor){
+				IExecutor bean = (IExecutor) beanObj;
+				return bean.rollback(params);
+			}else if(beanObj instanceof  AbstractExecutor){
+				AbstractExecutor bean = (AbstractExecutor) beanObj;
+				bean.init(request,response);
+				return bean.rollback(params);
+			}
 			return e.getMessage();
 		}
+		return "ERROR：执行错误，请检查执行日志并捕获并处理异常！";
 	}
 	
 	public Object doSQLProcess(ApiConfig config, HttpServletRequest request, HttpServletResponse response) {

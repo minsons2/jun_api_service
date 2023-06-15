@@ -1,4 +1,4 @@
-package com.bjc.lcp.api.component;
+package com.bjc.lcp.api.abscomponent;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,14 +22,14 @@ import cn.hutool.core.util.RandomUtil;
 /**
  * TODO
  */
-public class TestDownloadService extends AbstractExecutor implements  IExecutor<JSONObject, Map<String,Object>>  {
+public class TestDownloadService extends AbstractExecutor<JSONObject, Map<String,Object>>  {
 
 	@Override
 	public JSONObject execute(Map<String, Object> params) throws Exception{
-		HttpServletRequest request = (HttpServletRequest) params.get("_request");
+		HttpServletRequest request = super.getRequest();
 		super.parameters = params;
 		String servletPath = (String) params.get("path");
-		System.out.println(JSON.toJSONString(collectParams(params)));
+		System.out.println(JSON.toJSONString(params));
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 	    MultipartFile file = multipartRequest.getFile("file"); // 通过参数名获取指定文件
 	    FileUtil.writeBytes(file.getBytes(), "D:/abc/"+RandomUtil.randomInt()+file.getOriginalFilename());

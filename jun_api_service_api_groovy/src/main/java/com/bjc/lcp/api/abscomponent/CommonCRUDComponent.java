@@ -1,4 +1,4 @@
-package com.bjc.lcp.api.component;
+package com.bjc.lcp.api.abscomponent;
 
 
 import java.sql.SQLException;
@@ -29,24 +29,24 @@ import cn.hutool.extra.spring.SpringUtil;
  * 
  * 说明：需要把该代码放进DB，api_groovy，测试Jfinal-CURD-保存在庫裡面
  */
-public class CommonCRUDComponent extends AbstractExecutor implements IExecutor<String,Map<String,Object>> {
+public class CommonCRUDComponent extends AbstractExecutor<String,Map<String,Object>> {
 
 	@Override
-	public String execute(Map<String, Object> params) throws Exception{
+	public String execute(Map<String, Object> params) throws Exception {
 		//校验组件参数+校验上下文参数，TODO
 //		if (!checkMinParaCountAndSetRespCode(3)) {
 //			return ERROR;
 //		}
 		super.parameters = params;
 		
-		Context context = (Context) params.get(IExecutor.CONTEXT);
+		Context context = super.getContext();
 		
 		String sSqlStr = getPara("sSqlStr"); // 执行SQL语句 eq: delete from test where id = ?
 		Object[] paras = getParas("sParas"); // sql语句参数清单 eq: id (多个逗号分隔)
 		String sResultPath = getPara("sResult");// 执行SQL语句处理记录数存放标签 eq： 1 (更新的条数)
 		
 		String appNo = "A000101";
-		initDb(appNo, SpringUtil.getProperty("spring.datasource.url"),
+		super.initDb(appNo, SpringUtil.getProperty("spring.datasource.url"),
 				SpringUtil.getProperty("spring.datasource.username"),
 				SpringUtil.getProperty("spring.datasource.password"));
 

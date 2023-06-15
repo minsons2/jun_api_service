@@ -1,4 +1,4 @@
-package com.bjc.lcp.api.component;
+package com.bjc.lcp.api.abscomponent;
 
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.IdUtil;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class CompoentExecutorSave extends AbstractExecutor implements  IExecutor<DataResult, Map<String,Object>>  {
+public class CompoentExecutorSave extends AbstractExecutor<DataResult, Map<String,Object>>  {
 	String appNo = "A000101";
 
 	@PostConstruct

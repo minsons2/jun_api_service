@@ -4,10 +4,6 @@ import java.util.Map;
 
 public interface IExecutor<T, P extends Map> {
 	
-	public static String CONTEXT = "context";
-	public static Integer SUCCESS = 0;
-	public static Integer ERROR = -1;
-
 	/**
 	 * 执行接口
 	 * 

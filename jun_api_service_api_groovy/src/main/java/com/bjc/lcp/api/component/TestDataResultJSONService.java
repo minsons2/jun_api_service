@@ -22,7 +22,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
  * 
  * 说明：需要把该代码放进DB，api_groovy，测试Jfinal-CURD-保存在庫裡面
  */
-public class TestDataResultJSONService extends AbstractExecutor implements IExecutor<DataResult, Map<String,Object>> {
+public class TestDataResultJSONService implements IExecutor<DataResult, Map<String,Object>> {
 
 	public void initDb(String appNo, String url, String username, String password) {
 		DruidPlugin dp = new DruidPlugin(url, username, password);

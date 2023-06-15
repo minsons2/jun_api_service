@@ -242,6 +242,14 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.dromara.stream-query/stream-plugin-mybatis-plus -->
+        <dependency>
+            <groupId>org.dromara.stream-query</groupId>
+            <artifactId>stream-plugin-mybatis-plus</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+
+
     </dependencies>
     
     
