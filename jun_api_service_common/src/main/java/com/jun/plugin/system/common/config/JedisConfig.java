@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,8 +21,7 @@ import redis.clients.jedis.JedisPoolConfig;
  */
 @Configuration
 @EnableAutoConfiguration
-//@PropertySource("classpath:config.properties")
-//@ConfigurationProperties(prefix = "redis")
+@ConditionalOnProperty(name = "spring.redis.port",havingValue ="6379" )
 public class JedisConfig {
 
     /**
