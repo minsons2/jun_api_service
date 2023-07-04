@@ -25,6 +25,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 //import com.jun.plugin.system.service.UserService;
 import freemarker.template.TemplateException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -38,8 +39,8 @@ import java.util.Map;
 import java.util.ServiceLoader;
 
 @Slf4j
-@RestController
-public class TestController {
+@Controller
+public class TestController111 {
 
 //	@Resource
 //	SysDictService sysDictService;
@@ -110,7 +111,24 @@ public class TestController {
 		List apis = Db.use(DbUtil.MASTER).query(" select id,path from api_config where path like ? ",new Object[]{"%"+className+"%"});
 		return new DataResult(200,"脚本接口初始化成功！",apis);
 	}
+	@GetMapping("/api/test111/test111")
+	@ResponseBody
+	public String test111333(HttpServletRequest request){
+		System.out.println("Request URI: " + request.getRequestURI());
+		return  "111";
+	}
+	@GetMapping("/abc/test111")
+	@ResponseBody
+	public String test111333abc(HttpServletRequest request){
+		System.out.println("Request URI: " + request.getRequestURI());
+		return  "111abc";
+	}
+	@GetMapping("/api/test111/test222")
+	public String test222333(HttpServletRequest request){
+		System.out.println("Request URI: " + request.getRequestURI());
+		return  "thymeleaf";
+	}
 
 
 
-}
+	}

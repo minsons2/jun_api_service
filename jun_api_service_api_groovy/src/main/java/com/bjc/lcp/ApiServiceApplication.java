@@ -3,14 +3,7 @@ package com.bjc.lcp;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import com.alibaba.fastjson.JSON;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,10 +26,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @MapperScan({"com.jun.plugin.**.mapper","com.bjc.lcp.**.mapper"})
 @ComponentScan(basePackages = {"com.bjc.lcp","com.jun.plugin"})
 @ServletComponentScan(basePackages = {"com.jun.plugin.**.filter"})
-public class ApiGroovyApplication {
+public class ApiServiceApplication {
 
     public static void main(String[] args) throws UnknownHostException {
-        SpringApplication app = new SpringApplication(ApiGroovyApplication.class);
+        SpringApplication app = new SpringApplication(ApiServiceApplication.class);
         Environment env = app.run(args).getEnvironment();
         log.info("\n----------------------------------------------------------\n\t" +
                         "Application '{}' is running! Access URLs:\n\t" +
