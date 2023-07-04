@@ -32,7 +32,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>${ojdbc6.version}</version>
@@ -42,7 +42,7 @@
             <artifactId>sqljdbc4</artifactId>
             <version>${sqlserver.version}</version>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
 
         <dependency>
         	<groupId>cn.hutool</groupId>
