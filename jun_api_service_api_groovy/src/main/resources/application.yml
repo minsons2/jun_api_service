@@ -21,6 +21,8 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
+  main:
+    allow-bean-definition-overriding: true
   # redis token信息
   redis:
     key:
