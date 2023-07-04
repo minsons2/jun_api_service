@@ -18,6 +18,7 @@
 	<modules> 
 		<module>jun_api_service_api_interface</module>
 		<module>jun_api_service_api_groovy</module>
+		<module>jun_api_service_common</module>
 	</modules>
 
 	<dependencies>

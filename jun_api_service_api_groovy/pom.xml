@@ -2,24 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!--<parent>
-       	<groupId>com.jun.plugin</groupId>
-		<artifactId>jun_springboot_api_service</artifactId>
-		<version>1.0</version>
-    </parent>-->
-    
+
     <groupId>com.jun.plugin</groupId>
     <artifactId>jun_api_service_api_groovy</artifactId>
     <version>1.0</version>
     
     <properties>
-        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+
         <springfox.version>2.8.0</springfox.version>
         <groovy.version>2.4.7</groovy.version>
-        <java.version>1.8</java.version>
         <mybatis-plus.version>3.4.0</mybatis-plus.version>
         <mybatis-plus-dynamic.version>2.5.5</mybatis-plus-dynamic.version>
         <ojdbc6.version>12.1.0.1-atlassian-hosted</ojdbc6.version>
@@ -51,7 +45,7 @@
         <dependency>
             <groupId>com.jun.plugin</groupId>
             <artifactId>jun_api_service_common</artifactId>
-            <version>1.0</version>
+            <version>v1.0</version>
         </dependency>
 
         <dependency>
@@ -111,11 +105,11 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>
             <version>${mybatis-plus.version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
@@ -160,29 +154,6 @@
             <artifactId>cglib-nodep</artifactId>
             <version>2.1_3</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java8 -->
-        <!--<dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java8</artifactId>
-            <version>4.2.0</version>
-        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
-       <!-- <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>4.2.0</version>
-            <scope>test</scope>
-        </dependency>-->
-        <!--<dependency>
-            <groupId>com.github.ben-manes.caffeine</groupId>
-            <artifactId>caffeine</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>osgi</artifactId>
-            <version>3.10.0-v20140606-1445</version>
-            <scope>provided</scope>
-        </dependency>-->
        	<dependency>
 		    <groupId>org.codehaus.groovy</groupId>
 		    <artifactId>groovy</artifactId>
@@ -243,12 +214,11 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.dromara.stream-query/stream-plugin-mybatis-plus -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.dromara.stream-query</groupId>
             <artifactId>stream-plugin-mybatis-plus</artifactId>
             <version>1.8.0</version>
-        </dependency>
-
+        </dependency>-->
 
     </dependencies>
     
