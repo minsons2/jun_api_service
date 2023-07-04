@@ -1,7 +1,9 @@
-package com.jun.plugin.system.common.util;
+package com.jun.plugin.system.common.redis;
 
 import java.util.Set;
 
+import com.jun.plugin.system.common.utils.SerializableUtil;
+import com.jun.plugin.system.common.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

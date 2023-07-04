@@ -1,9 +1,10 @@
-package com.jun.plugin.system.common.util;
+package com.jun.plugin.system.common.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.jun.plugin.system.common.encypt.Base64ConvertUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

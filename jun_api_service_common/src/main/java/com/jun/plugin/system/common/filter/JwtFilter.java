@@ -2,7 +2,7 @@ package com.jun.plugin.system.common.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.jun.plugin.system.common.exception.BusinessException;
-import com.jun.plugin.system.common.util.JwtUtil;
+import com.jun.plugin.system.common.utils.JwtUtil;
 import com.jun.plugin.system.common.utils.Constant;
 import com.jun.plugin.system.common.utils.DataResult;
 import com.jun.plugin.system.service.RedisService;

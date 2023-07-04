@@ -35,11 +35,13 @@ public class ApiServiceApplication {
                         "Application '{}' is running! Access URLs:\n\t" +
                         "Local: \t\thttp://localhost:{}\n\t" +
                         "External: \thttp://{}:{}\n\t" +
+                        "Knife4j: \thttp://localhost:{}/doc.html\n" +
                         "SwaggerUI: \thttp://localhost:{}/swagger-ui.html\n" +
                         "----------------------------------------------------------",
                 env.getProperty("spring.application.name"),
                 env.getProperty("server.port"),
                 InetAddress.getLocalHost().getHostAddress(),
+                env.getProperty("server.port"),
                 env.getProperty("server.port"),
                 env.getProperty("server.port"));
         Console.log(env.getProperty("server.port"));

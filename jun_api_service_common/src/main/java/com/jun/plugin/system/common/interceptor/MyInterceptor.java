@@ -9,10 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * @author HongYi
- * @createTime 2021年02月01日 14:00:00
- */
 @Component
 public class MyInterceptor implements HandlerInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(MyInterceptor.class);

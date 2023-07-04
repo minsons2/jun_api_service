@@ -43,11 +43,7 @@ import java.util.List;
 
 /**
  * 初始化常量的监听器
- * <p>
  * 当spring装配好配置后，就去数据库读constants
- *
- * @author yubaoshan
- * @date 2020/6/6 23:39
  */
 public class ConstantsInitListener implements ApplicationListener<ApplicationContextInitializedEvent>, Ordered {
 

@@ -1,4 +1,4 @@
-package com.jun.plugin.system.common.util;
+package com.jun.plugin.system.common.encypt;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;

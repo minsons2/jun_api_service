@@ -1,10 +1,7 @@
-package com.jun.plugin.system.common.utils;
+package com.jun.plugin.system.common.encypt;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 
 /**
  * 密码加密

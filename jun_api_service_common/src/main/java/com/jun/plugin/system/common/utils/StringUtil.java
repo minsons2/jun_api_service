@@ -1,9 +1,7 @@
-package com.jun.plugin.system.common.util;
+package com.jun.plugin.system.common.utils;
 
 /**
  * String工具
- * @author dolyw.com
- * @date 2018/9/4 14:48
  */
 public class StringUtil {
 

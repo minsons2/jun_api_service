@@ -1,4 +1,4 @@
-package com.jun.plugin.system.common.util;
+package com.jun.plugin.system.common.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,26 +1,16 @@
-package com.jun.plugin.system.common.util;
+package com.jun.plugin.system.common.encypt;
 
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-
-//import com.jun.plugin.apiservice.exception.BusinessException;
-//import com.jun.plugin.apiservice.util.common.Base64ConvertUtil;
-//import com.jun.plugin.apiservice.util.common.HexConvertUtil;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-
+import com.jun.plugin.system.common.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.jun.plugin.system.common.exception.BusinessException;
+import javax.crypto.*;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 /**
  * AES加密解密工具类
@@ -70,7 +60,7 @@ public class AesUtil {
             // 该字节数组负责保存加密的结果
             byte[] cipherByte = c.doFinal(src);
             // 先将二进制转换成16进制，再返回Base64加密后的String
-            return Base64ConvertUtil.encode(HexConvertUtil.parseByte2HexStr(cipherByte));
+            return Base64ConvertUtil.encode(AesUtil.parseByte2HexStr(cipherByte));
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             logger.error("getInstance()方法异常:{}", e.getMessage());
             throw new BusinessException("getInstance()方法异常:" + e.getMessage());
@@ -108,7 +98,7 @@ public class AesUtil {
             // 根据密钥，对Cipher对象进行初始化，DECRYPT_MODE表示解密模式
             c.init(Cipher.DECRYPT_MODE, desKey);
             // 该字节数组负责保存解密的结果，先对str进行Base64解密，将16进制转换为二进制
-            byte[] cipherByte = c.doFinal(HexConvertUtil.parseHexStr2Byte(Base64ConvertUtil.decode(str)));
+            byte[] cipherByte = c.doFinal(AesUtil.parseHexStr2Byte(Base64ConvertUtil.decode(str)));
             return new String(cipherByte);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             logger.error("getInstance()方法异常:{}", e.getMessage());
@@ -123,5 +113,56 @@ public class AesUtil {
             logger.error("解密异常，密钥有误:{}", e.getMessage());
             throw new BusinessException("解密异常，密钥有误:" + e.getMessage());
         }
+    }
+
+
+
+    /**
+     * 1
+     */
+    private static final Integer INTEGER_1 = 1;
+
+    /**
+     * 2
+     */
+    private static final Integer INTEGER_2 = 2;
+
+    /**
+     * 将二进制转换成16进制
+     * @param bytes
+     * @return java.lang.String
+     * @author dolyw.com
+     * @date 2018/8/31 17:20
+     */
+    public static String parseByte2HexStr(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte buff : bytes) {
+            String hex = Integer.toHexString(buff & 0xFF);
+            if (hex.length() == INTEGER_1) {
+                hex = '0' + hex;
+            }
+            sb.append(hex.toUpperCase());
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 将16进制转换为二进制
+     * @param hexStr
+     * @return byte[]
+     * @author dolyw.com
+     * @date 2018/8/31 17:21
+     */
+    public static byte[] parseHexStr2Byte(String hexStr) {
+        if (hexStr.length() < INTEGER_1) {
+            return null;
+        }
+        byte[] result = new byte[hexStr.length() / INTEGER_2];
+        for (int i = 0, len = hexStr.length() / INTEGER_2; i < len; i++) {
+            int high = Integer.parseInt(hexStr.substring(i * 2, i * 2 + 1), 16);
+            int low = Integer.parseInt(hexStr.substring(i * 2 + 1, i * 2 + 2), 16);
+            result[i] = (byte) (high * 16 + low);
+        }
+        return result;
     }
 }

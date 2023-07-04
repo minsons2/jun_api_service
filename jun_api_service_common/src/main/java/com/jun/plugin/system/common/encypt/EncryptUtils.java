@@ -1,4 +1,4 @@
-package com.jun.plugin.system.common.utils;
+package com.jun.plugin.system.common.encypt;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;

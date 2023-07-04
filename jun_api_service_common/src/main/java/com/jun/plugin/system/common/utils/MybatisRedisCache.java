@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisServerCommands;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.jun.plugin.system.service.RedisService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,7 +45,7 @@ public class MybatisRedisCache implements Cache {
     public void putObject(Object key, Object value) {
         if (redisTemplate == null) {
         //由于启动期间注入失败，只能运行期间注入，这段代码可以删除
-            redisTemplate = (RedisTemplate<String, Object>) SpringContextUtils.getBean("redisTemplate");
+            redisTemplate = (RedisTemplate<String, Object>) SpringUtils.getBean("redisTemplate");
 //            redisTemplate = (RedisTemplate<String, Object>) SpringContextUtils.getBean("RedisTemplate");
         }
         if (value != null) {
@@ -79,7 +77,7 @@ public class MybatisRedisCache implements Cache {
     public void clear() {
         log.debug("清空缓存");
         if (redisTemplate == null) {
-            redisTemplate = (RedisTemplate<String, Object>) SpringContextUtils.getBean("redisTemplate");
+            redisTemplate = (RedisTemplate<String, Object>) SpringUtils.getBean("redisTemplate");
         }
         Set<String> keys = redisTemplate.keys("*:" + this.id + "*");
         if (!CollectionUtils.isEmpty(keys)) {

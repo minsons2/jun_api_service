@@ -19,20 +19,19 @@ import java.util.Set;
  * <p>
  * 搜集到的接口会被缓存，用于请求时判断请求的接口是否存在
  *
- * @author xuyuxiang
- * @date 2020/3/19 17:33
  */
 @Component
 public class ResourceCollectListener implements CommandLineRunner {
 
     private static final Log log = Log.get();
 
-    @Resource
-    private ResourceCache resourceCache;
+//    @Resource
+//    private ResourceCache resourceCache;
+
+    private final Set<String> resourceCaches = CollectionUtil.newHashSet();
 
     @Override
     public void run(String... args) {
-
         //1.获取所有后端接口
         Set<String> urlSet = CollectionUtil.newHashSet();
         Map<String, RequestMappingHandlerMapping> mappingMap = SpringUtil.getApplicationContext().getBeansOfType(RequestMappingHandlerMapping.class);
@@ -44,10 +43,27 @@ public class ResourceCollectListener implements CommandLineRunner {
                 urlSet.addAll(patterns);
             });
         }
-
         //2.汇总添加到缓存
-        resourceCache.putAllResources(urlSet);
-
+        this.putAllResources(urlSet);
         log.info(">>> 缓存资源URL集合完成!资源数量：{}", urlSet.size());
+    }
+
+
+
+    /**
+     * 获取所有缓存资源
+     *
+     */
+    public Set<String> getAllResources() {
+        return resourceCaches;
+    }
+
+
+    /**
+     * 直接缓存所有资源
+     *
+     */
+    public void putAllResources(Set<String> resources) {
+        resourceCaches.addAll(resources);
     }
 }
