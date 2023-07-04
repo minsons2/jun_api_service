@@ -1,25 +1,12 @@
 package com.bjc.lcp.api.controller;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.map.MapUtil;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.bjc.lcp.api.controller.sql.ISQLBuilder;
-import com.bjc.lcp.api.dbutil.DbUtil;
+import com.bjc.lcp.api.service.DbUtil;
 import com.gitthub.wujun728.engine.common.DataResult;
 import com.gitthub.wujun728.engine.common.RequestWrapper;
 import com.gitthub.wujun728.engine.generator.GenUtils;
 import com.gitthub.wujun728.engine.groovy.mapping.RequestMappingExecutor;
-import com.gitthub.wujun728.engine.util.JdbcUtil;
-import com.gitthub.wujun728.mybatis.sql.SqlMeta;
-import com.google.common.collect.Maps;
-import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.Db;
-import com.jfinal.plugin.activerecord.Page;
-import com.jfinal.plugin.activerecord.Record;
-import com.jfinal.plugin.druid.DruidPlugin;
 //import com.jun.plugin.system.entity.SysUser;
 //import com.jun.plugin.system.service.SysDictService;
 //import com.jun.plugin.system.service.UserService;
@@ -28,15 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ServiceLoader;
 
 @Slf4j
 @Controller

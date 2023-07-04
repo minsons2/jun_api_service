@@ -34,7 +34,7 @@ public class SwaggerConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(Predicates.or(RequestHandlerSelectors.basePackage("com.jun.plugin.system.controller"),
+                .apis(Predicates.or(RequestHandlerSelectors.basePackage("com.jun.plugin.system.web"),
                 		RequestHandlerSelectors.basePackage("com.jun.plugin.bizservice.controller")))
                 .paths(PathSelectors.any())
                 .build();

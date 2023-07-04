@@ -30,6 +30,12 @@
             <version>v1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.jun.plugin</groupId>
+            <artifactId>jun_api_service_api_groovy</artifactId>
+            <version>1.0</version>
+        </dependency>
+
 
         <!--Spring Boot依赖-->
         <dependency>
