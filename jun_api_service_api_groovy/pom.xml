@@ -42,11 +42,11 @@
             <artifactId>jun_api_service_api_interface</artifactId>
             <version>1.0</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.jun.plugin</groupId>
             <artifactId>jun_api_service_common</artifactId>
             <version>v1.0</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

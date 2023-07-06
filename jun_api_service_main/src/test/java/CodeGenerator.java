@@ -15,7 +15,7 @@ public class CodeGenerator {
 
 
     //多个表逗号分隔
-    static String tableName = "user";
+    static String tableName = "user_copy";
     //逻辑删除字段名, 假如表没有逻辑删除字段，请忽视
     static String logicDeleteFieldName = "del_flag";
 
@@ -46,7 +46,7 @@ public class CodeGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.jun.plugin.system");
+        pc.setParent("com.company.project");
         pc.setEntity("model");
         pc.setMapper("dao");
         pc.setController("web");

@@ -19,7 +19,7 @@
 		<module>jun_api_service_api_interface</module>
 		<module>jun_api_service_api_groovy</module>
 		<module>jun_api_service_common</module>
-		<module>jun_api_service_system</module>
+		<module>jun_api_service_main</module>
 	</modules>
 
 	<dependencies>
