@@ -7,6 +7,7 @@ import com.jun.plugin.project.utils.JwtUtils;
 import com.jun.plugin.project.utils.MD5Utils;
 import com.jun.plugin.project.model.User;
 import com.jun.plugin.project.service.IUserService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author project
  * @since 2020-01-08
  */
+@Api(tags = "用户管理")
 @Slf4j
 @RestController
 @RequestMapping("/api/user")

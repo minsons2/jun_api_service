@@ -4,6 +4,7 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.db.meta.Column;
 import cn.hutool.db.meta.MetaUtil;
 import cn.hutool.db.meta.Table;
+import cn.hutool.setting.dialect.PropsUtil;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.gitthub.wujun728.engine.generator.ClassInfo;
 import com.gitthub.wujun728.engine.generator.FieldInfo;
@@ -44,7 +45,7 @@ public class CodeGeneratorTest {
         tableNames.stream().forEach(t -> {
             Table table = MetaUtil.getTableMeta(ds, t);
             if(table.getPkNames().size()>0){//没有主键是不生成的
-                classInfos.add(this.getClassInfo(table));
+                classInfos.add(GenUtils.getClassInfo(table));
             }
         });
         genTables(classInfos);
@@ -68,13 +69,20 @@ public class CodeGeneratorTest {
         classInfos.forEach(classInfo -> {
             Map<String, Object> datas = new HashMap<String, Object>();
             datas.put("classInfo", classInfo);
-            datas.put("authorName", "wujun");
-            datas.put("isLombok", true);
-            datas.put("isAutoImport", true);
-            datas.put("isWithPackage", true);
-            datas.put("isSwagger", true);
-            datas.put("isComment", true);
-            datas.put("packageName", GenUtils.PACKAGE);
+//            datas.put("authorName", "wujun");
+//            datas.put("isLombok", true);
+//            datas.put("isAutoImport", true);
+//            datas.put("isWithPackage", true);
+//            datas.put("isSwagger", true);
+//            datas.put("isComment", true);
+//            datas.put("packageName", GenUtils.PACKAGE);
+            PropsUtil.get("config").forEach((k,v)->{
+                if(String.valueOf(v).equalsIgnoreCase("true")||String.valueOf(v).equalsIgnoreCase("false")){
+                    datas.put(String.valueOf(k), Boolean.valueOf(String.valueOf(v)));
+                }else{
+                    datas.put(String.valueOf(k), v);
+                }
+            });
             Map<String, String> result = new HashMap<String, String>();
             try {
                 result = GenUtils.processTemplatesStringWriter(datas, templates);
@@ -111,46 +119,5 @@ public class CodeGeneratorTest {
     }
 
 
-    public static ClassInfo getClassInfo(Table table) {
-        // V1 初始化数据及对象 模板V1 field List
-        List<FieldInfo> fieldList = new ArrayList<FieldInfo>();
-        for (Column column : table.getColumns()) {
-            // V1 初始化数据及对象
-            String remarks = column.getComment();// cloumnsSet.getString("REMARKS");// 列的描述
-            String columnName = column.getName();// cloumnsSet.getString("COLUMN_NAME"); // 获取列名
-            String javaType = GenUtils.getType(column.getType()/*cloumnsSet.getInt("DATA_TYPE")*/);// 获取类型，并转成JavaType
-            String columnType = column.getTypeName();// 获取类型，并转成JavaType
-            long COLUMN_SIZE = column.getSize();// cloumnsSet.getInt("COLUMN_SIZE");// 获取
-            String COLUMN_DEF = column.getColumnDef();// cloumnsSet.getString("COLUMN_DEF");// 获取
-            Boolean nullable = column.isNullable();// cloumnsSet.getInt("NULLABLE");// 获取
-            String propertyName = GenUtils.replace_(GenUtils.replaceRowPreStr(columnName));// 处理列名，驼峰
-            Boolean isPk = column.isPk();
-
-            // V1 初始化数据及对象
-            FieldInfo fieldInfo = new FieldInfo();
-            fieldInfo.setColumnName(columnName);
-            fieldInfo.setColumnType(columnType);
-            fieldInfo.setFieldName(propertyName);
-            fieldInfo.setFieldClass(GenUtils.simpleName(javaType));
-            fieldInfo.setFieldComment(remarks);
-            fieldInfo.setColumnSize(COLUMN_SIZE);
-            fieldInfo.setNullable(nullable);
-            fieldInfo.setFieldType(javaType);
-            fieldInfo.setIsPrimaryKey(isPk);
-            fieldList.add(fieldInfo);
-        }
-        if (fieldList != null && fieldList.size() > 0) {
-            ClassInfo classInfo = new ClassInfo();
-            classInfo.setTableName(table.getTableName());
-            String className = GenUtils.replace_(GenUtils.replaceTabblePreStr(table.getTableName())); // 名字操作,去掉tab_,tb_，去掉_并转驼峰
-            String classNameFirstUpper = GenUtils.firstUpper(className); // 大写对象
-            classInfo.setClassName(classNameFirstUpper);
-            classInfo.setClassComment(table.getComment());
-            classInfo.setFieldList(fieldList);
-            classInfo.setPkSize(table.getPkNames().size());
-            return classInfo;
-        }
-        return null;
-    }
 
 }
