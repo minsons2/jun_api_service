@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
-    @Value("${spring.jwt.enable: false}")
+    @Value("${spring.jwt.enable:false}")
     private boolean enable;
 
     private final Logger logger = LoggerFactory.getLogger(WebMvcConfigurer.class);

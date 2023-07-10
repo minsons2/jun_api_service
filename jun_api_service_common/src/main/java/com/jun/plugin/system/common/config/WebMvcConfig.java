@@ -49,9 +49,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport/* implements WebMvc
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		/** 本地文件上传路径 */
 //        registry.addResourceHandler(Constants.RESOURCE_PREFIX + "/**").addResourceLocations("file:" + Global.getProfile() + "/");
-
-		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/","classpath:/static2/","classpath:/static3/","classpath:/templates/","classpath:/templates2/","classpath:/templates3/","classpath:/views/");
-//		registry.addResourceHandler("/**").addResourceLocations("classpath:/templates/");
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/","classpath:/static2/","classpath:/static3/" );
+		registry.addResourceHandler("/**").addResourceLocations( "classpath:/templates/","classpath:/templates2/","classpath:/templates3/","classpath:/views/");//		registry.addResourceHandler("/**").addResourceLocations("classpath:/templates/");
 		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/","classpath:/static2/","classpath:/static3/");
 		registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
 		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
@@ -75,7 +74,29 @@ public class WebMvcConfig extends WebMvcConfigurationSupport/* implements WebMvc
 						return false;
 					}
 				}).addPathPatterns("/**")
-				.excludePathPatterns("/emp/toLogin","/emp/login","/js/**","/css/**","/images/**");
+				.excludePathPatterns("/doc.html")
+				.excludePathPatterns("/swagger-resources/**")
+				.excludePathPatterns("/error")
+				.excludePathPatterns("/webjars/**")
+				.excludePathPatterns("/public/**")
+				.excludePathPatterns("/**/*.html")
+				.excludePathPatterns("/**/*.js")
+				.excludePathPatterns("/**/*.css")
+				.excludePathPatterns("/**/*.ico")
+				.excludePathPatterns("/**/*.png")
+				.excludePathPatterns("/**/*.jpg")
+				.excludePathPatterns("/**/*.ttf")
+				.excludePathPatterns("/**/*.woff2")
+				.excludePathPatterns("/assets/**")
+				.excludePathPatterns("/json/**")
+				.excludePathPatterns("/static/**")
+				.excludePathPatterns("/api/user/login")
+				.excludePathPatterns("/api/user/register")
+				.excludePathPatterns("/emp/toLogin")
+				.excludePathPatterns("/emp/login")
+				.excludePathPatterns("/js/**")
+				.excludePathPatterns("/css/**")
+				.excludePathPatterns("/images/**") ;
 	}
 
 	/**
