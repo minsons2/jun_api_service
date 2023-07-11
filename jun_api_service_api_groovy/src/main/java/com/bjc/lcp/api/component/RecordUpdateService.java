@@ -6,10 +6,10 @@ import cn.hutool.db.meta.MetaUtil;
 import cn.hutool.db.meta.Table;
 import cn.hutool.json.JSONUtil;
 import com.bjc.lcp.core.api.executor.AbstractExecutor;
+import com.gitthub.wujun728.engine.common.BusinessException;
 import com.gitthub.wujun728.engine.common.DataResult;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
-import com.jun.plugin.system.common.exception.BusinessException;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;

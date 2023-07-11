@@ -24,15 +24,16 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gitthub.wujun728.engine.common.DataResult;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 /**
-* @description 
+* @description 测试用户表
 * @author Wujun
-* @date 2023-07-10
+* @date 2023-07-11
 */
-@Api(tags = "-管理")
+@Api(tags = "测试用户表-管理")
 @Slf4j
 @RestController
 @RequestMapping("/sysUser")
@@ -44,7 +45,7 @@ public class SysUserController {
     @Resource
     private SysUserMapper sysUserMapper;
     
-    @ApiOperation(value = "-新增")
+    @ApiOperation(value = "测试用户表-新增")
     @PostMapping("/add")
     //@RequiresPermissions("sysUser:add")
     public DataResult add(@Validated(SysUserVo.Create.class) @RequestBody SysUserVo vo) {
@@ -62,7 +63,7 @@ public class SysUserController {
         return DataResult.success(sysUserService.save(entity));
     }
     
-    @ApiOperation(value = "-删除")
+    @ApiOperation(value = "测试用户表-删除")
     @DeleteMapping("/remove")
     //@RequiresPermissions("sysUser:remove")
     public DataResult delete(@Validated(SysUserVo.Delete.class) @RequestBody SysUserVo vo) {
@@ -76,7 +77,7 @@ public class SysUserController {
         return DataResult.success(sysUserService.remove(queryWrapper));
     }
 
-    @ApiOperation(value = "-删除")
+    @ApiOperation(value = "测试用户表-删除")
     @DeleteMapping("/delete")
     //@RequiresPermissions("sysUser:delete")
     public DataResult delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
@@ -84,7 +85,7 @@ public class SysUserController {
     }
 
 
-    @ApiOperation(value = "-更新")
+    @ApiOperation(value = "测试用户表-更新")
     @PutMapping("/update")
     //@RequiresPermissions("sysUser:update")
     public DataResult update(@Validated(SysUserVo.Update.class) @RequestBody SysUserVo vo) {
@@ -97,15 +98,16 @@ public class SysUserController {
         queryWrapper.eq(SysUserEntity::getId, dto.getId());
         SysUserEntity entity = sysUserService.getOne(queryWrapper);;
         if (entity == null) {
-            return DataResult.fail("数据不存在");
+            //return DataResult.fail("数据不存在");
+            entity = new SysUserEntity();
         }
         BeanUtils.copyProperties(dto, entity);
-        return DataResult.success(sysUserService.updateById(entity));
+        return DataResult.success(sysUserService.saveOrUpdate(entity));
     }
     
 
 
-    @ApiOperation(value = "-查询单条")
+    @ApiOperation(value = "测试用户表-查询单条")
     @RequestMapping(value = "/getOne",method = {RequestMethod.GET,RequestMethod.POST})
     //@RequiresPermissions("sysUser:getOne")
     public DataResult getOne(@RequestBody SysUserVo vo) {
@@ -123,7 +125,7 @@ public class SysUserController {
     
 
 
-    @ApiOperation(value = "-查询列表分页数据")
+    @ApiOperation(value = "测试用户表-查询列表分页数据")
     @RequestMapping(value = "/listByPage",method = {RequestMethod.GET,RequestMethod.POST})
     //@RequiresPermissions("sysUser:listByPage")
     public DataResult listByPage(@RequestBody SysUserVo sysUser) {
@@ -144,7 +146,7 @@ public class SysUserController {
         return DataResult.success(iPage);
     }
     
-    @ApiOperation(value = "-查询全部列表数据")
+    @ApiOperation(value = "测试用户表-查询全部列表数据")
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     //@RequiresPermissions("sysUser:list")
     public DataResult findListByPage(@RequestBody SysUserVo sysUser) {

@@ -42,7 +42,7 @@ public class CodeGeneratorTest {
         templates.add("code-generator/mybatis-plus-single/service.impl.java.ftl");
         templates.add("code-generator/mybatis-plus-single/vo.java.ftl");
         templates.add("code-generator/mybatis-plus-single/menu.sql.ftl");
-        templates.add("code-generator/mybatis-plus-single/edit.html.ftl");
+//        templates.add("code-generator/mybatis-plus-single/edit.html.ftl");
         templates.add("code-generator/mybatis-plus-single/list.html.ftl");
         return templates;
     }

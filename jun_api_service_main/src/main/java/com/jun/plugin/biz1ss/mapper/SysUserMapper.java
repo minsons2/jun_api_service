@@ -5,9 +5,9 @@ import org.apache.ibatis.annotations.Select;
 import com.jun.plugin.biz1ss.entity.SysUserEntity;
 import java.util.List;
 /**
- * @description Mapper
+ * @description 测试用户表Mapper
  * @author Wujun
- * @date 2023-07-10
+ * @date 2023-07-11
  */
 @Mapper
 public interface SysUserMapper extends BaseMapper<SysUserEntity> {

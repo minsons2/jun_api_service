@@ -8,9 +8,9 @@ import com.jun.plugin.biz1ss.mapper.SysUserMapper;
 import com.jun.plugin.biz1ss.service.SysUserService;
 
 /**
- * @description 服务层实现
+ * @description 测试用户表服务层实现
  * @author Wujun
- * @date 2023-07-10
+ * @date 2023-07-11
  */
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity> implements SysUserService {

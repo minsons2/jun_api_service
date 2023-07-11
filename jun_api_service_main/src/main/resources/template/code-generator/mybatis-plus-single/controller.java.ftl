@@ -26,6 +26,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gitthub.wujun728.engine.common.DataResult;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -139,10 +140,11 @@ public class ${classInfo.className}Controller {
 </#if>
         ${classInfo.className}Entity entity = ${classInfo.className?uncap_first}Service.getOne(queryWrapper);;
         if (entity == null) {
-            return DataResult.fail("数据不存在");
+            //return DataResult.fail("数据不存在");
+            entity = new ${classInfo.className}Entity();
         }
         BeanUtils.copyProperties(dto, entity);
-        return DataResult.success(${classInfo.className?uncap_first}Service.updateById(entity));
+        return DataResult.success(${classInfo.className?uncap_first}Service.saveOrUpdate(entity));
     }
     
 

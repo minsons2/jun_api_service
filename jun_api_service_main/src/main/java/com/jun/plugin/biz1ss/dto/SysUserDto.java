@@ -8,32 +8,32 @@ import com.gitthub.wujun728.engine.common.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 /**
- * @description 
+ * @description 测试用户表
  * @author Wujun
- * @date 2023-07-10
+ * @date 2023-07-11
  */
 @Data
-@ApiModel("")
+@ApiModel("测试用户表")
 public class SysUserDto  extends BaseEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-    * 
+    * ID主键
     */
-    @ApiModelProperty("") 
+    @ApiModelProperty("ID主键") 
     private Long id;
 
     /**
-    * 
+    * 年纪
     */
-    @ApiModelProperty("") 
+    @ApiModelProperty("年纪") 
     private Integer age;
 
     /**
-    * 
+    * 姓名
     */
-    @ApiModelProperty("") 
+    @ApiModelProperty("姓名") 
     private String name;
 
     public SysUserDto() {}

@@ -1,221 +1,263 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>XXXX管理</title>
+    <link rel="stylesheet" href="/static/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/static/assets/module/admin.css?v=317"/>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
 <body>
-<div class="layuimini-container">
-    <div class="layuimini-main">
-
-        <fieldset class="table-search-fieldset">
-            <legend>搜索信息</legend>
-            <div style="margin: 10px 10px 10px 10px">
-                <form class="layui-form layui-form-pane" action="">
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">${classInfo.classComment}Id</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="${classInfo.className?uncap_first}Id" autocomplete="off" class="layui-input">
+<!-- 正文开始 -->
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <!-- 表格工具栏 -->
+            <form class="layui-form toolbar">
+                <div class="layui-form-item">
+                    <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
+                        <#list classInfo.fieldList as fieldItem >
+                            <div class="layui-inline">
+                                <label class="layui-form-label">${fieldItem.fieldComment}:</label>
+                                <div class="layui-input-inline">
+                                    <input name="${fieldItem.fieldName}" class="layui-input" placeholder="输入${fieldItem.fieldComment}"/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">${classInfo.classComment}名称</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="${classInfo.className?uncap_first}Name" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <button id="searchBtn" type="submit" class="layui-btn layui-btn-primary" lay-submit  lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                        </#list>
+                    </#if>
+                    <#--<div class="layui-inline">
+                        <label class="layui-form-label">角色名:</label>
+                        <div class="layui-input-inline">
+                            <input name="roleName" class="layui-input" placeholder="输入角色名"/>
                         </div>
                     </div>
-                </form>
-            </div>
-        </fieldset>
-
-        <script type="text/html" id="toolbarDemo">
-            <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add">  <i class="layui-icon layui-icon-addition"></i>${classInfo.classComment} </button>
-               <#-- <button class="layui-btn layui-btn-normal layui-btn-sm layui-btn-danger data-delete-btn" lay-event="del"> 删除${classInfo.classComment} </button>-->
-            </div>
-        </script>
-
-        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
-
-        <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
-        </script>
-
-        <script type="text/html" id="typeTemplate">
-            {{#  if(d.type == '1'){ }}
-            常规
-            {{#  } else if(d.type =='2') { }}
-            专项
-            {{#  } else { }}
-            其它
-            {{#  } }}
-        </script>
-        <script type="text/html" id="statusTemplate">
-            {{#  if(d.status == '1' ){ }}
-            <i class="layui-icon layui-icon-ok"></i>已发布
-            {{#  } else { }}
-            - 未发布
-            {{#  } }}
-        </script>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">角色代码:</label>
+                        <div class="layui-input-inline">
+                            <input name="roleCode" class="layui-input" placeholder="输入角色代码"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">备&emsp;注:</label>
+                        <div class="layui-input-inline">
+                            <input name="comments" class="layui-input" placeholder="输入备注"/>
+                        </div>
+                    </div>-->
+                    <div class="layui-inline">&emsp;
+                        <button class="layui-btn icon-btn" lay-filter="roleTbSearch" lay-submit>
+                            <i class="layui-icon">&#xe615;</i>搜索
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!-- 数据表格 -->
+            <table id="roleTable" lay-filter="roleTable"></table>
+        </div>
     </div>
 </div>
-<script src="￥{request.contextPath}/static/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
-<script>
-    layui.use(['form', 'table'], function () {
-        var $ = layui.jquery,
-            form = layui.form,
-            table = layui.table;
 
-        table.render({
-            elem: '#currentTableId',
+<!-- 表格操作列 -->
+<script type="text/html" id="roleTbBar">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+<#--    <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="auth">权限分配</a>-->
+</script>
+<!-- 表单弹窗 -->
+<script type="text/html" id="roleEditDialog">
+    <form id="roleEditForm" lay-filter="roleEditForm" class="layui-form model-form">
+        <input name="roleId" type="hidden"/>
+        <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
+            <#list classInfo.fieldList as fieldItem >
+                <div class="layui-form-item">
+                    <label class="layui-form-label layui-form-required">${fieldItem.fieldComment}:</label>
+                    <div class="layui-input-block">
+                        <input name="${fieldItem.fieldName}" placeholder="请输入${fieldItem.fieldComment}" class="layui-input"
+                               lay-verType="tips" lay-verify="required" required/>
+                    </div>
+                </div>
+            </#list>
+        </#if>
+
+        <#--<div class="layui-form-item">
+            <label class="layui-form-label layui-form-required">角色名:</label>
+            <div class="layui-input-block">
+                <input name="roleName" placeholder="请输入角色名" class="layui-input"
+                       lay-verType="tips" lay-verify="required" required/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label layui-form-required">角色代码:</label>
+            <div class="layui-input-block">
+                <input name="roleCode" placeholder="请输入角色代码" class="layui-input"
+                       lay-verType="tips" lay-verify="required" required/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注:</label>
+            <div class="layui-input-block">
+                <textarea name="comments" placeholder="请输入备注" class="layui-textarea"></textarea>
+            </div>
+        </div>-->
+        <div class="layui-form-item text-right">
+            <button class="layui-btn" lay-filter="roleEditSubmit" lay-submit>保存</button>
+            <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        </div>
+    </form>
+</script>
+
+<!-- js部分 -->
+<script type="text/javascript" src="/static/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/static/assets/js/common.js?v=317"></script>
+<script type="text/javascript" src="/static/assets/libs/jquery/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/static/assets/js/core.util.js"></script>
+<script>
+    layui.use(['layer', 'form', 'table', 'util', 'admin', 'zTree'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var form = layui.form;
+        var table = layui.table;
+        var util = layui.util;
+        var admin = layui.admin;
+
+        /* 渲染表格 */
+        var insTb = table.render({
+            elem: '#roleTable',
             method: 'post',
-            url: '￥{request.contextPath}/${classInfo.className?uncap_first}/list',
-            toolbar: '#toolbarDemo',
-            defaultToolbar: ['filter', 'exports', 'print', {
-                title: '提示',
-                layEvent: 'LAYTABLE_TIPS',
-                icon: 'layui-icon-tips'
-            }],
+            contentType: 'application/json',
+            url: '/${classInfo.className?uncap_first}/list',
+            page: true,
+            toolbar: ['<p>',
+                '<button lay-event="add" class="layui-btn layui-btn-sm icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>&nbsp;',
+                '<button lay-event="del" class="layui-btn layui-btn-sm layui-btn-danger icon-btn"><i class="layui-icon">&#xe640;</i>删除</button>',
+                '</p>'].join(''),
+            cellMinWidth: 100,
             cols: [[
                 {type: "checkbox", width: 50, fixed: "left"},
                 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
                 <#list classInfo.fieldList as fieldItem >
-                    {field: '${fieldItem.fieldName}', title: '${fieldItem.fieldComment}', sort: true}, <#if fieldItem_has_next> </#if>
+                {field: '${fieldItem.fieldName}', title: '${fieldItem.fieldComment}', sort: true}, <#if fieldItem_has_next> </#if>
                 </#list>
                 </#if>
                 /* 需要时间请自行解封
                 {title: '创建时间', sort: true,templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"},
                 {title: '修改时间', sort: true,templet: "<div>{{layui.util.toDateString(d.updateTime, 'yyyy-MM-dd')}}</div>"},
                 */
-                {title: '操作', minWidth: 400, templet: '#currentTableBar', fixed: "right", align: "center"}
+                {title: '操作', minWidth: 400, templet: '#roleTbBar', fixed: "right", align: "center"}
             ]],
             limits: [20 , 50 , 100],
             limit: 20,
             page: true
         });
 
-        var result;
-        /**
-         * submit(data-search-btn):监听搜索操作
-         */
-        form.on('submit(data-search-btn)', function (data) {
-            result = JSON.stringify(data.field);
-
-            //执行搜索重载
-            table.reload('currentTableId', {
-                page: {
-                    curr: 1
-                }
-                , where: {
-                    searchParams: result
-                }
-            }, 'data');
-
+        /* 表格搜索 */
+        form.on('submit(roleTbSearch)', function (data) {
+            insTb.reload({where: data.field, page: {curr: 1}});
             return false;
         });
 
-        var searchBtn = $("#searchBtn");
-        /**
-         * toolbar监听事件:表格添加按钮
-         */
-        table.on('toolbar(currentTableFilter)', function (obj) {
-            if (obj.event === 'add') {
-                var index = layer.open({
-                    title: '添加',
-                    type: 2,
-                    shade: 0.2,
-                    maxmin:true,
-                    shadeClose: true,
-                    area: ['1000px', '700px'],
-                    content: '￥{request.contextPath}/${classInfo.className?uncap_first}/edit?id=0',
-                });
-                return false;
-            }else if(obj.event === 'del') {
-                var checkStatus = table.checkStatus('currentTableId')
-                    , data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
+        /* 表格工具条点击事件 */
+        table.on('tool(roleTable)', function (obj) {
+            if (obj.event === 'edit') { // 修改
+                showEditModel(obj.data);
+            } else if (obj.event === 'del') { // 删除
+                //doDel(obj);
+                doDel({ids: [obj.data.id]});
+            } else if (obj.event === 'auth') {  // 权限管理
+                showPermModel(obj.data.roleId);
             }
-        });
-        /**
-         * checkbox(currentTableFilter):表格复选框选择
-         */
-        table.on('checkbox(currentTableFilter)', function (obj) {
-            //console.log(obj)
         });
 
-        /**
-         * tool监听事件:表格编辑删除等功能按钮
-         */
-        table.on('tool(currentTableFilter)', function (obj) {
-            var data = obj.data;
-            if (obj.event === 'edit') {
-                var index = layer.open({
-                    title: '编辑',
-                    type: 2,
-                    shade: 0.2,
-                    maxmin:true,
-                    shadeClose: true,
-                    area: ['1000px', '700px'],
-                    content: '￥{request.contextPath}/${classInfo.className?uncap_first}/edit?id='+obj.data.${classInfo.className?uncap_first}Id,
+        /* 表格头工具栏点击事件 */
+        table.on('toolbar(roleTable)', function (obj) {
+            if (obj.event === 'add') { // 添加
+                showEditModel();
+            } else if (obj.event === 'del') { // 删除
+                var checkRows = table.checkStatus('roleTable');
+                if (checkRows.data.length === 0) {
+                    layer.msg('请选择要删除的数据', {icon: 2});
+                    return;
+                }
+                var ids = checkRows.data.map(function (d) {
+                    return d.id; //TODO
                 });
-                return false;
-            } else if (obj.event === 'delete') {
-                layer.confirm('确认删除该记录吗？', function (index) {
-                    $.ajax({
-                        type: 'POST',
-                        url: "￥{request.contextPath}/${classInfo.className?uncap_first}/delete",
-                        data:{"id":obj.data.${classInfo.className?uncap_first}Id},
-                        success: function (responseData) {
-                            if (responseData.code === 200) {
-                                layer.msg(responseData.msg, function () {
-                                    obj.del();
-                                });
-                            } else {
-                                layer.msg(responseData.msg, function () {
-                                });
-                            }
-                        }
-                    });
-                    layer.close(index);
-                });
-            }else if (obj.event === 'publish') {
-                layer.confirm('确定要发布吗？', function (index) {
-                    $.ajax({
-                        type: 'POST',
-                        url: "￥{request.contextPath}/${classInfo.className?uncap_first}/publish",
-                        data:{"id":obj.data.${classInfo.className?uncap_first}Id,"status":"1"},
-                        success: function (responseData) {
-                            searchBtn.click();
-                            layer.msg(responseData.msg, function () {
-                            });
-                        }
-                    });
-                    layer.close(index);
-                });
-            }else if (obj.event === 'unpublish') {
-                layer.confirm('确定要停止吗？', function (index) {
-                    $.ajax({
-                        type: 'POST',
-                        url: "￥{request.contextPath}/${classInfo.className?uncap_first}/publish",
-                        data:{"id":obj.data.${classInfo.className?uncap_first}Id,"status":"0"},
-                        success: function (responseData) {
-                            searchBtn.click();
-                            layer.msg(responseData.msg, function () {
-                            });
-                        }
-                    });
-                    layer.close(index);
-                });
+                doDel({ids: ids});
             }
         });
+
+        /* 显示表单弹窗 */
+        function showEditModel(mData) {
+            admin.open({
+                type: 1,
+                title: (mData ? '修改' : '添加') + '${classInfo.classComment}'  ,
+                content: $('#roleEditDialog').html(),
+                success: function (layero, dIndex) {
+                    // 回显表单数据
+                    form.val('roleEditForm', mData);
+                    // 表单提交事件
+                    form.on('submit(roleEditSubmit)', function (data) {
+                        var loadIndex = layer.load(2);
+                        // $.get(mData ? '../../json/ok.json' : '../../json/ok.json', data.field, function (res) {
+                        //     layer.close(loadIndex);
+                        //     if (200 === res.code) {
+                        //         layer.close(dIndex);
+                        //         layer.msg(res.msg, {icon: 1});
+                        //         insTb.reload({page: {curr: 1}});
+                        //     } else {
+                        //         layer.msg(res.msg, {icon: 2});
+                        //     }
+                        // }, 'json');
+                        if(data.field.id===undefined || data.field.id===null || data.field.id===""){
+                            CoreUtil.sendPost("/${classInfo.className?uncap_first}/add",data.field,function (res) {
+                                layer.close(loadIndex);
+                                if (0 === res.code) {
+                                    layer.close(dIndex);
+                                    layer.msg(res.msg, {icon: 1});
+                                    insTb.reload({page: {curr: 1}});
+                                } else {
+                                    layer.msg(res.msg, {icon: 2});
+                                }
+                            });
+                        }else {
+                            CoreUtil.sendPut("/${classInfo.className?uncap_first}/update",data.field,function (res) {
+                                layer.close(loadIndex);
+                                if (0 === res.code) {
+                                    layer.close(dIndex);
+                                    layer.msg(res.msg, {icon: 1});
+                                    insTb.reload({page: {curr: 1}});
+                                } else {
+                                    layer.msg(res.msg, {icon: 2});
+                                }
+                            });
+                        }
+                        return false;
+                    });
+                }
+            });
+        }
+
+        /* 删除 */
+        function doDel(obj) {
+            layer.confirm('确定要删除选中数据吗？', {
+                skin: 'layui-layer-admin',
+                shade: .1
+            }, function (i) {
+                layer.close(i);
+                CoreUtil.sendDelete("/${classInfo.className?uncap_first}/delete",obj.ids,function (res) {
+                    layer.msg(res.msg, {time:1000},function () {
+                        layer.msg(res.msg, {icon: 1});
+                        insTb.reload({page: {curr: 1}});
+                    });
+                });
+            });
+        }
+
 
     });
 </script>
-<script>
-
-</script>
-
 </body>
 </html>
