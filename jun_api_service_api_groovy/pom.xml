@@ -34,13 +34,8 @@
     <dependencies>
         <dependency>
             <groupId>io.github.wujun728</groupId>
-            <artifactId>jun-groovy-api-spring-boot-starter</artifactId>
-            <version>1.0.2-RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-            <artifactId>jun_api_service_api_interface</artifactId>
-            <version>1.0</version>
+            <artifactId>groovy-api-spring-boot-starter</artifactId>
+            <version>1.0.4-RELEASE</version>
         </dependency>
         <!--<dependency>
             <groupId>com.jun.plugin</groupId>

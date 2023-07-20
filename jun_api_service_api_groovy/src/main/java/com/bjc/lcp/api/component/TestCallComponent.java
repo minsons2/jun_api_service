@@ -1,17 +1,13 @@
 package com.bjc.lcp.api.component;
 
-import java.util.Map;
-
-import javax.annotation.Resource;
-
+import cn.hutool.core.lang.Console;
+import com.gitthub.wujun728.engine.common.DataResult;
+import com.gitthub.wujun728.engine.interfaces.IExecutor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 
-import com.bjc.lcp.core.api.executor.IExecutor;
-//import com.github.freakchick.orange.context.Context;
-import com.gitthub.wujun728.engine.common.DataResult;
-
-import cn.hutool.core.lang.Console;
-import lombok.extern.slf4j.Slf4j;
+import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * 组件TestCallComponent
@@ -24,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
  * 说明：需要把该代码放进DB，api_groovy，测试Jfinal-CURD-保存在庫裡面
  */
 @Slf4j
-public class TestCallComponent implements  IExecutor<DataResult, Map<String,Object>>  {
+public class TestCallComponent implements IExecutor<DataResult, Map<String,Object>> {
 	
 	@Resource
 	ServerProperties config;

@@ -6,12 +6,12 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import com.gitthub.wujun728.engine.interfaces.IExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.bjc.lcp.core.api.executor.IExecutor;
 import com.gitthub.wujun728.engine.common.DataResult;
 
 import cn.hutool.core.lang.Console;
@@ -22,7 +22,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 
 @Component
-public class CompoentExecutorTest implements  IExecutor<DataResult, Map<String,Object>>  {
+public class CompoentExecutorTest implements IExecutor<DataResult, Map<String,Object>> {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;

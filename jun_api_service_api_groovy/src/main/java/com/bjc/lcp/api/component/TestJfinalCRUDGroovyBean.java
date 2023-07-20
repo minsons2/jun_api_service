@@ -1,24 +1,22 @@
 package com.bjc.lcp.api.component;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-
-import com.bjc.lcp.core.api.executor.IExecutor;
+import cn.hutool.extra.spring.SpringUtil;
+import cn.hutool.json.JSONUtil;
 import com.gitthub.wujun728.engine.common.DataResult;
+import com.gitthub.wujun728.engine.interfaces.IExecutor;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.druid.DruidPlugin;
 
-import cn.hutool.extra.spring.SpringUtil;
-import cn.hutool.json.JSONUtil;
+import javax.annotation.PostConstruct;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 需要把该代码放进DB，api_groovy，测试Jfinal-CURD-保存在庫裡面
  */
-public class TestJfinalCRUDGroovyBean  implements  IExecutor<DataResult, Map<String,Object>>  {
+public class TestJfinalCRUDGroovyBean  implements IExecutor<DataResult, Map<String,Object>> {
 
 	@PostConstruct
 	public void test(){

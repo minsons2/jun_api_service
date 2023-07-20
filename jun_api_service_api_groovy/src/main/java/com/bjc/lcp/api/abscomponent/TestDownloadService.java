@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.gitthub.wujun728.engine.interfaces.AbstractExecutor;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,8 +14,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.bjc.lcp.core.api.executor.AbstractExecutor;
-import com.bjc.lcp.core.api.executor.IExecutor;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.RandomUtil;
@@ -22,7 +21,7 @@ import cn.hutool.core.util.RandomUtil;
 /**
  * TODO
  */
-public class TestDownloadService extends AbstractExecutor<JSONObject, Map<String,Object>>  {
+public class TestDownloadService extends AbstractExecutor<JSONObject, Map<String,Object>> {
 
 	@Override
 	public JSONObject execute(Map<String, Object> params) throws Exception{

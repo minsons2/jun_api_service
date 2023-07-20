@@ -29,4 +29,9 @@ public class TestController {
         return "test1";
     }
 
+//    @RequestMapping("/")
+//    public String index(){
+//        return "index";
+//    }
+
 }

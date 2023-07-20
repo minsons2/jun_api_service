@@ -1,17 +1,18 @@
 package com.bjc.lcp.api.component;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import com.gitthub.wujun728.engine.interfaces.IExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.bjc.lcp.core.api.executor.IExecutor;
 import com.gitthub.wujun728.engine.common.DataResult;
 
 import cn.hutool.core.util.RandomUtil;
@@ -23,55 +24,24 @@ import cn.hutool.json.JSONUtil;
 @Component
 public class CommonDBCompoent implements IExecutor<DataResult,Map<String,Object>> {
 
-	@Autowired
-	JdbcTemplate jt;
-
 	DruidDataSource ds = new DruidDataSource();
 
 	@PostConstruct
 	public void test(){
-		ds.setUrl(SpringUtil.getProperty("spring.datasource.url"));
-		ds.setUsername(SpringUtil.getProperty("spring.datasource.username"));
-		ds.setPassword(SpringUtil.getProperty("spring.datasource.password"));
+		ds.setUrl(SpringUtil.getProperty("project.datasource.url"));
+		ds.setUsername(SpringUtil.getProperty("project.datasource.username"));
+		ds.setPassword(SpringUtil.getProperty("project.datasource.password"));
 	}
 
 	@Override
 	public DataResult execute(Map params) {
+		JdbcTemplate jt = new JdbcTemplate(ds);
 		if(jt!=null) {
-			try {
-				System.out.println("jdbcTemplate注入成功：" + jt.getDataSource().getConnection());
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			System.out.println("jdbcTemplate初始化成功" );
 		}
-		
-//		QueryRunner queryRunner = new QueryRunner(ds);
-//		//2 执行update方法
-//		String sql = "insert into product(pid,pname,price,category_id) values(?,?,?,?)";
-//		Object[] params = { 990,"测试",100,"c009" };
-//		int r = queryRunner.update(sql,params); 
-		
-		Map<String, Object> map = new HashMap<>();
-		try {
-			Long pk = null;
-			Entity entity = Entity.create("test");
-			entity.set("content", "unitTestUser11"+RandomUtil.randomInt());
-			entity.set("title", "title-"+RandomUtil.randomInt());
-			entity.set("remark", "remark"+RandomUtil.randomInt());
-			try {
-				pk = Db.use(ds).insertForGeneratedKey(
-					    entity
-					);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			entity.set("pk", pk);
-			map.put("record", entity);
-			System.out.println("返回数据为：" + JSONUtil.toJsonStr(map));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return DataResult.success(map);
+		Object[] sqliParams = Arrays.asList("aaa"+ RandomUtil.randomInt(),"bbb"+ RandomUtil.randomInt(),"cccc"+ RandomUtil.randomInt(),"dddd"+ RandomUtil.randomInt()).toArray() ;
+		int icount = jt.update("insert into test (title,content,remark,field_name_test ) VALUES ( ?, ?, ?, ? ) ", sqliParams);
+		return DataResult.success(icount);
 	}
 
 	@Override

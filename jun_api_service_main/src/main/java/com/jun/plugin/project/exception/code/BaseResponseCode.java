@@ -1,4 +1,4 @@
-package com.jun.plugin.project.exception;
+package com.jun.plugin.project.exception.code;
 
 
 /**

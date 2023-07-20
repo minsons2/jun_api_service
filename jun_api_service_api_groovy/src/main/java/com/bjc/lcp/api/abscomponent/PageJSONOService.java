@@ -1,13 +1,10 @@
-package com.bjc.lcp.api.component;
+package com.bjc.lcp.api.abscomponent;
 
 import com.alibaba.fastjson.JSONObject;
-import com.bjc.lcp.core.api.executor.AbstractExecutor;
-import com.gitthub.wujun728.engine.groovy.core.bean.GroovyDynamicLoader;
+import com.gitthub.wujun728.engine.interfaces.AbstractExecutor;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -23,7 +20,7 @@ import java.util.Map;
  * 说明：需要把该代码放进DB，api_config，测试JSONOBject对象直接返回-保存在庫裡面
  */
 @Component
-public class PageJSONOService extends  AbstractExecutor<JSONObject, Map<String,Object>>  {
+public class PageJSONOService extends AbstractExecutor<JSONObject, Map<String,Object>> {
 
 	@Override
 	public JSONObject execute(Map<String, Object> params) {

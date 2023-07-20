@@ -1,16 +1,13 @@
 package com.bjc.lcp.api.component;
 
-import java.util.Map;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.bjc.lcp.core.api.executor.AbstractExecutor;
-import com.bjc.lcp.core.api.executor.IExecutor;
-import com.bjc.lcp.engine.common.Context;
-//import com.github.freakchick.orange.context.Context;
 import com.gitthub.wujun728.engine.common.DataResult;
+import com.gitthub.wujun728.engine.interfaces.IExecutor;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
+
+import java.util.Map;
 
 /**
  * 组件ID：BAS000000000100

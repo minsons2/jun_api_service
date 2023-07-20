@@ -1,6 +1,9 @@
 package com.jun.plugin.project.exception;
 
 
+import com.jun.plugin.project.exception.code.BaseResponseCode;
+import com.jun.plugin.project.exception.code.ResponseCodeInterface;
+
 /**
  * BusinessException
  *

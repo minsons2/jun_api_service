@@ -1,6 +1,7 @@
 package com.jun.plugin.project.exception;
 
 import com.jun.plugin.project.core.Result;
+import com.jun.plugin.project.exception.code.BaseResponseCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

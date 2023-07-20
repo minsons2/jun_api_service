@@ -49,7 +49,7 @@ public class TestController111 {
 		// 准备数据
 		HashMap<String, Object> data = new HashMap<>();
 //		String tableName = "test333";
-		data.putAll(GenUtils.getTableData(tableName, ds.getConnection()));
+		//data.putAll(GenUtils.getTableData(tableName, ds.getConnection()));
 
 		DbUtil.initDb( DbUtil.MASTER,
 				"jdbc:mysql://localhost:3306/db_qixing?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8",
@@ -91,9 +91,10 @@ public class TestController111 {
 		Db.use(DbUtil.MASTER).save("api_config",DbUtil.getPkNames(ds,"api_config"),DbUtil.getTableRecord(ds,"api_config",sqlParamUpdate));
 //		DbUtil.executeSQL(ds,sqlParamUpdate,DbUtil.insertSQL(data));
 
-		String className = GenUtils.genTemplateStr(data, "${classInfo.className?uncap_first}");
-		List apis = Db.use(DbUtil.MASTER).query(" select id,path from api_config where path like ? ",new Object[]{"%"+className+"%"});
-		return new DataResult(200,"脚本接口初始化成功！",apis);
+		//String className = GenUtils.genTemplateStr(data, "${classInfo.className?uncap_first}");
+		//List apis = Db.use(DbUtil.MASTER).query(" select id,path from api_config where path like ? ",new Object[]{"%"+className+"%"});
+		//return new DataResult(200,"脚本接口初始化成功！",apis);
+		return null;
 	}
 	@GetMapping("/api/test111/test111")
 	@ResponseBody

@@ -1,27 +1,24 @@
 package com.bjc.lcp.api.component;
 
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-
-import com.alibaba.druid.pool.DruidDataSource;
-import com.bjc.lcp.core.api.executor.IExecutor;
-import com.gitthub.wujun728.engine.common.DataResult;
-
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.db.Db;
 import cn.hutool.db.Entity;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
+import com.alibaba.druid.pool.DruidDataSource;
+import com.gitthub.wujun728.engine.common.DataResult;
+import com.gitthub.wujun728.engine.interfaces.IExecutor;
+
+import javax.annotation.PostConstruct;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * 需要把该代码放进DB，api_groovy，测试ActiveRecord-CURD-CURD-保存在庫裡面
+ * 需要把该代码放进DB，api_groovy，CURD-CURD-保存在庫裡面
  */
-public class TestJdbCRUDGroovyBean  implements  IExecutor<DataResult, Map<String,Object>>  {
+public class TestJdbCRUDGroovyBean  implements IExecutor<DataResult, Map<String,Object>> {
 	
 	DruidDataSource ds = new DruidDataSource();
 			

@@ -6,9 +6,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import com.bjc.lcp.core.api.executor.AbstractExecutor;
-import com.bjc.lcp.engine.common.Context;
-
+import com.gitthub.wujun728.engine.interfaces.AbstractExecutor;
+import com.gitthub.wujun728.engine.interfaces.Context;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.druid.pool.DruidDataSource;
@@ -21,7 +20,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 
 @Component
-public class CompoentExecutorTest2 extends AbstractExecutor<Integer, Map<String,Object>>  {
+public class CompoentExecutorTest2 extends AbstractExecutor<Integer, Map<String,Object>> {
 
 //	public CompoentExecutorTest2(Context context) {
 //		super(context);

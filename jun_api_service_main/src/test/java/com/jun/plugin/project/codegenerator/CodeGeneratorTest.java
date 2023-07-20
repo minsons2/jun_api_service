@@ -29,7 +29,7 @@ public class CodeGeneratorTest {
     @Test
     public void codeGenerator() throws Exception {
         GenUtils.init(PropsUtil.get("config").toProperties(),getTemplates());
-        GenUtils.genCode(Arrays.asList("sys_user", "abc"));
+        GenUtils.genCode(Arrays.asList("sys_code_generate_config", "sys_code_generate"));
     }
 
     public static List<String> getTemplates() {

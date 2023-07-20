@@ -22,12 +22,14 @@
                 <div class="layui-form-item">
                     <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
                         <#list classInfo.fieldList as fieldItem >
+                            <#if fieldItem.nullable==false>
                             <div class="layui-inline">
                                 <label class="layui-form-label">${fieldItem.fieldComment}:</label>
                                 <div class="layui-input-inline">
                                     <input name="${fieldItem.fieldName}" class="layui-input" placeholder="输入${fieldItem.fieldComment}"/>
                                 </div>
                             </div>
+                              </#if>
                         </#list>
                     </#if>
                     <#--<div class="layui-inline">
@@ -77,7 +79,8 @@
                     <label class="layui-form-label layui-form-required">${fieldItem.fieldComment}:</label>
                     <div class="layui-input-block">
                         <input name="${fieldItem.fieldName}" placeholder="请输入${fieldItem.fieldComment}" class="layui-input"
-                               lay-verType="tips" lay-verify="required" required/>
+                               lay-verType="tips"  <#if fieldItem.nullable==false>lay-verify="required" required</#if>  />
+
                     </div>
                 </div>
             </#list>
