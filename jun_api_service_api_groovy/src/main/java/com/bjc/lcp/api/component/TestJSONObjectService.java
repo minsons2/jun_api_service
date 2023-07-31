@@ -1,9 +1,9 @@
 package com.bjc.lcp.api.component;
 
 import com.alibaba.fastjson.JSONObject;
+import com.gitthub.wujun728.engine.base.interfaces.AbstractExecutor;
 import com.gitthub.wujun728.engine.common.BusinessException;
-import com.gitthub.wujun728.engine.groovy.core.bean.GroovyDynamicLoader;
-import com.gitthub.wujun728.engine.interfaces.AbstractExecutor;
+import com.gitthub.wujun728.engine.groovy.GroovyDynamicLoader;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;

@@ -75,3 +75,14 @@ jasypt:
 
 shiro:
   enable: false
+
+beetlsql:
+  sqlManagers: sqlManager1,sqlManager2
+  sqlManager1:
+    ds: ds1
+    basePackage: org.beetl.sql.springboot.simple
+    daoSuffix: Dao
+  sqlManager2:
+    ds: ds1
+    basePackage: org.beetl.sql.springboot.simple2
+    daoSuffix: Dao

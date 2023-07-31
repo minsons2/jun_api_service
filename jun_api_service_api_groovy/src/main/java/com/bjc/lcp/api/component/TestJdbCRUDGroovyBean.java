@@ -7,8 +7,8 @@ import cn.hutool.db.Entity;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.gitthub.wujun728.engine.common.DataResult;
-import com.gitthub.wujun728.engine.interfaces.IExecutor;
+import com.gitthub.wujun728.engine.base.DataResult;
+import com.gitthub.wujun728.engine.base.interfaces.IExecutor;
 
 import javax.annotation.PostConstruct;
 import java.sql.SQLException;

@@ -1,7 +1,7 @@
 package com.bjc.lcp.api.component;
 
 import cn.hutool.core.lang.Console;
-import com.gitthub.wujun728.engine.interfaces.IExecutor;
+import com.gitthub.wujun728.engine.base.interfaces.IExecutor;
 
 import java.util.Map;
 

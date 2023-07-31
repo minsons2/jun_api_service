@@ -7,13 +7,13 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import com.gitthub.wujun728.engine.interfaces.IExecutor;
+import com.gitthub.wujun728.engine.base.DataResult;
+import com.gitthub.wujun728.engine.base.interfaces.IExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.gitthub.wujun728.engine.common.DataResult;
 
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.db.Db;

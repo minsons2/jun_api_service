@@ -15,7 +15,6 @@
         <module>aoplog</module>
         <module>fileUpload</module>
         <module>job</module>
-        <module>shiro</module>
         <module>thymeleaf</module>
         <module>jwt</module>
     </modules>

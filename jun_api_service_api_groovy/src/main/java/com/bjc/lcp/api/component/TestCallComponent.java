@@ -1,8 +1,8 @@
 package com.bjc.lcp.api.component;
 
 import cn.hutool.core.lang.Console;
-import com.gitthub.wujun728.engine.common.DataResult;
-import com.gitthub.wujun728.engine.interfaces.IExecutor;
+import com.gitthub.wujun728.engine.base.DataResult;
+import com.gitthub.wujun728.engine.base.interfaces.IExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 

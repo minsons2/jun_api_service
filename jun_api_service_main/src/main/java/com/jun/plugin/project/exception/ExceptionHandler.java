@@ -1,5 +1,6 @@
 package com.jun.plugin.project.exception;
 
+import com.gitthub.wujun728.engine.common.BusinessException;
 import com.jun.plugin.project.core.Result;
 import com.jun.plugin.project.exception.code.BaseResponseCode;
 import lombok.extern.slf4j.Slf4j;

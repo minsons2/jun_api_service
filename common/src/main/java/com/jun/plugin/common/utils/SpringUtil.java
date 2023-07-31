@@ -55,4 +55,8 @@ public class SpringUtil implements ApplicationContextAware {
     public static String getEnvironmentProperty(String key){
         return getApplicationContext().getEnvironment().getProperty(key);
     }
+
+    public static void autowireBean(Object bean) {
+        getApplicationContext().getAutowireCapableBeanFactory().autowireBean(bean);
+    }
 }

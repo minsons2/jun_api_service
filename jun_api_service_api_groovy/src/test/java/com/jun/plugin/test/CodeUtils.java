@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import com.gitthub.wujun728.engine.generator.GenUtils;
 
+import java.util.Arrays;
+
 /**
  * 代码生成器，根据DatabaseMetaData及数据表名称生成对应的Model、Mapper、Service、Controller简化基础代码逻辑开发。
  * @author Wujun
@@ -16,8 +18,8 @@ public class CodeUtils {
 		String tables = "res_basc,res_basc_arg,api_config";
 //		String tables = "git_user";
 //		String tables = "app_infoenvt,app_member,app_datasource,app_git_config,git_user,app_deploy_config";
-		GenUtils.isDefaultTemplate = true;
-		GenUtils.genTables(tables.split(","));
+		//GenUtils.isDefaultTemplate = true;
+		GenUtils.genTables(GenUtils.getClassInfo(tables.split(",")),Arrays.asList(tables.split(",")));;
 	}
 
 }

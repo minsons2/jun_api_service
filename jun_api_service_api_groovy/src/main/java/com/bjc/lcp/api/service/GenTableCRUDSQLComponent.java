@@ -1,31 +1,21 @@
 package com.bjc.lcp.api.service;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.sql.DataSource;
-
-import com.alibaba.druid.pool.DruidDataSource;
+import cn.hutool.core.map.MapUtil;
+import cn.hutool.db.meta.MetaUtil;
+import cn.hutool.db.meta.Table;
+import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.fastjson.JSON;
-import com.bjc.lcp.core.api.executor.IExecutor;
 import com.gitthub.wujun728.engine.common.DataResult;
-import com.gitthub.wujun728.engine.generator.GenUtils;
-import com.gitthub.wujun728.engine.util.JdbcUtil;
-import com.gitthub.wujun728.mybatis.sql.SqlMeta;
+import com.gitthub.wujun728.engine.interfaces.IExecutor;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.druid.DruidPlugin;
 
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.db.meta.MetaUtil;
-import cn.hutool.db.meta.Table;
-import cn.hutool.extra.spring.SpringUtil;
-import freemarker.template.TemplateException;
+import javax.sql.DataSource;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 组件ID：BAS000000000100 描 述：执行指定的SQL语句（insert/update/delete/select语句）
@@ -33,7 +23,7 @@ import freemarker.template.TemplateException;
  * 
  * 说明：需要把该代码放进DB，api_groovy，测试Jfinal-CURD-保存在庫裡面
  */
-public class GenTableCRUDSQLComponent implements  IExecutor<DataResult, Map<String,Object>>  {
+public class GenTableCRUDSQLComponent implements IExecutor<DataResult, Map<String,Object>> {
 
 	public static void initDb(String configName, String url, String username, String password) {
 		DruidPlugin dp = new DruidPlugin(url, username, password);

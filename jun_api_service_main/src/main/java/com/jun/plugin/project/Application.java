@@ -1,7 +1,6 @@
 package com.jun.plugin.project;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
-import com.gitthub.wujun728.engine.groovy.core.bean.GroovyDynamicLoader;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +18,8 @@ public class Application {
     private static Logger logger= LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws Exception {
+        //RunCodeController
         ConfigurableApplicationContext application = SpringApplication.run(Application.class, args);
-
         Environment env = application.getEnvironment();
         logger.info("\n----------------------------------------------------------\n\t" +
                         "Application '{}' is running! Access URLs:\n\t" +

@@ -1,7 +1,7 @@
 package com.bjc.lcp.api.abscomponent;
 
-import com.gitthub.wujun728.engine.common.DataResult;
-import com.gitthub.wujun728.engine.interfaces.AbstractExecutor;
+import com.gitthub.wujun728.engine.base.DataResult;
+import com.gitthub.wujun728.engine.base.interfaces.AbstractExecutor;
 import com.gitthub.wujun728.engine.util.JdbcUtil;
 import com.gitthub.wujun728.mybatis.sql.SqlMeta;
 import com.jfinal.plugin.activerecord.Db;

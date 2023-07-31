@@ -1,7 +1,7 @@
 package com.bjc.lcp.api.abscomponent;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gitthub.wujun728.engine.interfaces.AbstractExecutor;
+import com.gitthub.wujun728.engine.base.interfaces.AbstractExecutor;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;

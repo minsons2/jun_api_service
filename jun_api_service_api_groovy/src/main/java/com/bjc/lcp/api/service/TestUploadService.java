@@ -1,24 +1,17 @@
 package com.bjc.lcp.api.service;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.RandomUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.gitthub.wujun728.engine.interfaces.AbstractExecutor;
+import com.gitthub.wujun728.engine.interfaces.IExecutor;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.bjc.lcp.core.api.executor.AbstractExecutor;
-import com.bjc.lcp.core.api.executor.IExecutor;
-
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.RandomUtil;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Map;
 
 /**
  * 组件ID：BAS000000000100
@@ -30,7 +23,7 @@ import cn.hutool.core.util.RandomUtil;
  * 
  * 说明：需要把该代码放进DB，api_config，测试JSONOBject对象直接返回-保存在庫裡面
  */
-public class TestUploadService extends AbstractExecutor<JSONObject, Map<String,Object>> implements  IExecutor<JSONObject, Map<String,Object>>  {
+public class TestUploadService extends AbstractExecutor<JSONObject, Map<String,Object>> implements IExecutor<JSONObject, Map<String,Object>> {
 
 	@Override
 	public JSONObject execute(Map<String, Object> params) {

@@ -14,8 +14,8 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 
+import com.gitthub.wujun728.engine.common.BusinessException;
 import com.jun.plugin.project.core.Result;
-import com.jun.plugin.project.core.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -68,7 +68,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         exceptionResolvers.add(new HandlerExceptionResolver() {
             public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
                 Result result = new Result();
-                if (e instanceof ServiceException) {//业务失败的异常，如“账号或密码错误”
+                if (e instanceof BusinessException) {//业务失败的异常，如“账号或密码错误”
                     result.setCode(Result.FAIL).setMessage(e.getMessage());
                 } else if (e instanceof MethodArgumentNotValidException) {//@valid注解验证参数
                     MethodArgumentNotValidException m = (MethodArgumentNotValidException) e;
