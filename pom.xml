@@ -19,7 +19,6 @@
 		<module>plugins</module>
 		<module>modules</module>
 		<module>jun_api_service_api_groovy</module>
-		<module>jun_api_service_common</module>
 		<module>jun_api_service_main</module>
 	</modules>
 
