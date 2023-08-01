@@ -1,8 +1,8 @@
 package com.bjc.lcp.api.abscomponent;
 
-import com.gitthub.wujun728.engine.base.DataResult;
-import com.gitthub.wujun728.engine.base.interfaces.AbstractExecutor;
 import com.jfinal.plugin.activerecord.Db;
+import com.jun.plugin.common.Result;
+import com.jun.plugin.common.base.interfaces.AbstractExecutor;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -18,16 +18,16 @@ import java.util.Map;
  * 说明：需要把该代码放进DB，api_config，测试JSONOBject对象直接返回-保存在庫裡面
  */
 @Component
-public class RecordRemoveService extends AbstractExecutor<DataResult, Map<String,Object>> {
+public class RecordRemoveService extends AbstractExecutor<Result, Map<String,Object>> {
 
 	@Override
-	public DataResult execute(Map<String, Object> params) {
+	public Result execute(Map<String, Object> params) {
 		super.initDb();
 		super.setParameters(params);
 		return delete(params);
 	}
 
-	public DataResult delete(Map<String, Object> params) {
+	public Result delete(Map<String, Object> params) {
 		String tableName = super.getPara(params,"tableName");
 		String primaryKey = super.getPara(params,"primaryKey");
 		String id = super.getPara(params,"id");
@@ -38,12 +38,7 @@ public class RecordRemoveService extends AbstractExecutor<DataResult, Map<String
 		}else{
 			result = Db.use("master").deleteByIds(tableName,primaryKey, id);
 		}
-		return DataResult.success(result);
-	}
-
-	@Override
-	public DataResult rollback(Map<String, Object> parms) {
-		return DataResult.success();
+		return Result.success(result);
 	}
 
 }

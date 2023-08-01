@@ -1,6 +1,6 @@
 package com.bjc.lcp.api.config;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

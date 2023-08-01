@@ -5,9 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import com.alibaba.fastjson.JSON;
-import com.gitthub.wujun728.engine.base.interfaces.AbstractExecutor;
-import com.gitthub.wujun728.engine.base.interfaces.Context;
+import com.alibaba.fastjson2.JSON;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.generator.MetaBuilder;
@@ -15,6 +13,8 @@ import com.jfinal.plugin.activerecord.generator.TableMeta;
 
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import com.jun.plugin.common.base.interfaces.AbstractExecutor;
+import com.jun.plugin.common.base.interfaces.Context;
 
 /**
  * 组件ID：BAS000000000100
@@ -109,13 +109,5 @@ public class CommonCRUDComponent extends AbstractExecutor<String,Map<String,Obje
 		return "";
 	}
 
-	@Override
-	public String rollback(Map<String, Object> p) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	 
 
 }

@@ -3,20 +3,26 @@ package com.bjc.lcp.api.service;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.druid.pool.DruidPooledConnection;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.gitthub.wujun728.engine.common.*;
-import com.gitthub.wujun728.engine.groovy.cache.IApiConfigCache;
-import com.gitthub.wujun728.engine.groovy.core.cache.GroovyInnerCache;
-import com.gitthub.wujun728.engine.groovy.mapping.RequestMappingExecutor;
-import com.gitthub.wujun728.engine.interfaces.AbstractExecutor;
-import com.gitthub.wujun728.engine.interfaces.IExecutor;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.gitthub.wujun728.engine.common.model.ApiConfig;
+import com.gitthub.wujun728.engine.common.model.ApiDataSource;
+import com.gitthub.wujun728.engine.common.model.ApiSql;
+import com.gitthub.wujun728.engine.groovy.cache.GroovyInnerCache;
+import com.gitthub.wujun728.engine.mapping.http.RequestMappingExecutor;
+import com.gitthub.wujun728.engine.mapping.http.cache.IApiConfigCache;
 import com.gitthub.wujun728.engine.plugin.CachePlugin;
 import com.gitthub.wujun728.engine.plugin.PluginManager;
 import com.gitthub.wujun728.engine.plugin.TransformPlugin;
+import com.gitthub.wujun728.engine.service.ApiService;
 import com.gitthub.wujun728.engine.util.JdbcUtil;
 import com.gitthub.wujun728.engine.util.PoolManager;
 import com.gitthub.wujun728.mybatis.sql.SqlMeta;
+import com.jun.plugin.common.Result;
+import com.jun.plugin.common.base.interfaces.AbstractExecutor;
+import com.jun.plugin.common.base.interfaces.IExecutor;
+import com.jun.plugin.common.exception.BusinessException;
+import com.jun.plugin.common.properties.ApiProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +82,7 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 			ApiConfig config = apiInfoCache.get(servletPath);
 			if (config == null) {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-				out.append(JSON.toJSONString(DataResult.fail("Api not exists")));
+				out.append(JSON.toJSONString(Result.fail("Api not exists")));
 			}
 			switch (config.getScriptType()) {
 			case "SQL":
@@ -102,7 +108,7 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 			out.append(JSON.toJSONString(data));
 		} catch (Exception e) {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			out.append(JSON.toJSONString(DataResult.fail(e.toString())));
+			out.append(JSON.toJSONString(Result.fail(e.toString())));
 			log.error(e.toString(), e);
 		} finally {
 			if (out != null)
@@ -128,17 +134,17 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 				return bean.execute(params);
 			}
 		} catch (BusinessException e) {
-			return DataResult.fail(e.getMessage());
+			return Result.fail(e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
-			if(beanObj instanceof  IExecutor){
-				IExecutor bean = (IExecutor) beanObj;
-				return bean.rollback(params);
-			}else if(beanObj instanceof  AbstractExecutor){
-				AbstractExecutor bean = (AbstractExecutor) beanObj;
-				bean.init(request,response);
-				return bean.rollback(params);
-			}
+//			if(beanObj instanceof  IExecutor){
+//				IExecutor bean = (IExecutor) beanObj;
+//				return bean.rollback(params);
+//			}else if(beanObj instanceof  AbstractExecutor){
+//				AbstractExecutor bean = (AbstractExecutor) beanObj;
+//				bean.init(request,response);
+//				return bean.rollback(params);
+//			}
 			return e.getMessage();
 		}
 		return "ERROR：执行错误，请检查执行日志并捕获并处理异常！";
@@ -149,7 +155,7 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 			ApiDataSource datasource = apiService.getDatasource(config.getDatasourceId());
 			if (datasource == null || datasource.getId()==null) {
 				response.setStatus(500);
-				return DataResult.fail("Datasource not exists!");
+				return Result.fail("Datasource not exists!");
 			}
 			Map<String, Object> params = getParameters(request, config);
 //			if(MapUtil.getStr(params,"pageNumber")!=null && MapUtil.getStr(params,"pageSize")!=null ){
@@ -160,7 +166,7 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 //			}
 			List<ApiSql> sqlList = config.getSqlList();
 			if (CollectionUtils.isEmpty(params) && !CollectionUtils.isEmpty(sqlList) && JSON.toJSONString(sqlList).contains("#")) {
-				return DataResult.fail("Request parameter is not exists(请求入参不能为空)!");
+				return Result.fail("Request parameter is not exists(请求入参不能为空)!");
 			}
 			ApiDataSource ds = new ApiDataSource();
 			BeanUtil.copyProperties(datasource,ds, false);
@@ -261,7 +267,7 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 //
 //
 //		@Override
-//		public DataResult rollback(Map parms) {
+//		public Result rollback(Map parms) {
 //			// TODO Auto-generated method stub
 //			return null;
 //		}

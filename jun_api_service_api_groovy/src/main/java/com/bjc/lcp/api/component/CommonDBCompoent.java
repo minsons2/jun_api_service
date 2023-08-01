@@ -7,8 +7,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import com.gitthub.wujun728.engine.base.DataResult;
-import com.gitthub.wujun728.engine.base.interfaces.IExecutor;
+import com.jun.plugin.common.Result;
+import com.jun.plugin.common.base.interfaces.IExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 
 @Component
-public class CommonDBCompoent implements IExecutor<DataResult,Map<String,Object>> {
+public class CommonDBCompoent implements IExecutor<Result,Map<String,Object>> {
 
 	DruidDataSource ds = new DruidDataSource();
 
@@ -34,19 +34,14 @@ public class CommonDBCompoent implements IExecutor<DataResult,Map<String,Object>
 	}
 
 	@Override
-	public DataResult execute(Map params) {
+	public Result execute(Map params) {
 		JdbcTemplate jt = new JdbcTemplate(ds);
 		if(jt!=null) {
 			System.out.println("jdbcTemplate初始化成功" );
 		}
 		Object[] sqliParams = Arrays.asList("aaa"+ RandomUtil.randomInt(),"bbb"+ RandomUtil.randomInt(),"cccc"+ RandomUtil.randomInt(),"dddd"+ RandomUtil.randomInt()).toArray() ;
 		int icount = jt.update("insert into test (title,content,remark,field_name_test ) VALUES ( ?, ?, ?, ? ) ", sqliParams);
-		return DataResult.success(icount);
-	}
-
-	@Override
-	public DataResult rollback(Map params) {
-		return null;
+		return Result.success(icount);
 	}
 
 

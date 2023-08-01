@@ -4,13 +4,13 @@ import cn.hutool.core.map.MapUtil;
 import cn.hutool.db.meta.MetaUtil;
 import cn.hutool.db.meta.Table;
 import cn.hutool.extra.spring.SpringUtil;
-import com.alibaba.fastjson.JSON;
-import com.gitthub.wujun728.engine.common.DataResult;
-import com.gitthub.wujun728.engine.interfaces.IExecutor;
+import com.alibaba.fastjson2.JSON;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jun.plugin.common.Result;
+import com.jun.plugin.common.base.interfaces.IExecutor;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -23,7 +23,7 @@ import java.util.Map;
  * 
  * 说明：需要把该代码放进DB，api_groovy，测试Jfinal-CURD-保存在庫裡面
  */
-public class GenTableCRUDSQLComponent implements IExecutor<DataResult, Map<String,Object>> {
+public class GenTableCRUDSQLComponent implements IExecutor<Result, Map<String,Object>> {
 
 	public static void initDb(String configName, String url, String username, String password) {
 		DruidPlugin dp = new DruidPlugin(url, username, password);
@@ -34,7 +34,7 @@ public class GenTableCRUDSQLComponent implements IExecutor<DataResult, Map<Strin
 	}
 
 	@Override
-	public DataResult execute(Map<String, Object> params) throws Exception {
+	public Result execute(Map<String, Object> params) throws Exception {
 		// 校验组件参数+校验上下文参数，TODO
 //		if (!checkMinParaCountAndSetRespCode(3)) {
 //			return ERROR;
@@ -99,12 +99,8 @@ public class GenTableCRUDSQLComponent implements IExecutor<DataResult, Map<Strin
 				throw new Exception("数据库操作出错！");
 			}
 		}
-		return DataResult.success();
+		return Result.success();
 	}
 
-	@Override
-	public DataResult rollback(Map<String, Object> parms) {
-		return null;
-	}
 
 }

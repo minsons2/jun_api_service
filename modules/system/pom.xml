@@ -30,9 +30,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.jun.plugin</groupId>
-            <artifactId>common</artifactId>
-            <version>1.0</version>
+            <groupId>io.github.wujun728</groupId>
+            <artifactId>jun-groovy-api-spring-boot-starter</artifactId>
+            <version>1.0.5-RELEASE</version>
         </dependency>
 
         <dependency>

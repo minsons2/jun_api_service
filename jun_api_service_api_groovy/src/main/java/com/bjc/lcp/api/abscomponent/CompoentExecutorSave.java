@@ -6,12 +6,12 @@ import cn.hutool.db.meta.MetaUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.fastjson.JSON;
-import com.gitthub.wujun728.engine.base.DataResult;
-import com.gitthub.wujun728.engine.base.interfaces.AbstractExecutor;
+import com.alibaba.fastjson2.JSON;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
+import com.jun.plugin.common.Result;
+import com.jun.plugin.common.base.interfaces.AbstractExecutor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class CompoentExecutorSave extends AbstractExecutor<DataResult, Map<String,Object>> {
+public class CompoentExecutorSave extends AbstractExecutor<Result, Map<String,Object>> {
 	String appNo = "A000101";
 
 	@PostConstruct
@@ -54,7 +54,7 @@ public class CompoentExecutorSave extends AbstractExecutor<DataResult, Map<Strin
 	}
 
 	@Override
-	public DataResult execute(Map params) {
+	public Result execute(Map params) {
 		System.out.println("入参：" + JSONUtil.toJsonStr(params));
 		Map<String, Object> map = new HashMap<>();
 		try {
@@ -71,14 +71,9 @@ public class CompoentExecutorSave extends AbstractExecutor<DataResult, Map<Strin
 			System.out.println("返回数据为：" + JSONUtil.toJsonStr(map));
 		} catch (Exception e) {
 			e.printStackTrace();
-			return DataResult.fail(e.getMessage());
+			return Result.fail(e.getMessage());
 		}
-		return DataResult.success(map);
-	}
-
-	@Override
-	public DataResult rollback(Map params) {
-		return null;
+		return Result.success(map);
 	}
 
 

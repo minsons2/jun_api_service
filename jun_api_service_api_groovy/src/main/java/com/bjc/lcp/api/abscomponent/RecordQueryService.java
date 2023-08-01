@@ -1,10 +1,10 @@
 package com.bjc.lcp.api.abscomponent;
 
-import com.gitthub.wujun728.engine.base.DataResult;
-import com.gitthub.wujun728.engine.base.interfaces.AbstractExecutor;
 import com.gitthub.wujun728.engine.util.JdbcUtil;
 import com.gitthub.wujun728.mybatis.sql.SqlMeta;
 import com.jfinal.plugin.activerecord.Db;
+import com.jun.plugin.common.Result;
+import com.jun.plugin.common.base.interfaces.AbstractExecutor;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
@@ -21,10 +21,10 @@ import java.util.Map;
  * 说明：需要把该代码放进DB，api_config，测试JSONOBject对象直接返回-保存在庫裡面
  */
 @Component
-public class RecordQueryService extends AbstractExecutor<DataResult, Map<String,Object>> {
+public class RecordQueryService extends AbstractExecutor<Result, Map<String,Object>> {
 
 	@Override
-	public DataResult execute(Map<String, Object> params) throws SQLException {
+	public Result execute(Map<String, Object> params) throws SQLException {
 		super.initDb();
 		super.setParameters(params);
 		int pageNumber = super.getParaInt(params,"page");
@@ -57,12 +57,7 @@ public class RecordQueryService extends AbstractExecutor<DataResult, Map<String,
 				"    #{start}, #{size}    ";
 		SqlMeta sqlMeta = JdbcUtil.getEngine().parse(sqlText, params);
 		Object data = JdbcUtil.executeSql(Db.use("master").getConfig().getConnection(), sqlMeta.getSql(), sqlMeta.getJdbcParamValues());
-		return DataResult.success(data);
-	}
-
-	@Override
-	public DataResult rollback(Map<String, Object> parms) {
-		return DataResult.success();
+		return Result.success(data);
 	}
 
 }

@@ -144,11 +144,11 @@
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.ibeetl/beetlsql -->
         <!-- https://mvnrepository.com/artifact/com.ibeetl/sql-springboot-starter -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.ibeetl</groupId>
             <artifactId>sql-springboot-starter</artifactId>
             <version>3.23.4-RELEASE</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>

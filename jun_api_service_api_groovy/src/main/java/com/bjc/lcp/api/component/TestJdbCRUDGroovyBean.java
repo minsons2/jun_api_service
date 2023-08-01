@@ -7,8 +7,8 @@ import cn.hutool.db.Entity;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.druid.pool.DruidDataSource;
-import com.gitthub.wujun728.engine.base.DataResult;
-import com.gitthub.wujun728.engine.base.interfaces.IExecutor;
+import com.jun.plugin.common.Result;
+import com.jun.plugin.common.base.interfaces.IExecutor;
 
 import javax.annotation.PostConstruct;
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * 需要把该代码放进DB，api_groovy，CURD-CURD-保存在庫裡面
  */
-public class TestJdbCRUDGroovyBean  implements IExecutor<DataResult, Map<String,Object>> {
+public class TestJdbCRUDGroovyBean  implements IExecutor<Result, Map<String,Object>> {
 	
 	DruidDataSource ds = new DruidDataSource();
 			
@@ -33,7 +33,7 @@ public class TestJdbCRUDGroovyBean  implements IExecutor<DataResult, Map<String,
  
 
 	@Override
-	public DataResult execute(Map<String, Object> parms) throws Exception {
+	public Result execute(Map<String, Object> parms) throws Exception {
 		Map<String, Object> params = parms;
 		Map<String, Object> map = new HashMap<>();
 		try {
@@ -56,12 +56,7 @@ public class TestJdbCRUDGroovyBean  implements IExecutor<DataResult, Map<String,
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return DataResult.success(map);
+		return Result.success(map);
 	}
 
-	@Override
-	public DataResult rollback(Map<String, Object> parms) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -2,14 +2,13 @@ package com.bjc.lcp.api.controller;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.bjc.lcp.api.service.DbUtil;
-import com.gitthub.wujun728.engine.common.DataResult;
-import com.gitthub.wujun728.engine.common.RequestWrapper;
-import com.gitthub.wujun728.engine.generator.GenUtils;
-import com.gitthub.wujun728.engine.groovy.mapping.RequestMappingExecutor;
+import com.gitthub.wujun728.engine.util.HttpRequestLocal;
+import com.gitthub.wujun728.engine.util.RequestWrapper;
 import com.jfinal.plugin.activerecord.Db;
 //import com.jun.plugin.system.entity.SysUser;
 //import com.jun.plugin.system.service.SysDictService;
 //import com.jun.plugin.system.service.UserService;
+import com.jun.plugin.common.Result;
 import freemarker.template.TemplateException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -34,11 +33,11 @@ public class TestController111 {
 
 	@GetMapping("/api/genTableSQL/{tableName}")
 	@ResponseBody
-	public DataResult genTableCRUDSQL(HttpServletRequest request,@PathVariable String tableName) throws IOException, TemplateException, SQLException {
+	public Result genTableCRUDSQL(HttpServletRequest request, @PathVariable String tableName) throws IOException, TemplateException, SQLException {
 		System.out.println("Request URI: " + request.getRequestURI());
 
 		HttpServletRequest requestWrapper = new RequestWrapper((HttpServletRequest) request);
-		Map param = RequestMappingExecutor.getParameters(requestWrapper);
+		Map param = HttpRequestLocal.getAllParameters(requestWrapper);
 
 		DruidDataSource ds = new DruidDataSource();
 		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
@@ -93,7 +92,7 @@ public class TestController111 {
 
 		//String className = GenUtils.genTemplateStr(data, "${classInfo.className?uncap_first}");
 		//List apis = Db.use(DbUtil.MASTER).query(" select id,path from api_config where path like ? ",new Object[]{"%"+className+"%"});
-		//return new DataResult(200,"脚本接口初始化成功！",apis);
+		//return new Result(200,"脚本接口初始化成功！",apis);
 		return null;
 	}
 	@GetMapping("/api/test111/test111")

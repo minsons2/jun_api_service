@@ -2,12 +2,12 @@ package com.bjc.lcp.api.component;
 
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
-import com.gitthub.wujun728.engine.base.DataResult;
-import com.gitthub.wujun728.engine.base.interfaces.IExecutor;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jun.plugin.common.Result;
+import com.jun.plugin.common.base.interfaces.IExecutor;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * 需要把该代码放进DB，api_groovy，测试Jfinal-CURD-保存在庫裡面
  */
-public class TestJfinalCRUDGroovyBean  implements IExecutor<DataResult, Map<String,Object>> {
+public class TestJfinalCRUDGroovyBean  implements IExecutor<Result, Map<String,Object>> {
 
 	@PostConstruct
 	public void test(){
@@ -33,7 +33,7 @@ public class TestJfinalCRUDGroovyBean  implements IExecutor<DataResult, Map<Stri
 
 
 	@Override
-	public DataResult execute(Map<String, Object> parms) throws Exception {
+	public Result execute(Map<String, Object> parms) throws Exception {
 		Record data = new Record().set("title", "1111").set("content", "content").set("remark", "remark");
 		Boolean resutl = Db.use("test1").save("test", data);
 		Map<String, Object> params = parms;
@@ -41,12 +41,8 @@ public class TestJfinalCRUDGroovyBean  implements IExecutor<DataResult, Map<Stri
 		map.put("reward", "6666");
 		map.put("resutl", resutl);
 		System.out.println("返回数据为：" + JSONUtil.toJsonStr(map));
-		return DataResult.success(map);
+		return Result.success(map);
 	}
 
-	@Override
-	public DataResult rollback(Map<String, Object> parms) {
-		return null;
-	}
 }
 

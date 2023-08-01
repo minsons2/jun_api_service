@@ -1,10 +1,10 @@
 package com.bjc.lcp.api.abscomponent;
 
-import com.alibaba.fastjson.JSONObject;
-import com.gitthub.wujun728.engine.base.interfaces.AbstractExecutor;
+import com.alibaba.fastjson2.JSONObject;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
+import com.jun.plugin.common.base.interfaces.AbstractExecutor;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -32,12 +32,8 @@ public class PageJSONOService extends AbstractExecutor<JSONObject, Map<String,Ob
 		String columnName = super.getPara("columnName");
 		Page<Record> pages = Db.use("master").paginate(pageNumber,pageSize,"select *"," from "+tableName);
 		Page<Map> datas = super.getPageMaps(pages);
-		return (JSONObject) JSONObject.toJSON(datas);
-	}
-
-	@Override
-	public JSONObject rollback(Map<String, Object> parms) {
-		return (JSONObject) new JSONObject().put("rollbakc",true);
+		return (JSONObject) JSONObject.from(datas);
+//		return (JSONObject) JSONObject.toJSON(datas);
 	}
 
 }

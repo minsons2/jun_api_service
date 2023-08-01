@@ -6,8 +6,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import com.gitthub.wujun728.engine.base.interfaces.AbstractExecutor;
-import com.gitthub.wujun728.engine.base.interfaces.Context;
+import com.jun.plugin.common.base.interfaces.AbstractExecutor;
+import com.jun.plugin.common.base.interfaces.Context;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.druid.pool.DruidDataSource;
@@ -78,12 +78,5 @@ public class CompoentExecutorTest2 extends AbstractExecutor<Integer, Map<String,
 		return 0;
 	}
 
-
-
-
-	@Override
-	public Integer rollback(Map<String,Object> params) {
-		return 0;
-	}
 
 }

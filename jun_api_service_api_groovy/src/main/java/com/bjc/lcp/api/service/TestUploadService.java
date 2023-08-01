@@ -2,10 +2,10 @@ package com.bjc.lcp.api.service;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.RandomUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.gitthub.wujun728.engine.interfaces.AbstractExecutor;
-import com.gitthub.wujun728.engine.interfaces.IExecutor;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.jun.plugin.common.base.interfaces.AbstractExecutor;
+import com.jun.plugin.common.base.interfaces.IExecutor;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -48,9 +48,9 @@ public class TestUploadService extends AbstractExecutor<JSONObject, Map<String,O
 		return json;
 	}
 
-	@Override
-	public JSONObject rollback(Map<String, Object> parms) {
-		return null;
-	}
+//	@Override
+//	public JSONObject rollback(Map<String, Object> parms) {
+//		return null;
+//	}
 
 }

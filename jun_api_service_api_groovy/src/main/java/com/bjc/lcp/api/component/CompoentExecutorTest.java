@@ -6,8 +6,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-import com.gitthub.wujun728.engine.base.DataResult;
-import com.gitthub.wujun728.engine.base.interfaces.IExecutor;
+import com.jun.plugin.common.Result;
+import com.jun.plugin.common.base.interfaces.IExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 
 @Component
-public class CompoentExecutorTest implements IExecutor<DataResult, Map<String,Object>> {
+public class CompoentExecutorTest implements IExecutor<Result, Map<String,Object>> {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -39,7 +39,7 @@ public class CompoentExecutorTest implements IExecutor<DataResult, Map<String,Ob
 	}
 
 	@Override
-	public DataResult execute(Map params) {
+	public Result execute(Map params) {
 		System.out.println("入参：" + JSONUtil.toJsonStr(params));
 		if(jdbcTemplate!=null) {
 			try {
@@ -68,12 +68,7 @@ public class CompoentExecutorTest implements IExecutor<DataResult, Map<String,Ob
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return DataResult.success(map);
-	}
-
-	@Override
-	public DataResult rollback(Map params) {
-		return null;
+		return Result.success(map);
 	}
 
 

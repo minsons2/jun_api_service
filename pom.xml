@@ -16,7 +16,6 @@
 	</properties>
 
 	<modules> 
-		<module>common</module>
 		<module>plugins</module>
 		<module>modules</module>
 		<module>jun_api_service_api_groovy</module>

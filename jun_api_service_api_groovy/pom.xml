@@ -208,11 +208,11 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.ibeetl/sql-springboot-starter -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.ibeetl</groupId>
             <artifactId>sql-springboot-starter</artifactId>
             <version>3.23.4-RELEASE</version>
-        </dependency>
+        </dependency>-->
 
 
         <!-- https://mvnrepository.com/artifact/org.dromara.stream-query/stream-plugin-mybatis-plus -->
