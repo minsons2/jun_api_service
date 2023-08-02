@@ -1,4 +1,17 @@
 # jun_springboot_api_service
+
+jun_springboot_api_service是一个基于我另外一个自定义的starter的动态API框架。项目本身使用技术有**SpringBoot+字节码生成执行+动态脚本+动态SQL**，**可以实时动态生成RESTAPI并动态发布或者热加载**。且发布后**可动态执行java源码、groovy脚本及SQL脚本的API服务项目**。提供在线执行动态程序脚热加载本及动态生成API并执行的功能。支持动态注册RequestMapping，动态生成类及源码并动态编译生成类并注入Spring容器生成Bean，可动态生成HTTP接口。支持在线编辑写好SQL或者Java源码、Groovy源码、Python源码（TODO），JavaScript源码（TODO）、Shell脚本，后即可快速生成Rest接口对外提供服务，同时支持服务在线热加载在线编辑替换逻辑，提供了一键生成CRUD通用接口方法，减少通用接口的SQL编写，让开发人员专注更复杂的业务逻辑实现。
+
+说明：目前没有前端页面，都是Postman调用生成的，准备适当新增部分前端页面功能。
+
+- 常规写项目的逻辑，硬编码MVC三层代码提供REST服务，每次调试及编码修改后重启JVM，上线后有Bug，换包重启JVM才能修复Bug。
+- 针对以上，有痛点三，1、硬编码；2、重启JVM；3、换包；4、快速开发快速迭代；
+  本项目如何解决以上三点：
+- 解决痛点1，本项目在线执行动态Java源码程序热加载及动态生成API并执行的功能。支持动态注册RequestMapping，动态生成类及源码并动态编译生成类嵌入Spring容器生成Bean，可动态生成HTTP接口。
+- 解决痛点2，无需重启JVM，根据源码生成的字节码在自定义Classloader工厂里面加载(类加载后其实卸载不了，但是类的加载器是可以卸载的)，外加ScriptEngine可动态执行Groovy脚本及JavaScript等等类型的脚本
+- 解决痛点3，无需换包，源码直接存在数据库中，可动态热加载到JVM，随时编辑，随时生效；
+- 解决痛点4，新增API+SQL模式，写一个path路径，写一条SQL，自动生成一个API，秒实现需求（可执行多条SQL，非复杂功能无需代码实现）。
+
 ### 特征&提供
 
 **1、可在线写Java、编译Java源码生成字节码、生成对象、动态注册Bean实例；**
@@ -15,9 +28,8 @@
 
 **7、如果这个项目对你有用，不妨Star一下；（没有性能问题，编译后的源码还是字节码）**
 
-jun_springboot_api_service是低代码开发平台开发示例项目，基于SpringBoot项目都可以嵌入支持。项目基于SpringBoot+Groovy+SQL动态生成API并动态发布，且发布后可动态执行groovy脚本及SQL脚本的Stater。提供在线执行动态程序脚热加载本及动态生成API并执行的功能。支持动态注册Mapping，动态生成类及源码并动态编译生成Bean，**可动态生成HTTP接口。支持在线编辑写好SQL或者Java源码、Groovy源码、Python源码（TODO），JavaScript源码（TODO）、Shell脚本等，而后即可动态编译脚本与执行脚本，快速生成Rest接口对外提供服务**，同时支持服务在线热加载在线编辑替换逻辑，还将提供了一键生成CRUD通用接口方法，减少通用接口的SQL编写，让开发人员专注更复杂的业务逻辑实现。支持有JDBC驱动的的数据源(Java支持的都可以支持)。后续将集成微服务注册中心、网关支持接口转发、黑白名单、权限认证、限流、缓存、监控等提供一站式API服务功能。
 
-说明：本项目仅是一个Stater，无法独立运行（通用模块），需要嵌入到jun_springboot_api_service中jun_springboot_groovy_api独立模块（定制模块）才能运行。
+说明：本项目jun_springboot_api_service依赖本人自定义starter(jun-groovy-api-spring-boot-starter)才能运行，Starter已发布中央仓库，另源码starter也已开源。
 
 The project is based on SpringBoot+Groovy to dynamically generate APIs and publish them, and can dynamically execute Groovy scripts and SQL scripts' Staters after publication. Provide online execution of dynamic scripts class and hot loader and dynamic API generation and execution functions.
 
