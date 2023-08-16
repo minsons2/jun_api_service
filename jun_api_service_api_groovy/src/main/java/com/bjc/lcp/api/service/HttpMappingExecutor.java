@@ -16,13 +16,13 @@ import com.gitthub.wujun728.engine.plugin.PluginManager;
 import com.gitthub.wujun728.engine.plugin.TransformPlugin;
 import com.gitthub.wujun728.engine.service.ApiService;
 import com.gitthub.wujun728.engine.util.JdbcUtil;
-import com.gitthub.wujun728.engine.util.PoolManager;
 import com.gitthub.wujun728.mybatis.sql.SqlMeta;
 import com.jun.plugin.common.Result;
 import com.jun.plugin.common.base.interfaces.AbstractExecutor;
 import com.jun.plugin.common.base.interfaces.IExecutor;
 import com.jun.plugin.common.exception.BusinessException;
 import com.jun.plugin.common.properties.ApiProperties;
+import com.jun.plugin.common.util.DbPoolManager;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,8 +152,8 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 	
 	public Object doSQLProcess(ApiConfig config, HttpServletRequest request, HttpServletResponse response) {
 		try {
-			ApiDataSource datasource = apiService.getDatasource(config.getDatasourceId());
-			if (datasource == null || datasource.getId()==null) {
+			ApiDataSource ds = apiService.getDatasource(config.getDatasourceId());
+			if (ds == null || ds.getId()==null) {
 				response.setStatus(500);
 				return Result.fail("Datasource not exists!");
 			}
@@ -168,9 +168,7 @@ public class HttpMappingExecutor extends RequestMappingExecutor
 			if (CollectionUtils.isEmpty(params) && !CollectionUtils.isEmpty(sqlList) && JSON.toJSONString(sqlList).contains("#")) {
 				return Result.fail("Request parameter is not exists(请求入参不能为空)!");
 			}
-			ApiDataSource ds = new ApiDataSource();
-			BeanUtil.copyProperties(datasource,ds, false);
-			DruidPooledConnection connection = PoolManager.getPooledConnection(ds);
+			DruidPooledConnection connection = DbPoolManager.init(ds.getName(),ds.getUrl(),ds.getUsername(),ds.getPassword(),ds.getDriver()).getConnection();
 			// 是否开启事务
 			boolean flag = config.getOpenTrans() == 1 ? true : false;
 			// 执行sql
