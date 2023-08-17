@@ -15,11 +15,9 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
-	<modules> 
-		<module>plugins</module>
-		<module>modules</module>
+	<modules>  
 		<module>jun_api_service_api_groovy</module>
-		<module>jun_api_service_main</module>
+		<module>jun_springboot_layui</module>
 	</modules>
 
 	<dependencies>

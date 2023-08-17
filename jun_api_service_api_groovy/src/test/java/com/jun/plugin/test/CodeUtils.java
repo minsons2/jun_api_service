@@ -1,9 +1,9 @@
 package com.jun.plugin.test;
 
+import com.jun.plugin.generator.GenUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.gitthub.wujun728.engine.generator.GenUtils;
 
 import java.util.Arrays;
 
