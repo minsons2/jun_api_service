@@ -16,7 +16,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     #MySQL配置
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db_qixing?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8
+    url: jdbc:mysql://localhost:3306/db_test666?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2b8
     username: root
     password: ENC(KX2tfUq8cZG3IXeAwZgk5w==)
     #oracle配置
