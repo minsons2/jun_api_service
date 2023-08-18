@@ -7,8 +7,6 @@ spring:
       username: ENC(i9EHZ6vsnfpTeKGvHmH+fA==)
       password: ENC(KX2tfUq8cZG3IXeAwZgk5w==)
       driver-class-name: com.mysql.cj.jdbc.Driver
-      filters: stat,wall,log4j
-      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
   redis:
     host: localhost # Redis服务器地址
     database: 0 # Redis数据库索引（默认为0）

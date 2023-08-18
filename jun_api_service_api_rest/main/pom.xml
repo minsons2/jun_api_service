@@ -13,24 +13,21 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-    		<artifactId>common</artifactId>
-    		<version>1.0</version>
-        </dependency> 
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-		    <artifactId>snakerflow</artifactId>
-			<version>1.0</version>
-			<scope>compile</scope>
-        </dependency>
-        <!--
-        <dependency>
+		<dependency>
 			<groupId>io.github.wujun728</groupId>
 			<artifactId>jun-groovy-api-spring-boot-starter</artifactId>
 			<version>1.0.5-RELEASE</version>
-        </dependency>-->
-
+		</dependency>
+		<dependency>
+			<groupId>com.github.xiaoymin</groupId>
+			<artifactId>knife4j-spring-boot-starter</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+		<!-- thymeleaf ThymeleafConfigration 配置類  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 		<!-- 公共模块 -->
 		<dependency>
 	        <groupId>org.springframework.boot</groupId>
@@ -47,6 +44,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<!--数据源-->
 		<dependency>
 			<groupId>com.alibaba</groupId>

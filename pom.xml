@@ -17,7 +17,7 @@
 
 	<modules>  
 		<module>jun_api_service_api_groovy</module>
-		<module>jun_springboot_layui</module>
+		<module>jun_api_service_api_rest</module>
 	</modules>
 
 	<dependencies>
