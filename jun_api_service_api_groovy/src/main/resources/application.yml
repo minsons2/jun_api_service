@@ -1,6 +1,6 @@
 # 端口
 server:
-  port: 9080
+  port: 8888
   http2:
     enabled: true
 

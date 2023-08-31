@@ -33,7 +33,7 @@ public class App2Controller2 {
 				+ "		\"createtime\":1593422850,\r\n"
 				+ "		\"expiretime\":1596014850,\r\n"
 				+ "		\"expires_in\":2592000}} ");
-		return Result.successWithDataMsg(json,null);
+		return Result.success(null,json);
 	}
 	
 	@RequestMapping("/api/index/getsysteminfo")
@@ -44,7 +44,7 @@ public class App2Controller2 {
 				+ "    \"name\": \"齐兴会计师事务所\",  \r\n"
 				+ "    \"beian\": \"beian666\"  \r\n"
 				+ "} ");
-		return Result.successWithDataMsg(json,null);
+		return Result.success(null,json);
 	}
 	
 	@RequestMapping("/api/index/getmenus")
@@ -68,7 +68,7 @@ public class App2Controller2 {
 		menu.put("info", info);
 		menus.add(menu);
 		data.put("menus", menus);
-		return Result.successWithDataMsg(data,null);
+		return Result.success(data);
 	}
 	
 	@RequestMapping("/api/index/getmenus2")
@@ -94,7 +94,7 @@ public class App2Controller2 {
 				+ "        \"status\": 0\r\n"
 				+ "    }\r\n"
 				+ "} ");
-		return Result.successWithDataMsg(json,null);
+		return Result.success(json);
 	}
 	
 	Map<String,Object> userinfo = Maps.newHashMap();
@@ -111,7 +111,7 @@ public class App2Controller2 {
 			userinfo.put("birthday", "2023-01-02");
 			userinfo.put("gender", 1);
 		}
-		return Result.successWithDataMsg(userinfo,null);
+		return Result.success(userinfo);
 	}
 	
 	@RequestMapping("/api/user/setuserinfo")
@@ -126,14 +126,14 @@ public class App2Controller2 {
 //		data.put("birthday", "2023-01-02");
 //		data.put("gender", 1);
 		userinfo.putAll(param);
-		return Result.successWithDataMsg(userinfo,null);
+		return Result.success(userinfo);
 	}
 	@RequestMapping("/api/user/setusergender")
 	public Result setusergender(HttpServletRequest request) {
 		Map param = HttpRequestLocal.getFromParams(request);
 		System.out.println(JSON.toJSONString(param));
 		userinfo.putAll(param);
-		return Result.successWithDataMsg(userinfo,null);
+		return Result.success(userinfo);
 	}
 	
 	
@@ -145,7 +145,7 @@ public class App2Controller2 {
 				+ "    \"name\": \"name\",  \r\n"
 				+ "    \"filePath\": \"filePath\"  \r\n"
 				+ "} ");
-		return Result.successWithDataMsg(json,null);
+		return Result.success(json);
 	}
 	@RequestMapping("/api/ykjp/product/unit/deleteUnit")
 	public Result deleteUnit(HttpServletRequest request) {
@@ -208,7 +208,7 @@ public class App2Controller2 {
 				+ "			\"deletetime\": null\r\n"
 				+ "		}]\r\n"
 				+ "	} ");
-		return Result.successWithDataMsg(json,null);
+		return Result.success(json);
 	}
 	
 	@RequestMapping("/api/ykjp/product/type/getType")
@@ -241,7 +241,7 @@ public class App2Controller2 {
 				+ "			weigh:0\r\n"
 				+ "		} ]\r\n"
 				+ "	} ");
-		return Result.successWithDataMsg(json,null);
+		return Result.success(json);
 	}
 	
 	@RequestMapping("/api/ykjp/product/product/getProduct")
@@ -270,7 +270,7 @@ public class App2Controller2 {
 				+ "            }\r\n"
 				+ "        ]\r\n"
 				+ "    } ");
-		return Result.successWithDataMsg(json,null);
+		return Result.success(json);
 	}
 	
 	@RequestMapping("/api/ykjp/information/basisinfo/supplier/index")
@@ -306,7 +306,7 @@ public class App2Controller2 {
 				+ "            }\r\n"
 				+ "        ]\r\n"
 				+ "    } ");
-		return Result.successWithDataMsg(json,null);
+		return Result.success(json);
 	}
 	
 	
@@ -343,7 +343,7 @@ public class App2Controller2 {
 				+ "            }\r\n"
 				+ "        ]\r\n"
 				+ "    } ");
-		return Result.successWithDataMsg(json,null);
+		return Result.success(json);
 	}
 	
 	@RequestMapping("/api/ykjp/summary/Purchase/index")
@@ -366,7 +366,7 @@ public class App2Controller2 {
 				+ "            \"status\": 0\r\n"
 				+ "        }\r\n"
 				+ "    } ");
-		return Result.successWithDataMsg(json,null);
+		return Result.success(json);
 	}
 	
 }
