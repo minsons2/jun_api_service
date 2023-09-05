@@ -3,6 +3,7 @@ package com.bjc.lcp;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import com.jun.plugin.EnableJunGroovyApi;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +23,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Slf4j
 @EnableScheduling
+@EnableJunGroovyApi
 @SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class) // 多数据源 (exclude = DruidDataSourceAutoConfigure.class)
 @MapperScan({"com.jun.plugin.**.mapper","com.bjc.lcp.**.mapper"})
 @ComponentScan(basePackages = {"com.bjc.lcp","com.jun.plugin"})
