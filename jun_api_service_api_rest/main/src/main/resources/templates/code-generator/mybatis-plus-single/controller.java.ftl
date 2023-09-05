@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 </#if>
 /**
+* @Version666
 * @description ${classInfo.classComment}
 * @author ${authorName}
 * @date ${.now?string('yyyy-MM-dd')}

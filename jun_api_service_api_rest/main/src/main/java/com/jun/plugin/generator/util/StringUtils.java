@@ -1,4 +1,4 @@
-package com.jun.plugin.codegenerator.admin.util;
+package com.jun.plugin.generator.util;
 
 /**
  * string tool

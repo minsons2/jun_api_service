@@ -1,16 +1,15 @@
-package com.jun.plugin.codegenerator.admin.controller;
+package com.jun.plugin.generator.controller;
 
 import com.jun.plugin.common.Result;
 import com.jun.plugin.common.generator.ClassInfo;
+import com.jun.plugin.generator.util.FreemarkerTool;
+import com.jun.plugin.generator.util.StringUtils;
 import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.jun.plugin.codegenerator.admin.util.StringUtils;
-import com.jun.plugin.codegenerator.admin.util.FreemarkerTool;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -24,10 +23,10 @@ public class IndexController {
     @Resource
     private FreemarkerTool freemarkerTool;
 
-    @RequestMapping("/")
-    public String index() {
-        return "index";
-    }
+//    @RequestMapping("/")
+//    public String index() {
+//        return "index";
+//    }
     @RequestMapping("/generate")
     public String index2() {
         return "generate";
