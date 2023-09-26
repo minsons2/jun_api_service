@@ -15,6 +15,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -25,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @EnableJunGroovyApi
 @SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class) // 多数据源 (exclude = DruidDataSourceAutoConfigure.class)
 @MapperScan("com.jun.plugin.**.mapper")
-//@ComponentScan(basePackages = {"com.jun.plugin.project","com.jun.plugin.common","com.jun.plugin.compile","com.jun.plugin.rest"})
+@ComponentScan(basePackages = {"com.jun.plugin.project","com.jun.plugin.common","com.jun.plugin.compile","com.jun.plugin.rest","com.jun.plugin.generator"})
 @ServletComponentScan(basePackages = {"com.jun.plugin.**.filter"})
 public class OnlineApplication extends SpringBootServletInitializer {
 

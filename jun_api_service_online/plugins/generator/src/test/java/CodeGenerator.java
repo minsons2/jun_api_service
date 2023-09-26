@@ -1,3 +1,4 @@
+import cn.hutool.core.io.file.PathUtil;
 import com.google.common.collect.Lists;
 import com.jun.plugin.common.generator.GenUtils;
 import org.slf4j.Logger;
@@ -14,13 +15,16 @@ public class CodeGenerator {
 	private static final Logger logger = LoggerFactory.getLogger(CodeGenerator.class);
 	
 	public static void main(String[] args) throws Exception {
-		String tables = "t_admin";
+		System.out.println(System.getProperty("user.dir"));
+		System.out.println(CodeGenerator.class.getResource("/").getPath());
+		String tables = "sys_code_generate_config,sys_code_generate";
+//		String tables = "t_admin";
 //		String tables = "res_basc,res_basc_arg,api_config";
 //		String tables = "git_user";
 //		String tables = "app_infoenvt,app_member,app_datasource,app_git_config,git_user,app_deploy_config";
 		//GenUtils.isDefaultTemplate = true;
 		//GenUtils.genTables(GenUtils.getClassInfo(tables.split(",")),getTemplates());;
-		GenUtils.genCode(Arrays.asList(tables.split(",")),getTemplates());;
+		GenUtils.genCode(Arrays.asList(tables.split(",")),getTemplates());
 	}
 
 	public static List<String> getTemplates() {
