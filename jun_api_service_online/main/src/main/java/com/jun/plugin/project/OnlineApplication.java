@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import com.jun.plugin.EnableJunGroovyApi;
+import com.jun.plugin.rest.filter.ResourceFilter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -44,7 +45,6 @@ public class OnlineApplication extends SpringBootServletInitializer {
 		String url = env.getProperty("spring.datasource.url");
 		log.info("项目启动成功！访问地址: http://{}:{}/{}", hostAddress, serverPort, serverPath);
 		log.info("本机地址: http://localhost:{}", serverPort);
-
 	}
 
 	@Override // 为了打包springboot项目
