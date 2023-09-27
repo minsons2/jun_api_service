@@ -65,6 +65,7 @@ public class WebConfig implements WebMvcConfigurer {
      * @description: 访问静态文件,发现如果继承了WebMvcConfigurationSupport，则在yml中配置的相关内容会失效。 需要重新指定静态资源
      * @date: 2021/4/15
      */
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         /** 本地文件上传路径 */

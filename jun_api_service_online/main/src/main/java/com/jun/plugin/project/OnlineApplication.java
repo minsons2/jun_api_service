@@ -2,6 +2,7 @@ package com.jun.plugin.project;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.util.Arrays;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import com.jun.plugin.EnableJunGroovyApi;
@@ -29,12 +30,11 @@ import lombok.extern.slf4j.Slf4j;
 @ComponentScan(basePackages = {"com.jun.plugin.project","com.jun.plugin.common","com.jun.plugin.compile","com.jun.plugin.rest","com.jun.plugin.generator"})
 @ServletComponentScan(basePackages = {"com.jun.plugin.**.filter"})
 public class OnlineApplication extends SpringBootServletInitializer {
-
 	public static void main(String[] args) throws Exception {
 //      SpringApplication application = new SpringApplication(SpringbootApplication.class);
 //		application.setBannerMode(Banner.Mode.OFF);
 //		application.run(args);
-		System.setProperty("spring.devtools.restart.enabled", "true");
+		//System.setProperty("spring.devtools.restart.enabled", "true");
 		ConfigurableApplicationContext application = SpringApplication.run(OnlineApplication.class, args);
 		Environment env = application.getEnvironment();
 		InetAddress inetAddress = Inet4Address.getLocalHost();
@@ -42,9 +42,9 @@ public class OnlineApplication extends SpringBootServletInitializer {
 		String serverPort = env.getProperty("server.port");
 		String serverPath = env.getProperty("spring.application.name");
 		String url = env.getProperty("spring.datasource.url");
-
 		log.info("项目启动成功！访问地址: http://{}:{}/{}", hostAddress, serverPort, serverPath);
 		log.info("本机地址: http://localhost:{}", serverPort);
+
 	}
 
 	@Override // 为了打包springboot项目
@@ -58,11 +58,7 @@ public class OnlineApplication extends SpringBootServletInitializer {
 			System.out.println("Let's inspect the beans provided by Spring Boot:");
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			System.err.println("beanNames size = "+ beanNames.length);
-
-			for (String beanName : beanNames) {
-				//System.err.println(beanName);
-			}
-
+			Arrays.stream(beanNames).forEach(System.out::println);
 		};
 	}
 }
