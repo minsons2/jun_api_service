@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +26,7 @@ public class Test666 {
         System.out.println(sets2.size());
 
         List<String> urlsNew = Lists.newArrayList();
-        List<String> urlsNew2 = Lists.newArrayList();
+        List<String> urlsExists = Lists.newArrayList();
         for(String url : sets2){
             if(!sets.stream().anyMatch(i->{
                 //return url.endsWith(i);
@@ -33,12 +35,12 @@ public class Test666 {
             })){
                 urlsNew.add(url);
             }else{
-                urlsNew2.add(url);
+                urlsExists.add(url);
             }
         }
-        System.out.println(urlsNew2.size());
+        System.out.println(urlsExists.size());
+        FileUtil.writeUtf8Lines(urlsExists,"D:\\Documents\\Desktop\\exists11.txt");
         System.err.println(urlsNew.size());
-        FileUtil.writeUtf8Lines(urlsNew2,"D:\\Documents\\Desktop\\exists11.txt");
         FileUtil.writeUtf8Lines(urlsNew,"D:\\Documents\\Desktop\\new11.txt");
 
 //        String result = HttpUtil.post("https://gitlab.billjc.com/oauth/token?grant_type=password", "{\n" +

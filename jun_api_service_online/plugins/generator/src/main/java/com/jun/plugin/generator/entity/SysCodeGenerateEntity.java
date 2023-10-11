@@ -13,7 +13,7 @@ import com.jun.plugin.common.entity.BaseEntity;
 /**
  * @description 代码生成基础配置
  * @author Wujun
- * @date 2023-09-19
+ * @date 2023-10-09
  */
 @Data
 @TableName("sys_code_generate")

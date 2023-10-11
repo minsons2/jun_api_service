@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @description 代码生成详细配置
  * @author Wujun
- * @date 2023-09-19
+ * @date 2023-10-09
  */
 @Data
 @ApiModel("代码生成详细配置")

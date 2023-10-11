@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @description 代码生成基础配置Mapper
  * @author Wujun
- * @date 2023-09-19
+ * @date 2023-10-09
  */
 @Mapper
 public interface SysCodeGenerateMapper extends BaseMapper<SysCodeGenerateEntity> {

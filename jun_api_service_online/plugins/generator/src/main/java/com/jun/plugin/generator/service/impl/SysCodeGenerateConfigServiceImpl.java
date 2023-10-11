@@ -10,7 +10,7 @@ import com.jun.plugin.generator.service.SysCodeGenerateConfigService;
 /**
  * @description 代码生成详细配置服务层实现
  * @author Wujun
- * @date 2023-09-19
+ * @date 2023-10-09
  */
 @Service
 public class SysCodeGenerateConfigServiceImpl extends ServiceImpl<SysCodeGenerateConfigMapper, SysCodeGenerateConfigEntity> implements SysCodeGenerateConfigService {
