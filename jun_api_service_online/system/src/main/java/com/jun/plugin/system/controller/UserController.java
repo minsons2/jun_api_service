@@ -16,9 +16,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.subject.Subject;
+//import org.apache.shiro.SecurityUtils;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.subject.Subject;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -111,7 +111,7 @@ public class UserController {
 
     @PutMapping("/user")
     @ApiOperation(value = "更新用户信息接口")
-    @RequiresPermissions("sys:user:update")
+    //@RequiresPermissions("sys:user:update")
     public Result updateUserInfo(@RequestBody SysUser vo) {
         if (StringUtils.isEmpty(vo.getId())) {
             return Result.fail("id不能为空");
@@ -130,7 +130,7 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     @ApiOperation(value = "查询用户详情接口")
-    @RequiresPermissions("sys:user:detail")
+    //@RequiresPermissions("sys:user:detail")
     public Result detailInfo(@PathVariable("id") String id) {
         return Result.success(userService.getById(id));
     }
@@ -144,7 +144,7 @@ public class UserController {
 
     @PostMapping("/users")
     @ApiOperation(value = "分页获取用户列表接口")
-//    @RequiresPermissions("sys:user:list")
+//    //@RequiresPermissions("sys:user:list")
     @DataScope
     public Result pageInfo(@RequestBody SysUser vo) {
         return Result.success(userService.pageInfo(vo));
@@ -183,7 +183,7 @@ public class UserController {
 
     @PostMapping("/user")
     @ApiOperation(value = "新增用户接口")
-    @RequiresPermissions("sys:user:add")
+    //@RequiresPermissions("sys:user:add")
     public Result addUser(@RequestBody @Valid SysUser vo) {
         userService.addUser(vo);
         return Result.success();
@@ -193,8 +193,8 @@ public class UserController {
     @ApiOperation(value = "退出接口")
     public Result logout() {
         httpSessionService.abortUserByToken();
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
+//        Subject subject = SecurityUtils.getSubject();
+//        subject.logout();
         return Result.success();
     }
 
@@ -212,7 +212,7 @@ public class UserController {
 
     @DeleteMapping("/user")
     @ApiOperation(value = "删除用户接口")
-    @RequiresPermissions("sys:user:deleted")
+    //@RequiresPermissions("sys:user:deleted")
     public Result deletedUser(@RequestBody @ApiParam(value = "用户id集合") List<String> userIds) {
         //删除用户， 删除redis的绑定的角色跟权限
         httpSessionService.abortUserByUserIds(userIds);
@@ -224,14 +224,14 @@ public class UserController {
 
     @GetMapping("/user/roles/{userId}")
     @ApiOperation(value = "赋予角色-获取所有角色接口")
-    @RequiresPermissions("sys:user:role:detail")
+    //@RequiresPermissions("sys:user:role:detail")
     public Result getUserOwnRole(@PathVariable("userId") String userId) {
         return Result.success(userService.getUserOwnRole(userId));
     }
 
     @PutMapping("/user/roles/{userId}")
     @ApiOperation(value = "赋予角色-用户赋予角色接口")
-    @RequiresPermissions("sys:user:update:role")
+    //@RequiresPermissions("sys:user:update:role")
     public Result setUserOwnRole(@PathVariable("userId") String userId, @RequestBody List<String> roleIds) {
 
         LambdaQueryWrapper<SysUserRole> queryWrapper = Wrappers.lambdaQuery();

@@ -15,10 +15,21 @@
             <artifactId>jun-common</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <!--shiro 依赖-->
         <dependency>
-            <groupId>com.jun.plugin</groupId>
-		    <artifactId>system</artifactId>
-			<version>1.0</version>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.theborakompanioni</groupId>
+            <artifactId>thymeleaf-extras-shiro</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.3.2</version>
         </dependency>
 
     </dependencies>

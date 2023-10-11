@@ -12,8 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 
-import org.apache.shiro.authz.annotation.Logical;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.Logical;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,7 +37,7 @@ public class SysFilesController {
 
 	@ApiOperation(value = "新增")
 	@PostMapping("/upload")
-	@RequiresPermissions(value = { "sysFiles:add", "sysContent:update", "sysContent:add" }, logical = Logical.OR)
+	//@RequiresPermissions(value = { "sysFiles:add", "sysContent:update", "sysContent:add" }, logical = Logical.OR)
 	public Result add(@RequestParam(value = "file") MultipartFile file, @RequestParam(value = "bizid",required = false) String bizid,
 					  @RequestParam(value = "biztype",required = false) String biztype) {
 		log.info(biztype);
@@ -52,7 +52,7 @@ public class SysFilesController {
 
 	@ApiOperation(value = "删除")
 	@DeleteMapping("/delete")
-	@RequiresPermissions("sysFiles:delete")
+	//@RequiresPermissions("sysFiles:delete")
 	public Result delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
 		sysFilesService.removeByIdsAndFiles(ids);
 		return Result.success();
@@ -60,7 +60,7 @@ public class SysFilesController {
 
 	@ApiOperation(value = "查询分页数据")
 	@PostMapping("/listByPage")
-	@RequiresPermissions("sysFiles:list")
+	//@RequiresPermissions("sysFiles:list")
 	public Result findListByPage(@RequestBody SysFilesEntity sysFiles) {
 		Page page = new Page(sysFiles.getPage(), sysFiles.getLimit());
 		IPage<SysFilesEntity> iPage = sysFilesService.page(page,
@@ -71,7 +71,7 @@ public class SysFilesController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@ApiOperation(value = "查询分页数据")
 	@PostMapping("/listByPageUser")
-	@RequiresPermissions("sysFiles:list")
+	//@RequiresPermissions("sysFiles:list")
 	public Result listByPageUser(@RequestBody SysFilesEntity sysFiles) {
 		Page page = new Page(sysFiles.getPage(), sysFiles.getLimit());
 		IPage<SysFilesEntity> iPage = sysFilesService.page(page,

@@ -48,7 +48,11 @@ public class CustomAccessControlFilter extends AccessControlFilter {
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         StringBuffer url = request.getRequestURL();
+        String uri = request.getRequestURI();
         if(url.toString().endsWith(".js") || url.toString().endsWith(".css")){
+            return true;
+        }
+        if(uri.equals("/")){
             return true;
         }
         try {

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import com.jun.plugin.common.Result;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,7 +49,7 @@ public class SysDictController {
 
     @ApiOperation(value = "新增")
     @PostMapping("/add")
-    @RequiresPermissions("sysDict:add")
+    //@RequiresPermissions("sysDict:add")
     public Result add(@RequestBody SysDictEntity sysDict) {
         if (StringUtils.isEmpty(sysDict.getName())) {
             return Result.fail("字典名称不能为空");
@@ -64,7 +64,7 @@ public class SysDictController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysDict:delete")
+    //@RequiresPermissions("sysDict:delete")
     public Result delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysDictService.removeByIds(ids);
         //删除detail
@@ -74,7 +74,7 @@ public class SysDictController {
 
     @ApiOperation(value = "更新")
     @PutMapping("/update")
-    @RequiresPermissions("sysDict:update")
+    //@RequiresPermissions("sysDict:update")
     public Result update(@RequestBody SysDictEntity sysDict) {
         if (StringUtils.isEmpty(sysDict.getName())) {
             return Result.fail("字典名称不能为空");
@@ -91,7 +91,7 @@ public class SysDictController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysDict:list")
+    //@RequiresPermissions("sysDict:list")
 //    @CacheEvict(value = "valueName",allEntries = true)
 //    @CacheEvict(cacheNames = "com.jun.plugin.business.service.impl.ProviderServiceImpl", key = "#id")
 //    @Cacheable(cacheNames = "SysDictController.findListByPage", key = "#sysDict")

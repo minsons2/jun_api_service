@@ -64,13 +64,7 @@
 		    <artifactId>system</artifactId>
 			<version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.jun.plugin</groupId>
-		    <artifactId>shiro</artifactId>
-			<version>1.0</version>
-			<scope>compile</scope>
-		</dependency>
-        <dependency>
+		<dependency>
             <groupId>com.jun.plugin</groupId>
 		    <artifactId>fileservice</artifactId>
 			<version>1.0</version>

@@ -6,7 +6,6 @@ import cn.hutool.db.meta.Table;
 import cn.hutool.extra.spring.SpringUtil;
 import com.jun.plugin.common.Result;
 import com.jun.plugin.common.generator.GenUtils;
-import com.jun.plugin.rest.controller.RestServiceController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

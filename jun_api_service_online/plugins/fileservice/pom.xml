@@ -83,11 +83,11 @@
 			<version>3.2.1</version>
 		</dependency>
 		<!--shiro 依赖-->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
 			<version>1.4.0</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>com.deepoove</groupId>
 			<artifactId>poi-tl</artifactId>

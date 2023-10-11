@@ -10,7 +10,7 @@ import com.jun.plugin.quartz.entity.SysJobLogEntity;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +33,7 @@ public class SysJobLogController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysJob:list")
+    //@RequiresPermissions("sysJob:list")
     public Result findListByPage(@RequestBody SysJobLogEntity sysJobLog) {
         Page page = new Page(sysJobLog.getPage(), sysJobLog.getLimit());
         LambdaQueryWrapper<SysJobLogEntity> queryWrapper = Wrappers.lambdaQuery();
@@ -48,7 +48,7 @@ public class SysJobLogController {
 
     @ApiOperation(value = "清空定时任务日志")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysJob:delete")
+    //@RequiresPermissions("sysJob:delete")
     public Result delete() {
         sysJobLogService.remove(Wrappers.emptyWrapper());
         return Result.success();

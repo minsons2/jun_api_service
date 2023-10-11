@@ -11,7 +11,7 @@ import com.jun.plugin.system.service.SysRoleDeptService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +39,7 @@ public class RoleController {
 
     @PostMapping("/role")
     @ApiOperation(value = "新增角色接口")
-    @RequiresPermissions("sys:role:add")
+    //@RequiresPermissions("sys:role:add")
     public Result addRole(@RequestBody @Valid SysRole vo) {
         roleService.addRole(vo);
         return Result.success();
@@ -47,7 +47,7 @@ public class RoleController {
 
     @DeleteMapping("/role/{id}")
     @ApiOperation(value = "删除角色接口")
-    @RequiresPermissions("sys:role:deleted")
+    //@RequiresPermissions("sys:role:deleted")
     public Result deleted(@PathVariable("id") String id) {
         roleService.deletedRole(id);
         return Result.success();
@@ -55,7 +55,7 @@ public class RoleController {
 
     @PutMapping("/role")
     @ApiOperation(value = "更新角色信息接口")
-    @RequiresPermissions("sys:role:update")
+    //@RequiresPermissions("sys:role:update")
     public Result updateDept(@RequestBody SysRole vo) {
         if (StringUtils.isEmpty(vo.getId())) {
             return Result.fail("id不能为空");
@@ -66,7 +66,7 @@ public class RoleController {
 
     @PostMapping("/role/bindDept")
     @ApiOperation(value = "绑定角色部门接口")
-    @RequiresPermissions("sys:role:bindDept")
+    //@RequiresPermissions("sys:role:bindDept")
     public Result bindDept(@RequestBody SysRole vo) {
         if (StringUtils.isEmpty(vo.getId())) {
             return Result.fail("id不能为空");
@@ -97,14 +97,14 @@ public class RoleController {
 
     @GetMapping("/role/{id}")
     @ApiOperation(value = "查询角色详情接口")
-    @RequiresPermissions("sys:role:detail")
+    //@RequiresPermissions("sys:role:detail")
     public Result detailInfo(@PathVariable("id") String id) {
         return Result.success(roleService.detailInfo(id));
     }
 
     @PostMapping("/roles")
     @ApiOperation(value = "分页获取角色信息接口")
-    @RequiresPermissions("sys:role:list")
+    //@RequiresPermissions("sys:role:list")
     @SuppressWarnings("unchecked")
     public Result pageInfo(@RequestBody SysRole vo) {
         Page page = new Page(vo.getPage(), vo.getLimit());

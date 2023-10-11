@@ -11,7 +11,7 @@ import com.jun.plugin.system.service.SysDictDetailService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +40,7 @@ public class SysDictDetailController {
 
     @ApiOperation(value = "新增")
     @PostMapping("/add")
-    @RequiresPermissions("sysDict:add")
+    //@RequiresPermissions("sysDict:add")
     public Result add(@RequestBody SysDictDetailEntity sysDictDetail) {
         if (StringUtils.isEmpty(sysDictDetail.getValue())) {
             return Result.fail("字典值不能为空");
@@ -58,7 +58,7 @@ public class SysDictDetailController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysDict:delete")
+    //@RequiresPermissions("sysDict:delete")
     public Result delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysDictDetailService.removeByIds(ids);
         return Result.success();
@@ -66,7 +66,7 @@ public class SysDictDetailController {
 
     @ApiOperation(value = "更新")
     @PutMapping("/update")
-    @RequiresPermissions("sysDict:update")
+    //@RequiresPermissions("sysDict:update")
     public Result update(@RequestBody SysDictDetailEntity sysDictDetail) {
         if (StringUtils.isEmpty(sysDictDetail.getValue())) {
             return Result.fail("字典值不能为空");
@@ -86,7 +86,7 @@ public class SysDictDetailController {
 
     @ApiOperation(value = "查询列表数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysDict:list")
+    //@RequiresPermissions("sysDict:list")
     public Result findListByPage(@RequestBody SysDictDetailEntity sysDictDetail) {
         Page page = new Page(sysDictDetail.getPage(), sysDictDetail.getLimit());
         if (StringUtils.isEmpty(sysDictDetail.getDictId())) {

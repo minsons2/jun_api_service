@@ -1,35 +1,20 @@
 package com.bjc.lcp.api.controller;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
-
-//import com.jun.plugin.system.entity.SysUser;
-//import com.jun.plugin.system.service.SysDictService;
-//import com.jun.plugin.system.service.UserService;
-//import com.jun.plugin.system.vo.resp.LoginRespVO;
-import com.gitthub.wujun728.engine.mapping.http.RequestMappingExecutor;
+import cn.hutool.core.map.MapUtil;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import com.gitthub.wujun728.engine.util.HttpRequestLocal;
 import com.gitthub.wujun728.engine.util.RequestWrapper;
+import com.google.common.collect.Maps;
 import com.jun.plugin.common.Result;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONArray;
-import com.alibaba.fastjson2.JSONObject;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.util.RandomUtil;
-import cn.hutool.http.server.HttpServerRequest;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Map;
 
 @RestController
 public class App1Controller {

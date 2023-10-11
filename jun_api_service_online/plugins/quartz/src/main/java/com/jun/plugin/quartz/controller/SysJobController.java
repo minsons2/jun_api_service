@@ -13,7 +13,7 @@ import com.jun.plugin.quartz.service.SysJobService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.quartz.TriggerUtils;
 import org.quartz.impl.triggers.CronTriggerImpl;
 import org.springframework.util.StringUtils;
@@ -43,7 +43,7 @@ public class SysJobController {
 
     @ApiOperation(value = "新增")
     @PostMapping("/add")
-    @RequiresPermissions("sysJob:add")
+    //@RequiresPermissions("sysJob:add")
     public Result add(@RequestBody SysJobEntity sysJob) {
         if (isValidExpression(sysJob.getCronExpression())) {
             return Result.fail("cron表达式有误");
@@ -55,7 +55,7 @@ public class SysJobController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysJob:delete")
+    //@RequiresPermissions("sysJob:delete")
     public Result delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysJobService.delete(ids);
         return Result.success();
@@ -63,7 +63,7 @@ public class SysJobController {
 
     @ApiOperation(value = "更新")
     @PutMapping("/update")
-    @RequiresPermissions("sysJob:update")
+    //@RequiresPermissions("sysJob:update")
     public Result update(@RequestBody SysJobEntity sysJob) {
         if (isValidExpression(sysJob.getCronExpression())) {
             return Result.fail("cron表达式有误");
@@ -75,7 +75,7 @@ public class SysJobController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysJob:list")
+    //@RequiresPermissions("sysJob:list")
     public Result findListByPage(@RequestBody SysJobEntity sysJob) {
         Page page = new Page(sysJob.getPage(), sysJob.getLimit());
         LambdaQueryWrapper<SysJobEntity> queryWrapper = Wrappers.lambdaQuery();
@@ -93,7 +93,7 @@ public class SysJobController {
      */
     @ApiOperation(value = "立即执行任务")
     @PostMapping("/run")
-    @RequiresPermissions("sysJob:run")
+    //@RequiresPermissions("sysJob:run")
     public Result run(@RequestBody List<String> ids) {
         sysJobService.run(ids);
 
@@ -105,7 +105,7 @@ public class SysJobController {
      */
     @ApiOperation(value = "暂停定时任务")
     @PostMapping("/pause")
-    @RequiresPermissions("sysJob:pause")
+    //@RequiresPermissions("sysJob:pause")
     public Result pause(@RequestBody List<String> ids) {
         sysJobService.pause(ids);
 
@@ -117,7 +117,7 @@ public class SysJobController {
      */
     @ApiOperation(value = "恢复定时任务")
     @PostMapping("/resume")
-    @RequiresPermissions("sysJob:resume")
+    //@RequiresPermissions("sysJob:resume")
     public Result resume(@RequestBody List<String> ids) {
         sysJobService.resume(ids);
         return Result.success();
@@ -143,7 +143,7 @@ public class SysJobController {
 
     @ApiOperation(value = "获取运行时间")
     @PostMapping("/getRecentTriggerTime")
-    @RequiresPermissions("sysJob:add")
+    //@RequiresPermissions("sysJob:add")
     public Result getRecentTriggerTime(String cron) {
         List<String> list = new ArrayList<>();
         try {

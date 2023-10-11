@@ -3,8 +3,8 @@ package com.jun.plugin.system.controller;
 import com.jun.plugin.common.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.Logical;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.Logical;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +32,7 @@ public class RolePermissionController {
 
     @PostMapping("/role/permission")
     @ApiOperation(value = "修改或者新增角色菜单权限接口")
-    @RequiresPermissions(value = {"sys:role:update", "sys:role:add"}, logical = Logical.OR)
+    //@RequiresPermissions(value = {"sys:role:update", "sys:role:add"}, logical = Logical.OR)
     public Result operationRolePermission(@RequestBody @Valid RolePermissionOperationReqVO vo) {
         rolePermissionService.addRolePermission(vo);
         return Result.success();

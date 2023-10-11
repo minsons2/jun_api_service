@@ -12,7 +12,7 @@ import com.jun.plugin.system.service.SysContentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +38,7 @@ public class SysContentController {
 
     @ApiOperation(value = "新增")
     @PostMapping("/add")
-    @RequiresPermissions("sysContent:add")
+    //@RequiresPermissions("sysContent:add")
     public Result add(@RequestBody SysContentEntity sysContent) {
         sysContentService.save(sysContent);
         return Result.success();
@@ -46,7 +46,7 @@ public class SysContentController {
 
     @ApiOperation(value = "删除")
     @DeleteMapping("/delete")
-    @RequiresPermissions("sysContent:delete")
+    //@RequiresPermissions("sysContent:delete")
     public Result delete(@RequestBody @ApiParam(value = "id集合") List<String> ids) {
         sysContentService.removeByIds(ids);
         return Result.success();
@@ -54,7 +54,7 @@ public class SysContentController {
 
     @ApiOperation(value = "更新")
     @PutMapping("/update")
-    @RequiresPermissions("sysContent:update")
+    //@RequiresPermissions("sysContent:update")
     public Result update(@RequestBody SysContentEntity sysContent) {
         sysContentService.updateById(sysContent);
         return Result.success();
@@ -62,7 +62,7 @@ public class SysContentController {
 
     @ApiOperation(value = "查询分页数据")
     @PostMapping("/listByPage")
-    @RequiresPermissions("sysContent:list")
+    //@RequiresPermissions("sysContent:list")
     @DataScope
     public Result findListByPage(@RequestBody SysContentEntity sysContent) {
         Page page = new Page(sysContent.getPage(), sysContent.getLimit());

@@ -5,8 +5,8 @@ import com.jun.plugin.common.exception.BusinessException;
 import com.jun.plugin.common.exception.code.BaseResponseCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.Logical;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.Logical;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +33,7 @@ public class PermissionController {
 
     @PostMapping("/permission")
     @ApiOperation(value = "新增菜单权限接口")
-    @RequiresPermissions("sys:permission:add")
+    //@RequiresPermissions("sys:permission:add")
     public Result addPermission(@RequestBody @Valid SysPermission vo) {
         verifyFormPid(vo);
         vo.setStatus(1);
@@ -43,7 +43,7 @@ public class PermissionController {
 
     @DeleteMapping("/permission/{id}")
     @ApiOperation(value = "删除菜单权限接口")
-    @RequiresPermissions("sys:permission:deleted")
+    //@RequiresPermissions("sys:permission:deleted")
     public Result deleted(@PathVariable("id") String id) {
         permissionService.deleted(id);
         return Result.success();
@@ -51,7 +51,7 @@ public class PermissionController {
 
     @PutMapping("/permission")
     @ApiOperation(value = "更新菜单权限接口")
-    @RequiresPermissions("sys:permission:update")
+    //@RequiresPermissions("sys:permission:update")
     public Result updatePermission(@RequestBody @Valid SysPermission vo) {
         if (StringUtils.isEmpty(vo.getId())) {
             return Result.fail("id不能为空");
@@ -70,7 +70,7 @@ public class PermissionController {
 
     @GetMapping("/permission/{id}")
     @ApiOperation(value = "查询菜单权限接口")
-    @RequiresPermissions("sys:permission:detail")
+    //@RequiresPermissions("sys:permission:detail")
     public Result detailInfo(@PathVariable("id") String id) {
         return Result.success(permissionService.getById(id));
 
@@ -78,21 +78,21 @@ public class PermissionController {
 
     @GetMapping("/permissions")
     @ApiOperation(value = "获取所有菜单权限接口")
-    @RequiresPermissions("sys:permission:list")
+    //@RequiresPermissions("sys:permission:list")
     public Result getAllMenusPermission() {
         return Result.success(permissionService.selectAll());
     }
 
     @GetMapping("/permission/tree")
     @ApiOperation(value = "获取所有目录菜单树接口")
-    @RequiresPermissions(value = {"sys:permission:update", "sys:permission:add"}, logical = Logical.OR)
+    //@RequiresPermissions(value = {"sys:permission:update", "sys:permission:add"}, logical = Logical.OR)
     public Result getAllMenusPermissionTree(@RequestParam(required = false) String permissionId) {
         return Result.success(permissionService.selectAllMenuByTree(permissionId));
     }
 
     @GetMapping("/permission/tree/all")
     @ApiOperation(value = "获取所有目录菜单树接口")
-    @RequiresPermissions(value = {"sys:role:update", "sys:role:add"}, logical = Logical.OR)
+    //@RequiresPermissions(value = {"sys:role:update", "sys:role:add"}, logical = Logical.OR)
     public Result getAllPermissionTree() {
         return Result.success(permissionService.selectAllByTree());
     }
