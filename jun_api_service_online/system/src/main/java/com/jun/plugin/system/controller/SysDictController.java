@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.alibaba.fastjson2.JSONReader;
+import com.alibaba.fastjson2.JSONWriter;
 import com.jun.plugin.common.Result;
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.jun.plugin.common.service.RedisService;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,6 +48,8 @@ public class SysDictController {
     private SysDictService sysDictService;
     @Resource
     private SysDictDetailService sysDictDetailService;
+    @Resource
+    private RedisService redisService;
 
 
     @ApiOperation(value = "新增")
@@ -112,7 +117,14 @@ public class SysDictController {
     @ApiOperation(value = "查询字典明细数据")
     @RequestMapping("/getType/{name}")
     public JSONArray getType(@PathVariable String name) {
-    	return sysDictService.getType(name);
+        if(!redisService.exists(name)){
+            JSONArray json = sysDictService.getType(name);
+            redisService.setAndExpire(name,json.toJSONString(JSONWriter.Feature.WriteMapNullValue),3600);
+            return json;
+        }else{
+            String jsonStr = redisService.get(name);
+            return JSONArray.parseArray(jsonStr, JSONReader.Feature.SupportAutoType);
+        }
     }
     
     

@@ -43,7 +43,7 @@ public class BaseController {
         String url = env.getProperty("spring.datasource.url");
         Result result = Result.success("项目启动成功！");
         result.put("local",String.format("本机地址: http://localhost:%s", serverPort));
-        result.put("ipadress",String.format("访问地址: http://{}:{}/{}", hostAddress, serverPort, serverPath));
+        result.put("ipadress",String.format("访问地址: http://%s:%s/%s", hostAddress, serverPort, serverPath));
         return result;
     }
 
