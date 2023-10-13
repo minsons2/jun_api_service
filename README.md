@@ -1,4 +1,4 @@
-# jun_springboot_api_service
+# jun_api_service
 
 jun_springboot_api_service是一个基于我另外一个自定义的starter的动态API框架。项目本身使用技术有**SpringBoot+字节码生成执行+动态脚本+动态SQL**，**可以实时动态生成RESTAPI并动态发布或者热加载**。且发布后**可动态执行java源码、groovy脚本及SQL脚本的API服务项目**。提供在线执行动态程序脚热加载本及动态生成API并执行的功能。支持动态注册RequestMapping，动态生成类及源码并动态编译生成类并注入Spring容器生成Bean，可动态生成HTTP接口。支持在线编辑写好SQL或者Java源码、Groovy源码、Python源码（TODO），JavaScript源码（TODO）、Shell脚本，后即可快速生成Rest接口对外提供服务，同时支持服务在线热加载在线编辑替换逻辑，提供了一键生成CRUD通用接口方法，减少通用接口的SQL编写，让开发人员专注更复杂的业务逻辑实现。
 
