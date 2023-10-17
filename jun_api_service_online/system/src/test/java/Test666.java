@@ -18,12 +18,12 @@ public class Test666 {
         System.out.println(filenames.size());
         Set<String> sets = Sets.newHashSet();
         filenames.forEach(i->{sets.add(i);});
-        System.out.println(sets.size());
+        System.out.println("不重复的mp4链接："+sets.size());
 
         List<String> urls = FileUtil.readLines(new File("D:\\Documents\\Desktop\\new.txt"),"UTF-8");
         Set<String> sets2 = Sets.newHashSet();
         urls.forEach(i->{sets2.add(i);});
-        System.out.println(sets2.size());
+        System.out.println("不重复的new链接："+sets2.size());
 
         List<String> urlsNew = Lists.newArrayList();
         List<String> urlsExists = Lists.newArrayList();
@@ -38,9 +38,9 @@ public class Test666 {
                 urlsExists.add(url);
             }
         }
-        System.out.println(urlsExists.size());
+        System.out.println("重复的mp4链接exitst："+urlsExists.size());
         FileUtil.writeUtf8Lines(urlsExists,"D:\\Documents\\Desktop\\exists11.txt");
-        System.err.println(urlsNew.size());
+        System.err.println("不重复的mp4链接new："+urlsNew.size());
         FileUtil.writeUtf8Lines(urlsNew,"D:\\Documents\\Desktop\\new11.txt");
 
 //        String result = HttpUtil.post("https://gitlab.billjc.com/oauth/token?grant_type=password", "{\n" +

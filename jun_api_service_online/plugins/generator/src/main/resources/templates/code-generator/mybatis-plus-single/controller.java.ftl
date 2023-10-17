@@ -182,12 +182,13 @@ public class ${classInfo.className}Controller {
     @ApiOperation(value = "${classInfo.classComment}-查询列表分页数据")
     @RequestMapping(value = "/listByPage",method = {RequestMethod.GET,RequestMethod.POST})
     //@RequiresPermissions("${classInfo.className?uncap_first}:listByPage")
-    public Result listByPage(@RequestBody ${classInfo.className}Vo ${classInfo.className?uncap_first}) {
+    public Result listByPage(@RequestBody(required = false)  ${classInfo.className}Vo ${classInfo.className?uncap_first}) {
         Page page = new Page(${classInfo.className?uncap_first}.getPage(), ${classInfo.className?uncap_first}.getLimit());
         ${classInfo.className}Dto dto = new ${classInfo.className}Dto();
     	BeanUtils.copyProperties(${classInfo.className?uncap_first}, dto);
         LambdaQueryWrapper<${classInfo.className}Entity> queryWrapper = Wrappers.lambdaQuery();
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
+    if(!ObjectUtils.isEmpty(${classInfo.className?uncap_first})){
 <#list classInfo.fieldList as fieldItem >
 <#if fieldItem.isPrimaryKey==true>
         if (!ObjectUtils.isEmpty(${classInfo.className?uncap_first}.get${fieldItem.fieldName?cap_first}())) {
@@ -199,6 +200,7 @@ public class ${classInfo.className}Controller {
         }
 </#if>
 </#list>
+    }
 </#if>
         IPage<${classInfo.className}Entity> iPage = ${classInfo.className?uncap_first}Service.page(page, queryWrapper);
         return Result.success(iPage);
@@ -207,9 +209,10 @@ public class ${classInfo.className}Controller {
     @ApiOperation(value = "${classInfo.classComment}-查询全部列表数据")
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     //@RequiresPermissions("${classInfo.className?uncap_first}:list")
-    public Result findListByPage(@RequestBody ${classInfo.className}Vo ${classInfo.className?uncap_first}) {
+    public Result findListByPage(@RequestBody(required = false) ${classInfo.className}Vo ${classInfo.className?uncap_first}) {
         LambdaQueryWrapper<${classInfo.className}Entity> queryWrapper = Wrappers.lambdaQuery();
 <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
+    if(!ObjectUtils.isEmpty(${classInfo.className?uncap_first})){
 <#list classInfo.fieldList as fieldItem >
 <#if fieldItem.isPrimaryKey==true>
         if (!ObjectUtils.isEmpty(${classInfo.className?uncap_first}.get${fieldItem.fieldName?cap_first}())) {
@@ -221,6 +224,7 @@ public class ${classInfo.className}Controller {
         }
 </#if>
 </#list>
+    }
 </#if>
         List<${classInfo.className}Entity> list = ${classInfo.className?uncap_first}Service.list(queryWrapper);
         return Result.success(list);

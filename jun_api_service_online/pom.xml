@@ -18,7 +18,7 @@
 		<module>system</module>
 		<module>plugins</module>
 		<module>modules</module>
-		<module>main</module>
+		<module>web</module>
 
 	</modules>
 

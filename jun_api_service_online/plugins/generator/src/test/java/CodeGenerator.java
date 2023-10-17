@@ -17,7 +17,7 @@ public class CodeGenerator {
 	public static void main(String[] args) throws Exception {
 		System.out.println(System.getProperty("user.dir"));
 		System.out.println(CodeGenerator.class.getResource("/").getPath());
-		String tables = "sys_code_generate_config,sys_code_generate";
+		String tables = "test";
 //		String tables = "t_admin";
 //		String tables = "res_basc,res_basc_arg,api_config";
 //		String tables = "git_user";
