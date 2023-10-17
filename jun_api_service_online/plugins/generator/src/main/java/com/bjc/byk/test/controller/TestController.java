@@ -137,11 +137,12 @@ public class TestController {
     @ApiOperation(value = "-查询列表分页数据")
     @RequestMapping(value = "/listByPage",method = {RequestMethod.GET,RequestMethod.POST})
     //@RequiresPermissions("test:listByPage")
-    public Result listByPage(@RequestBody TestVo test) {
+    public Result listByPage(@RequestBody(required = false)  TestVo test) {
         Page page = new Page(test.getPage(), test.getLimit());
         TestDto dto = new TestDto();
     	BeanUtils.copyProperties(test, dto);
         LambdaQueryWrapper<TestEntity> queryWrapper = Wrappers.lambdaQuery();
+    if(!ObjectUtils.isEmpty(test)){
         if (!ObjectUtils.isEmpty(test.getId())) {
             queryWrapper.eq(TestEntity::getId, dto.getId());
         }
@@ -160,6 +161,7 @@ public class TestController {
         if (!ObjectUtils.isEmpty(test.getCreateTime())) {
             queryWrapper.eq(TestEntity::getCreateTime, dto.getCreateTime());
         }
+    }
         IPage<TestEntity> iPage = testService.page(page, queryWrapper);
         return Result.success(iPage);
     }
@@ -167,8 +169,9 @@ public class TestController {
     @ApiOperation(value = "-查询全部列表数据")
     @RequestMapping(value = "/list",method = {RequestMethod.GET,RequestMethod.POST})
     //@RequiresPermissions("test:list")
-    public Result findListByPage(@RequestBody TestVo test) {
+    public Result findListByPage(@RequestBody(required = false) TestVo test) {
         LambdaQueryWrapper<TestEntity> queryWrapper = Wrappers.lambdaQuery();
+    if(!ObjectUtils.isEmpty(test)){
         if (!ObjectUtils.isEmpty(test.getId())) {
             queryWrapper.eq(TestEntity::getId, test.getId());
         }
@@ -187,6 +190,7 @@ public class TestController {
         if (!ObjectUtils.isEmpty(test.getCreateTime())) {
             queryWrapper.eq(TestEntity::getCreateTime, test.getCreateTime());
         }
+    }
         List<TestEntity> list = testService.list(queryWrapper);
         return Result.success(list);
     }
