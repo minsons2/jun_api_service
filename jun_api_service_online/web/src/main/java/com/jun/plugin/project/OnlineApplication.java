@@ -5,7 +5,6 @@ import java.net.InetAddress;
 import java.util.Arrays;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
-import com.jun.plugin.EnableJunGroovyApi;
 import com.jun.plugin.rest.filter.ResourceFilter;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
@@ -25,10 +24,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @EnableScheduling
-@EnableJunGroovyApi
 @SpringBootApplication(exclude = DruidDataSourceAutoConfigure.class) // 多数据源 (exclude = DruidDataSourceAutoConfigure.class)
 @MapperScan("com.jun.plugin.**.mapper")
-@ComponentScan(basePackages = {"com.jun.plugin.project","com.jun.plugin.common","com.jun.plugin.compile","com.jun.plugin.rest","com.jun.plugin.generator"})
+@ComponentScan(basePackages = {"com.jun.plugin.project","com.jun.plugin.common","com.jun.plugin.rest","com.jun.plugin.generator",
+		"com.jun.plugin.quartz"})
 @ServletComponentScan(basePackages = {"com.jun.plugin.**.filter"})
 public class OnlineApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) throws Exception {

@@ -64,23 +64,20 @@ mybatis-plus:
       logic-delete-field: deleted
 
 project:
-  database: mysql
+  config:
+    packages: 'com.jun.plugin.abcd,com.jun.plugin.abc'
   datasource:
+    dsname: 'main'
     url: ${spring.datasource.url}
     driver: ${spring.datasource.driver-class-name}
     username: ${spring.datasource.username}
-    password:
-  groovy-api:
+    password: ${spring.datasource.password}
+  runApi:
     enable: true
-    servicename: jun-engine-api
+    serviceName: jun-runtime-api
+    api_config: api_config
     context: /api
-    datasource:
-      dbtype: ${project.database}
-      url: ${spring.datasource.url}
-      username: ${spring.datasource.username}
-      driver: ${spring.datasource.driver-class-name}
-      password:
-      api_config: api_config
+
 
 jasypt:
   algorithm: PBEWithMD5AndDES

@@ -12,12 +12,6 @@
     
     <dependencies>
         <dependency>
-            <groupId>io.github.wujun728</groupId>
-            <artifactId>jun-common</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        
-        <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
             <version>2.3.2</version>
@@ -43,7 +37,12 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.5.3.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>io.github.wujun728</groupId>
+            <artifactId>jun-common</artifactId>
+            <version>1.0.8.3</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <!-- 依赖声明 -->

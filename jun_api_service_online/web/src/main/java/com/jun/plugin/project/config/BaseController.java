@@ -1,7 +1,7 @@
 package com.jun.plugin.project.config;
 
 import com.jun.plugin.common.Result;
-import com.jun.plugin.common.util.SpringContextUtil;
+import com.jun.plugin.common.utils.SpringContextUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
