@@ -6,13 +6,13 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.db.meta.MetaUtil;
 import cn.hutool.db.meta.Table;
 import com.alibaba.fastjson2.JSON;
-import com.gitthub.wujun728.engine.util.JdbcUtil;
 import com.gitthub.wujun728.mybatis.sql.SqlMeta;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jun.plugin.common.generator.GenUtils;
+import com.jun.plugin.groovy.util.JdbcUtil;
 import freemarker.template.TemplateException;
 import lombok.extern.slf4j.Slf4j;
 

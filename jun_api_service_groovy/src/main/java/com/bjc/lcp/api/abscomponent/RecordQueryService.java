@@ -1,12 +1,10 @@
 package com.bjc.lcp.api.abscomponent;
-
-import com.gitthub.wujun728.engine.util.JdbcUtil;
 import com.gitthub.wujun728.mybatis.sql.SqlMeta;
 import com.jfinal.plugin.activerecord.Db;
 import com.jun.plugin.common.Result;
 import com.jun.plugin.common.base.interfaces.AbstractExecutor;
+import com.jun.plugin.groovy.util.JdbcUtil;
 import org.springframework.stereotype.Component;
-
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -59,5 +57,4 @@ public class RecordQueryService extends AbstractExecutor<Result, Map<String,Obje
 		Object data = JdbcUtil.executeSql(Db.use("master").getConfig().getConnection(), sqlMeta.getSql(), sqlMeta.getJdbcParamValues());
 		return Result.success(data);
 	}
-
 }

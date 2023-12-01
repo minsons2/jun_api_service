@@ -2,13 +2,13 @@ package com.bjc.lcp.api.controller;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.bjc.lcp.api.service.DbUtil;
-import com.gitthub.wujun728.engine.util.HttpRequestLocal;
-import com.gitthub.wujun728.engine.util.RequestWrapper;
 import com.jfinal.plugin.activerecord.Db;
 //import com.jun.plugin.system.entity.SysUser;
 //import com.jun.plugin.system.service.SysDictService;
 //import com.jun.plugin.system.service.UserService;
 import com.jun.plugin.common.Result;
+import com.jun.plugin.common.utils.HttpRequestUtil;
+import com.jun.plugin.common.utils.RequestWrapper;
 import freemarker.template.TemplateException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -37,7 +37,7 @@ public class TestController111 {
 		System.out.println("Request URI: " + request.getRequestURI());
 
 		HttpServletRequest requestWrapper = new RequestWrapper((HttpServletRequest) request);
-		Map param = HttpRequestLocal.getAllParameters(requestWrapper);
+		Map param = HttpRequestUtil.getAllParameters(requestWrapper);
 
 		DruidDataSource ds = new DruidDataSource();
 		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");

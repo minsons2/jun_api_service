@@ -1,12 +1,12 @@
 package com.bjc.lcp.api.component;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.gitthub.wujun728.engine.groovy.GroovyDynamicLoader;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import com.jun.plugin.common.base.interfaces.AbstractExecutor;
 import com.jun.plugin.common.exception.BusinessException;
+import com.jun.plugin.groovy.groovy.GroovyDynamicLoader;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
